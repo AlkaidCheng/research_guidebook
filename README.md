@@ -48,7 +48,7 @@ never cited.
 Every section, subsection, figure, table and numbered box has a permalink:
 the `§` mark that appears beside it copies a URL that opens the book at that
 place. Section anchors are derived from the heading text, so renaming a
-heading changes its link.
+heading changes its link. Figures and tables open enlarged when clicked.
 
 A new part is a new directory with an `index.md` opener and an entry in
 `book.yaml`.
