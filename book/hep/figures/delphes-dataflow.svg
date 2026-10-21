@@ -1,0 +1,113 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 420">
+  <defs>
+    <marker id="df-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0 0L10 5L0 10z" fill="var(--ink-2, #4a463f)"/>
+    </marker>
+  </defs>
+  <style>
+    .box { fill: none; stroke: var(--ink-2, #4a463f); stroke-width: 1.3; }
+    .src { fill: none; stroke: var(--ink-3, #7a756b); stroke-width: 1.3; stroke-dasharray: 4 4; }
+    .name { fill: var(--ink, #1d1b17); font-size: 12.5px; font-weight: 600; text-anchor: middle; }
+    .cls { fill: var(--ink-3, #7a756b); font-size: 10px; font-style: italic; text-anchor: middle; }
+    .arr { fill: var(--accent-ink, #6a2522); font-size: 9.5px; font-weight: 600; text-anchor: middle; letter-spacing: 0.4px; }
+    .flow { stroke: var(--ink-2, #4a463f); stroke-width: 1.2; fill: none; marker-end: url(#df-arrow); }
+    .lane { fill: var(--ink-3, #7a756b); font-size: 10px; letter-spacing: 1.6px; text-anchor: middle; }
+    .brace { stroke: var(--ink-3, #7a756b); stroke-width: 1; fill: none; }
+  </style>
+
+  <!-- lane labels -->
+  <text class="lane" x="70" y="22">INPUT</text>
+  <text class="lane" x="250" y="22">TRACKING</text>
+  <text class="lane" x="250" y="246">CALORIMETRY</text>
+  <text class="lane" x="470" y="22">PARTICLE FLOW</text>
+  <text class="lane" x="690" y="22">PHYSICS OBJECTS</text>
+
+  <!-- input -->
+  <rect class="src" x="15" y="60" width="110" height="46" rx="4"/>
+  <text class="name" x="70" y="80">Generator record</text>
+  <text class="cls" x="70" y="96">status 1 particles</text>
+
+  <rect class="box" x="15" y="150" width="110" height="46" rx="4"/>
+  <text class="name" x="70" y="170">ParticlePropagator</text>
+  <text class="cls" x="70" y="186">helices in Bz</text>
+  <path class="flow" d="M70 106 V148"/>
+  <text class="arr" x="96" y="131">stableParticles</text>
+
+  <!-- tracking lane -->
+  <rect class="box" x="185" y="44" width="130" height="40" rx="4"/>
+  <text class="name" x="250" y="62">Tracking efficiency</text>
+  <text class="cls" x="250" y="76">Efficiency, per species</text>
+
+  <rect class="box" x="185" y="112" width="130" height="40" rx="4"/>
+  <text class="name" x="250" y="130">Momentum smearing</text>
+  <text class="cls" x="250" y="144">MomentumSmearing</text>
+
+  <rect class="box" x="185" y="180" width="130" height="40" rx="4"/>
+  <text class="name" x="250" y="198">TrackMerger</text>
+  <text class="cls" x="250" y="212">Merger</text>
+
+  <path class="flow" d="M125 165 H160 V64 H183"/>
+  <text class="arr" x="150" y="40">chargedHadrons · electrons · muons</text>
+  <path class="flow" d="M250 84 V110"/>
+  <path class="flow" d="M250 152 V178"/>
+
+  <!-- calorimetry lane -->
+  <rect class="box" x="185" y="268" width="130" height="40" rx="4"/>
+  <text class="name" x="250" y="286">ECal</text>
+  <text class="cls" x="250" y="300">SimpleCalorimeter</text>
+
+  <rect class="box" x="185" y="336" width="130" height="40" rx="4"/>
+  <text class="name" x="250" y="354">HCal</text>
+  <text class="cls" x="250" y="368">SimpleCalorimeter</text>
+
+  <path class="flow" d="M70 196 V288 H183"/>
+  <text class="arr" x="108" y="282">stableParticles</text>
+  <path class="flow" d="M250 220 V266"/>
+  <text class="arr" x="272" y="248">tracks</text>
+  <path class="flow" d="M250 308 V334"/>
+  <text class="arr" x="290" y="326">eflowTracks</text>
+
+  <!-- particle flow -->
+  <rect class="box" x="400" y="188" width="140" height="46" rx="4"/>
+  <text class="name" x="470" y="208">EFlowMerger</text>
+  <text class="cls" x="470" y="224">tracks + photons + neutral hadrons</text>
+
+  <path class="flow" d="M315 356 H360 V211 H398"/>
+  <text class="arr" x="358" y="380">eflowTracks · eflowNeutralHadrons</text>
+  <path class="flow" d="M315 288 H360"/>
+  <text class="arr" x="338" y="280">eflowPhotons</text>
+
+  <!-- physics objects -->
+  <rect class="box" x="610" y="44" width="170" height="40" rx="4"/>
+  <text class="name" x="695" y="62">Jets</text>
+  <text class="cls" x="695" y="76">FastJetFinder → EnergyScale → tagging</text>
+
+  <rect class="box" x="610" y="112" width="170" height="40" rx="4"/>
+  <text class="name" x="695" y="130">Photons, electrons, muons</text>
+  <text class="cls" x="695" y="144">Efficiency → Isolation</text>
+
+  <rect class="box" x="610" y="180" width="170" height="40" rx="4"/>
+  <text class="name" x="695" y="198">MissingET · ScalarHT</text>
+  <text class="cls" x="695" y="212">Merger (momentum sum)</text>
+
+  <rect class="box" x="610" y="268" width="170" height="40" rx="4"/>
+  <text class="name" x="695" y="286">UniqueObjectFinder</text>
+  <text class="cls" x="695" y="300">overlap removal, in priority order</text>
+
+  <rect class="box" x="610" y="336" width="170" height="40" rx="4"/>
+  <text class="name" x="695" y="354">TreeWriter</text>
+  <text class="cls" x="695" y="368">one branch per array</text>
+
+  <path class="flow" d="M540 211 H575 V64 H608"/>
+  <path class="flow" d="M575 132 H608"/>
+  <path class="flow" d="M575 200 H608"/>
+  <text class="arr" x="562" y="160">eflow</text>
+  <path class="flow" d="M695 84 V110"/>
+  <path class="flow" d="M695 152 V178"/>
+  <path class="flow" d="M695 220 V266"/>
+  <path class="flow" d="M695 308 V334"/>
+
+  <!-- the generator record is also written -->
+  <path class="flow" d="M70 196 V400 H695 V378"/>
+  <text class="arr" x="380" y="412">allParticles · GenJet · GenMissingET (generator level, written alongside)</text>
+</svg>
