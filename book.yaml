@@ -1,0 +1,18 @@
+title: Research Guidebook
+subtitle: Methods, tools and conventions from my research projects
+kicker: Notes and methods
+author: Alkaid Cheng
+url: https://alkaidcheng.github.io/research_guidebook/
+repo: https://github.com/AlkaidCheng/research_guidebook
+
+# Parts are categories; chapters are the topics inside them. Chapters are
+# numbered continuously through the book, parts with Roman numerals.
+# Each part directory needs an index.md; each chapter is one Markdown file
+# with a YAML front matter block (title, summary, optional status, references).
+parts:
+  - dir: hep
+    title: High Energy Physics
+    chapters:
+      - event-generation.md
+      - detector-simulation.md
+      - statistical-inference.md
