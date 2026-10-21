@@ -52,6 +52,27 @@
     headings.forEach(function (h) { observer.observe(h); });
   }
 
+  /* -------------------------------------------------------- copy permalinks */
+
+  document.querySelectorAll("a.anchor").forEach(function (a) {
+    a.addEventListener("click", function (e) {
+      var url = new URL(a.getAttribute("href"), window.location.href).href;
+      history.replaceState(null, "", url);
+      var target = document.getElementById(a.getAttribute("href").slice(1));
+      if (target) target.scrollIntoView({ block: "start" });
+      e.preventDefault();
+      var done = function () {
+        a.classList.add("copied");
+        setTimeout(function () { a.classList.remove("copied"); }, 1400);
+      };
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(url).then(done, done);
+      } else {
+        done();
+      }
+    });
+  });
+
   /* ----------------------------------------------------------------- search */
 
   var overlay = document.querySelector(".search");
