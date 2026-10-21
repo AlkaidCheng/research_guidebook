@@ -190,6 +190,14 @@ def outside_code(text: str, transform) -> str:
 HEADING = re.compile(r'<h([23]) id="([^"]+)">(.*?)</h\1>', re.S)
 
 
+def anchor_link(anchor: str) -> str:
+    """A permalink that copies the shareable URL of the element when clicked."""
+    return (
+        f' <a class="anchor" href="#{anchor}" title="Copy link to this place"'
+        f' aria-label="Copy link to this place">§</a>'
+    )
+
+
 def number_headings(page: Page) -> None:
     """Prefix H2/H3 with section numbers and collect the chapter's section list."""
     counters = [0, 0]
@@ -197,7 +205,7 @@ def number_headings(page: Page) -> None:
 
     def replace(match: re.Match) -> str:
         level, anchor, text = int(match.group(1)), match.group(2), match.group(3)
-        plain = re.sub(r"<[^>]+>", "", text)
+        plain = re.sub(r"<[^>]+>", "", text).strip()
         unnumbered = "unnumbered" in text or plain.strip().lower() in {"references", "further reading"}
         if level == 2:
             counters[1] = 0
@@ -213,7 +221,7 @@ def number_headings(page: Page) -> None:
             label = f"{page.number}.{counters[0]}.{counters[1]}"
         sections.append({"level": level, "id": anchor, "title": plain, "number": label})
         prefix = f'<span class="secnum">{label}</span> ' if label else ""
-        return f'<h{level} id="{anchor}">{prefix}{text}</h{level}>'
+        return f'<h{level} id="{anchor}">{prefix}{text}{anchor_link(anchor)}</h{level}>'
 
     page.body_html = HEADING.sub(replace, page.body_html)
     page.sections = sections
@@ -254,14 +262,16 @@ def number_figures_and_tables(page: Page) -> None:
         body = inline_svg(page, img, caption) or img
         return (
             f'<figure id="fig-{fig[0]}">{body}<figcaption>'
-            f'<span class="caplabel">Figure {label}{fig[0]}</span> {caption}</figcaption></figure>'
+            f'<span class="caplabel">Figure {label}{fig[0]}</span> {caption}'
+            f'{anchor_link(f"fig-{fig[0]}")}</figcaption></figure>'
         )
 
     def table(match: re.Match) -> str:
         tab[0] += 1
         body, caption = match.group(1), match.group(2)
         cap = (
-            f'<figcaption><span class="caplabel">Table {label}{tab[0]}</span> {caption}</figcaption>'
+            f'<figcaption><span class="caplabel">Table {label}{tab[0]}</span> {caption}'
+            f'{anchor_link(f"tab-{tab[0]}")}</figcaption>'
             if caption
             else ""
         )
@@ -292,10 +302,15 @@ def number_boxes(page: Page) -> None:
                 head += f' <span class="boxtitle">{title}</span>'
             return f'<div class="admonition {kind}{extra}">\n<p class="admonition-title">{head}</p>'
         counters[kind] = counters.get(kind, 0) + 1
+        box_id = f"{kind}-{label}{counters[kind]}".replace(".", "-")
         head = f'<span class="boxlabel">{name} {label}{counters[kind]}</span>'
         if title and title != kind.capitalize():
             head += f' <span class="boxtitle">{title}</span>'
-        return f'<div class="admonition {kind}{extra}">\n<p class="admonition-title">{head}</p>'
+        head += anchor_link(box_id)
+        return (
+            f'<div class="admonition {kind}{extra}" id="{box_id}">\n'
+            f'<p class="admonition-title">{head}</p>'
+        )
 
     page.body_html = BOX.sub(replace, page.body_html)
 
@@ -397,12 +412,12 @@ def search_entries(page: Page) -> list[dict]:
     entries = []
     for chunk in chunks:
         heading = re.match(r'<h2 id="([^"]+)">(.*?)</h2>', chunk, re.S)
-        text = html.unescape(TAG.sub(" ", chunk))
+        text = html.unescape(TAG.sub(" ", chunk)).replace("§", "")
         text = re.sub(r"\s+", " ", text).strip()
         if not text:
             continue
         if heading:
-            section = html.unescape(TAG.sub("", heading.group(2))).strip()
+            section = html.unescape(TAG.sub("", heading.group(2))).replace("§", "").strip()
             anchor = "#" + heading.group(1)
             text = text[len(section):].strip() if text.startswith(section) else text
         else:

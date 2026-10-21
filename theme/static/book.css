@@ -618,3 +618,45 @@ ol.references li:target { background: var(--accent-soft); }
   body { font-size: 10.5pt; }
   a { color: inherit; }
 }
+
+/* --------------------------------------------------------------- anchors */
+
+.anchor {
+  font-family: var(--sans);
+  font-weight: 400;
+  font-size: 0.72em;
+  color: var(--ink-3);
+  text-decoration: none;
+  margin-left: 0.4em;
+  opacity: 0;
+  transition: opacity 0.15s;
+  position: relative;
+  vertical-align: 0.12em;
+}
+h2:hover .anchor, h3:hover .anchor, figcaption:hover .anchor, .admonition-title:hover .anchor,
+.anchor:focus-visible, .anchor.copied { opacity: 1; }
+.anchor:hover { color: var(--accent-ink); text-decoration: none; }
+.anchor::after {
+  content: "Link copied";
+  position: absolute;
+  left: 50%; bottom: 1.6em;
+  transform: translateX(-50%);
+  white-space: nowrap;
+  background: var(--ink);
+  color: var(--paper);
+  font-size: 0.7rem;
+  letter-spacing: 0.04em;
+  padding: 0.2em 0.6em;
+  border-radius: 3px;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.15s;
+}
+.anchor.copied::after { opacity: 1; }
+@media (hover: none) { .anchor { opacity: 0.55; } }
+h2:target, h3:target { scroll-margin-top: calc(var(--topbar) + 1rem); }
+h2:target .secnum, h3:target .secnum, figure:target .caplabel, .admonition:target .boxlabel,
+h2:target, h3:target { color: var(--accent-ink); }
+.admonition:target { box-shadow: 0 0 0 2px var(--accent-soft); }
+figure { scroll-margin-top: calc(var(--topbar) + 1rem); }
+.admonition { scroll-margin-top: calc(var(--topbar) + 1rem); }
