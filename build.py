@@ -224,6 +224,23 @@ TABLE_CAPTION = re.compile(r"(<table>.*?</table>)\s*(?:<p>Table:\s*(.*?)</p>)?",
 IMG_ALT = re.compile(r'alt="([^"]*)"')
 
 
+IMG_SRC = re.compile(r'src="([^"]+)"')
+XML_DECLARATION = re.compile(r"<\?xml[^>]*\?>\s*")
+
+
+def inline_svg(page: Page, img: str, caption: str) -> str | None:
+    """Embed a local SVG figure so it can use the page's colour tokens."""
+    src = IMG_SRC.search(img)
+    if not src or not src.group(1).endswith(".svg") or "://" in src.group(1):
+        return None
+    path = BOOK_DIR / page.source.parent / src.group(1)
+    if not path.is_file():
+        raise BuildError(f"{page.source}: missing figure: {src.group(1)}")
+    svg = XML_DECLARATION.sub("", path.read_text(encoding="utf-8")).strip()
+    title = html.escape(caption, quote=True)
+    return svg.replace("<svg", f'<svg class="inline-svg" role="img" aria-label="{title}"', 1)
+
+
 def number_figures_and_tables(page: Page) -> None:
     label = f"{page.number}." if page.kind == "chapter" else ""
     fig = [0]
@@ -234,8 +251,9 @@ def number_figures_and_tables(page: Page) -> None:
         img = match.group(1)
         alt = IMG_ALT.search(img)
         caption = alt.group(1) if alt else ""
+        body = inline_svg(page, img, caption) or img
         return (
-            f'<figure id="fig-{fig[0]}">{img}<figcaption>'
+            f'<figure id="fig-{fig[0]}">{body}<figcaption>'
             f'<span class="caplabel">Figure {label}{fig[0]}</span> {caption}</figcaption></figure>'
         )
 
