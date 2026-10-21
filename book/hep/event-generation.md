@@ -23,16 +23,28 @@ references:
 
 ## The simulation chain
 
-A proton–proton collision at the LHC involves physics on every scale from the
-hard scattering at hundreds of GeV down to the formation of hadrons at about
-1 GeV. No single calculation covers that range. Event generators instead
-exploit the factorisation of QCD into a chain of stages, each handled by a
-method suited to its scale [@buckley2011]. The hard process is computed from
-matrix elements at fixed order in perturbation theory. The parton shower
-dresses it with soft and collinear radiation down to a cutoff of order 1 GeV.
-Hadronisation turns the resulting partons into hadrons with a phenomenological
-model, and unstable hadrons are decayed. Only then is the event handed to a
-detector simulation such as Delphes [@delphes], the subject of Chapter 2.
+A high-energy collision, whether of protons at the LHC, of electrons and
+positrons at a lepton collider, or of an electron and a proton, involves
+physics on every scale from the hard scattering at the collision energy down
+to the formation of hadrons at about 1 GeV. No single calculation covers that
+range. Event generators instead exploit the factorisation of QCD into a chain
+of stages, each handled by a method suited to its scale [@buckley2011]. The
+hard process is computed from matrix elements at fixed order in perturbation
+theory. The parton shower dresses it with soft and collinear radiation down to
+a cutoff of order 1 GeV. Hadronisation turns the resulting partons into
+hadrons with a phenomenological model, and unstable hadrons are decayed. Only
+then is the event handed to a detector simulation such as Delphes [@delphes],
+the subject of Chapter 2.
+
+The chain is the same for every collider; what differs is the initial state.
+With hadron beams the colliding partons carry unknown momentum fractions drawn
+from parton distribution functions, and the beam remnants interact among
+themselves, so the generator must also model multiple parton interactions and
+the underlying event. With lepton beams the initial state is known, up to
+initial-state radiation and beamstrahlung, and those stages fall away. The
+examples in this chapter use proton–proton collisions, the case with the most
+moving parts; the lepton-collider setting is the same chain with the
+hadron-specific pieces switched off.
 
 ![The generation chain and the file formats that cross its boundaries. Programs in italics are the ones used in the projects described here; any stage can be swapped for another program that reads and writes the same format.](figures/event-generation-chain.svg)
 
@@ -45,7 +57,7 @@ writes.
 | Stage | Physics | Method | Program | Output |
 |---|---|---|---|---|
 | Hard process | $2 \to n$ scattering at scale $Q$ | Fixed-order matrix elements, phase-space integration | MadGraph5_aMC@NLO | LHE |
-| Parton shower | Soft and collinear QCD/QED radiation, multiple parton interactions | Sudakov-ordered Markov chain | Pythia 8 | in memory |
+| Parton shower | Soft and collinear QCD/QED radiation; multiple parton interactions for hadron beams | Sudakov-ordered Markov chain | Pythia 8 | in memory |
 | Hadronisation and decays | Confinement, hadron decays | Lund string model, decay tables | Pythia 8 | HepMC3 |
 | Detector response | Material interactions, resolution, efficiencies | Parametrised (fast) or Geant4 (full) | Delphes, Geant4 | ROOT |
 
@@ -77,9 +89,9 @@ can drive Pythia 8 directly for the shower.
 Pythia 8 [@bierlich2022] is a general-purpose event generator: it contains its
 own leading-order matrix elements for a large library of processes, but in the
 chain of Figure 1.1 it is used for everything *after* the hard process. It
-reads the LHE events, adds initial- and final-state parton showers, multiple
-parton interactions and beam remnants, hadronises the partons with the Lund
-string model, and decays the unstable hadrons. Pythia is a C++ library; a
+reads the LHE events, adds initial- and final-state parton showers and, for
+hadron beams, multiple parton interactions and beam remnants, hadronises the
+partons with the Lund string model, and decays the unstable hadrons. Pythia is a C++ library; a
 main program creates a `Pythia` object, feeds it settings, and asks for events
 one at a time. Its behaviour is controlled entirely by *settings*, `Key =
 value` pairs with documented defaults, usually collected in a command file
@@ -94,8 +106,8 @@ and calorimeter deposits are smeared and accepted with efficiency functions,
 particle-flow candidates are built, and jets, leptons, photons and missing
 transverse momentum are reconstructed. The detector model is a *card*, a Tcl
 file that lists the modules to run and sets their parameters; the Delphes
-distribution ships cards approximating ATLAS, CMS and several proposed
-detectors. The output is a ROOT tree with one branch per reconstructed
+distribution ships cards approximating ATLAS and CMS as well as detectors
+proposed for future electron–positron and hadron colliders. The output is a ROOT tree with one branch per reconstructed
 collection. Chapter 2 treats the card and the output in detail.
 
 ### Geant4
@@ -117,8 +129,10 @@ fast simulation inherits.
 
 ### The master formula
 
-For a hadron collider the cross section for a hard process factorises into
-parton distribution functions (PDFs) and a partonic cross section,
+The cross section for a hard process is the cross section for the colliding
+partons, weighted by the probability of finding those partons in the beams.
+For a hadron collider this factorises into parton distribution functions
+(PDFs) and a partonic cross section,
 
 $$
 \sigma = \sum_{a,b} \int_0^1 \dd x_a \, \dd x_b \;
@@ -140,7 +154,11 @@ $$
 $$
 
 with the bar denoting the average over initial and sum over final spins and
-colours. A matrix-element generator evaluates
+colours. For lepton beams the parton distributions in $\eqref{eq:xsec}$
+collapse to the beam particles themselves, broadened only by initial-state
+radiation and beamstrahlung, and the collider cross section is
+$\eqref{eq:partonic}$ evaluated at the beam energy. A matrix-element
+generator evaluates
 $\eqref{eq:xsec}$–$\eqref{eq:partonic}$ numerically and, crucially, *unweights*
 the integrand so that each generated phase-space point occurs with a
 probability proportional to its differential cross section. The result is a
