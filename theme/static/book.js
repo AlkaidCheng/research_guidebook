@@ -73,6 +73,57 @@
     });
   });
 
+  /* ------------------------------------------------ enlarge figures, tables */
+
+  var lightbox = document.createElement("div");
+  lightbox.className = "lightbox";
+  lightbox.hidden = true;
+  lightbox.innerHTML =
+    '<div class="lightbox-body" role="dialog" aria-modal="true" aria-label="Enlarged view">' +
+    '<button class="iconbtn lightbox-close" type="button" aria-label="Close">&#x2715;</button>' +
+    '<div class="lightbox-content"></div></div>';
+  document.body.appendChild(lightbox);
+  var lightboxContent = lightbox.querySelector(".lightbox-content");
+  var lightboxClose = lightbox.querySelector(".lightbox-close");
+  var lastFocus = null;
+
+  function openLightbox(figure) {
+    var copy = figure.cloneNode(true);
+    copy.removeAttribute("id");
+    copy.querySelectorAll("a.anchor, [tabindex]").forEach(function (el) {
+      if (el.classList.contains("anchor")) el.remove();
+      else el.removeAttribute("tabindex");
+    });
+    lightboxContent.innerHTML = "";
+    lightboxContent.appendChild(copy);
+    lastFocus = document.activeElement;
+    lightbox.hidden = false;
+    body.classList.add("lightbox-open");
+    lightboxClose.focus();
+  }
+  function closeLightbox() {
+    if (lightbox.hidden) return;
+    lightbox.hidden = true;
+    body.classList.remove("lightbox-open");
+    lightboxContent.innerHTML = "";
+    if (lastFocus && lastFocus.focus) lastFocus.focus();
+  }
+  document.querySelectorAll("figure").forEach(function (figure) {
+    var target = figure.querySelector("svg, img, .table-wrap");
+    if (!target) return;
+    target.classList.add("zoomable");
+    target.setAttribute("tabindex", "0");
+    target.setAttribute("role", "button");
+    target.setAttribute("aria-label", "Enlarge");
+    target.addEventListener("click", function () { openLightbox(figure); });
+    target.addEventListener("keydown", function (e) {
+      if (e.key === "Enter" || e.key === " ") { e.preventDefault(); openLightbox(figure); }
+    });
+  });
+  lightboxClose.addEventListener("click", closeLightbox);
+  lightbox.addEventListener("click", function (e) { if (e.target === lightbox) closeLightbox(); });
+  document.addEventListener("keydown", function (e) { if (e.key === "Escape") closeLightbox(); });
+
   /* ----------------------------------------------------------------- search */
 
   var overlay = document.querySelector(".search");
