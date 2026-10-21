@@ -188,7 +188,7 @@ below is the complete input for top-pair production in the Standard Model.
 
 ```text
 import model sm                 # the UFO model; restrictions as sm-no_b_mass
-define p = g u c d s u~ c~ d~ s~  # the proton as a multiparticle (default: 4 flavours + gluon)
+define p = g u c d s u~ c~ d~ s~  # the proton as a multiparticle (4 flavours + gluon)
 define j = p                    # a jet is any of the same partons
 generate p p > t t~             # the process; "add process" appends another
 output pp_ttbar                 # write the process directory
@@ -210,14 +210,14 @@ per line; the comments are MadGraph's own and the ones below are shortened.
 
 ```text
   10000     = nevents  ! number of unweighted events requested
-  0         = iseed    ! random seed; 0 = chosen by the program and written to the banner
+  0         = iseed    ! random seed; 0 = chosen by the program, recorded in the banner
   1         = lpp1     ! beam 1: 1 = proton, -1 = antiproton, 0 = no PDF (lepton)
   1         = lpp2     ! beam 2
   6500.0    = ebeam1   ! beam 1 energy in GeV
   6500.0    = ebeam2   ! beam 2 energy in GeV
   lhapdf    = pdlabel  ! PDF: a built-in set name, or lhapdf
   303600    = lhaid    ! LHAPDF id when pdlabel = lhapdf (303600 = NNPDF31_nnlo_as_0118)
-  -1.0      = scale    ! fixed factorisation scale; -1 = dynamical, chosen by dynamical_scale_choice
+  -1.0      = scale    ! fixed factorisation scale; -1 = dynamical (dynamical_scale_choice)
   0         = ickkw    ! matching: 0 = none, 1 = MLM (Section 1.5)
   0.0       = xqcut    ! parton-level matching cut in GeV; 0 when ickkw = 0
   20.0      = ptj      ! minimum jet transverse momentum in GeV
@@ -302,9 +302,9 @@ loses the correlations between, for example, the two top decays in a $t\bar t$
 event. The **MadSpin card** lists the decay chains and a few options.
 
 ```text
-set Nevents_for_max_weight 250   # events used to estimate the maximum weight per channel
-set BW_cut 15                    # how far off shell a resonance may be, in units of its width
-set spinmode full                # full = spin correlations and off-shell effects (default)
+set Nevents_for_max_weight 250   # events used to estimate the max. weight per channel
+set BW_cut 15                    # allowed off-shellness, in units of the resonance width
+set spinmode full                # full (default): spin correlations + off-shell effects
 decay t  > w+ b,  w+ > all all   # the chain; "all all" sums over every W decay
 decay t~ > w- b~, w- > all all
 launch

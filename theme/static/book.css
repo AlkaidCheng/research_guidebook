@@ -26,8 +26,7 @@
   --box-warning: #a3471e;
   --box-summary: var(--accent);
 
-  --measure: 43rem;      /* the prose column, about 75 characters */
-  --measure-wide: 62rem; /* code, tables and figures may bleed to here */
+  --measure: 47rem;      /* the single text column: prose, code, figures and tables */
   --sidebar: 17.5rem;
   --topbar: 3.25rem;
   --radius: 4px;
@@ -220,14 +219,8 @@ kbd {
   padding: 0 clamp(1rem, 5vw, 4rem) 4rem;
   min-width: 0;
 }
-.content > article { max-width: var(--measure-wide); margin: 0 auto; }
-.pagenav, .colophon { max-width: var(--measure-wide); margin: 0 auto; }
-/* prose stays on the measure; code cards, tables and figures may run wider */
-.chapter-head, .part-head, .title-page, .prose > :not(figure):not(.highlight):not(.admonition):not(.references):not(.arithmatex),
-.part-contents, .contents, .home > .prose { max-width: var(--measure); }
-.prose > .admonition { max-width: calc(var(--measure) + 8rem); }
-.prose > .references { max-width: var(--measure); }
-.prose > div.arithmatex { max-width: calc(var(--measure) + 4rem); }
+.content > article { max-width: var(--measure); margin: 0 auto; }
+.pagenav, .colophon { max-width: var(--measure); margin: 0 auto; }
 
 /* ----------------------------------------------------------- chapter head */
 
@@ -378,7 +371,7 @@ code, pre, .highlight { font-family: var(--mono); font-feature-settings: normal;
 
 figure { margin: 2rem 0; }
 figure img, figure svg { display: block; margin: 0 auto; }
-figure svg.inline-svg { width: 100%; max-width: 48rem; height: auto; font-family: var(--sans); color: var(--ink-2); }
+figure svg.inline-svg { width: 100%; height: auto; font-family: var(--sans); color: var(--ink-2); }
 figcaption {
   font-family: var(--sans);
   font-size: 0.88rem;
