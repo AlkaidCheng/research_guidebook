@@ -80,7 +80,7 @@
   lightbox.hidden = true;
   lightbox.innerHTML =
     '<div class="lightbox-body" role="dialog" aria-modal="true" aria-label="Enlarged view">' +
-    '<button class="iconbtn lightbox-close" type="button" aria-label="Close">&#x2715;</button>' +
+    '<div class="lightbox-head"><button class="iconbtn lightbox-close" type="button" aria-label="Close">&#x2715;</button></div>' +
     '<div class="lightbox-content"></div></div>';
   document.body.appendChild(lightbox);
   var lightboxContent = lightbox.querySelector(".lightbox-content");
