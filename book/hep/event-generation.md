@@ -162,7 +162,16 @@ generator evaluates
 $\eqref{eq:xsec}$–$\eqref{eq:partonic}$ numerically and, crucially, *unweights*
 the integrand so that each generated phase-space point occurs with a
 probability proportional to its differential cross section. The result is a
-set of events with equal weights that can be treated like data.
+set of events with equal weights that can be treated like data. MadEvent does
+this channel by channel, each channel contributing events in proportion to its
+cross section, and a run reaches the number requested only when every channel
+converges. A channel whose integrand is not finite never does: the run ends
+with fewer events than asked for and says so in its log. The cause is almost
+always a divergence left uncut, light partons in the final state without a
+transverse-momentum, separation or invariant-mass cut, or a particle that can
+decay but was given zero width and diverges wherever it appears as an
+$s$-channel resonance. The per-channel luminosities in the log point at the
+channel at fault, and the cure is a cut in the run card, not a larger request.
 
 ### The MadGraph cards
 
@@ -226,7 +235,9 @@ per line; the comments are MadGraph's own and the ones below are shortened.
   True      = use_syst ! store scale and PDF variation weights in the event
 ```
 
-`nevents` and `iseed` define the run; `lpp` and `ebeam` the beams; `pdlabel`
+`nevents` and `iseed` define the run; `nevents` is a request, and the number of
+events the run wrote is read back from the banner (Section 1.6.1). `lpp` and
+`ebeam` set the beams; `pdlabel`
 and `lhaid` the PDF set, which must be the same one named in the shower and in
 any cross-section normalisation later. `scale` and its companions fix or
 delegate the renormalisation and factorisation scales of
@@ -315,7 +326,15 @@ samples, and `BW_cut` is the one to check when a resonance's lineshape matters.
 `decay` lines state each chain in MadGraph's process syntax, with nested
 decays separated by commas; particles not mentioned are left undecayed.
 `launch` runs the decay; the output is a second LHE file next to the first,
-with the decayed particles given status 2 and their products status 1.
+with the decayed particles given status 2 and their products status 1. The
+events stay unweighted and their number is normally unchanged; what changes is
+the cross section, which MadSpin multiplies by the branching ratio of the
+requested chains and writes into the new banner. When the subprocesses of a
+run decay with slightly different total branching ratios, MadSpin drops a few
+events so that each resonance keeps its correct share, and its log reports the
+number written against the number read. Setting the widths and branching
+ratios in the parameter card, instead of leaving them to the automatic width
+calculation, removes the mismatch.
 
 !!! recipe "A minimal MadGraph run"
     The following script generates, decays and showers top-pair production in
@@ -412,7 +431,13 @@ and `Random:seed` are discussed in Section 1.7.
 
 Unknown keys abort initialisation in strict mode, which is what you want: a
 misspelt setting should never run silently. Pythia stops at the end of the
-LHE file if it holds fewer events than the main program asks for.
+LHE file if it holds fewer events than the main program asks for, so
+`Main:numberOfEvents` is an upper bound on the showered sample, not its size.
+A run also ends early after `Main:timesAllowErrors` flawed events, 10 by
+default, and a matched sample loses events to the matching veto
+(Section 1.5.2). The number of showered events, and the cross section they
+stand for, is therefore read from the run's own summary, never assumed from
+the request.
 
 ### Hadronisation and decays
 
@@ -596,7 +621,18 @@ beam energies, the PDF author-group and set ids for each beam, the weighting
 strategy (−4: unweighted events whose weight is the cross section, with
 MadGraph's sign convention) and the number of subprocesses. One line per
 subprocess follows with its cross section and uncertainty in pb, its maximum
-weight and its id. Each `<event>` opens with the number of particles, the
+weight and its id. The header's `<MGGenerationInfo>` block states the number
+of events in the file and the integrated cross section, and these two numbers
+normalise the sample: at an integrated luminosity $L$ each event stands for
+
+$$
+\frac{\sigma\, L}{N_{\text{written}}}
+\label{eq:event-share}
+$$
+
+collisions, with $N_{\text{written}}$ the count in the file, not the count
+requested, since the two differ whenever the integration (Section 1.3.1) or
+MadSpin (Section 1.3.4) did not deliver the request. Each `<event>` opens with the number of particles, the
 subprocess id, the event weight, the hard scale in GeV and the values of
 $\alpha_\mathrm{em}$ and $\alpha_\mathrm{s}$ at that scale. Each particle line
 then gives the PDG id; the status (−1 incoming, 1 outgoing, 2 intermediate
@@ -694,7 +730,11 @@ program actually used can differ from the ones in your files: a card may be
 overridden on the command line, a default may change between versions, and a
 setting in the LHE banner may be forwarded to the shower. Store the banner,
 Pythia's printed settings list and the Delphes card next to the output, along
-with the version of every program.
+with the version of every program. Record the counts as well as the settings:
+the events requested, the events the generator wrote, and the events kept
+after showering and matching. A written count below the request, in a sample
+without MadSpin, is a failed run to be understood from the log, not a smaller
+sample to be used.
 
 **Keep physics values in one place.** Centre-of-mass energy, cuts, matching
 scales, tunes and particle-stability conventions belong in a single
@@ -707,8 +747,9 @@ reproducible by accident.
     - Event generation factorises into hard process, shower, hadronisation
       and decays; the stages communicate through LHE and HepMC3 files.
     - MadGraph computes the hard process and is reproduced by its cards; the
-      banner inside the LHE file is the authoritative record of a run.
-      MadSpin decays resonances with spin correlations intact.
+      banner inside the LHE file is the authoritative record of a run, its
+      event count and cross section included. MadSpin decays resonances with
+      spin correlations intact.
     - Pythia showers, hadronises and decays, driven by settings; which
       particles are "stable" is a convention. Match the reference, and
       record it.
