@@ -23,8 +23,9 @@ python3 -m http.server --directory site 8000
 ```
 
 Then open <http://127.0.0.1:8000/>. The build fails on a broken internal link,
-a missing figure, a citation without a reference entry, or a reference that is
-never cited.
+a missing figure, a citation without a reference entry, a reference that is
+never cited, an `\eqref` to a label no numbered equation carries, or an
+equation label used twice.
 
 ## Writing a chapter
 
@@ -36,9 +37,9 @@ never cited.
    are numbered in that order, continuously through the book.
 3. Use `##` for sections and `###` for subsections; the build numbers them.
    Display equations in `$$ … $$` are numbered within the chapter and can
-   carry `\label{}` for `\eqref{}`. An image becomes a numbered figure with
-   its alt text as caption; a table followed by a paragraph starting with
-   `Table:` becomes a numbered table.
+   carry `\label{}`, which `\eqref{}` reaches from any page. An image becomes
+   a numbered figure with its alt text as caption; a table followed by a
+   paragraph starting with `Table:` becomes a numbered table.
 4. Cite with `[@key]`; the reference list is generated at the end of the
    chapter in order of first citation.
 5. Set material apart with `!!! definition`, `!!! example`, `!!! remark`,
@@ -63,10 +64,10 @@ chapters:
 ```
 
 Each section page is numbered within the chapter (3.1, 3.2), its `##` headings
-become subsections (3.1.1), and figures, tables and numbered boxes keep one
-running count through the chapter. Equations do not: their numbers restart on
-each page, and `\eqref` finds only equations on the same page. Each page has
-its own `references` map and reference list.
+become subsections (3.1.1), and figures, tables, numbered boxes and equations
+keep one running count through the chapter, so splitting a chapter changes none
+of those numbers. An `\eqref` to an equation on another page prints its number
+and links to it. Each page has its own `references` map and reference list.
 
 A new part is a new directory with an `index.md` opener and an entry in
 `book.yaml`.

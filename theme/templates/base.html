@@ -31,7 +31,8 @@ window.MathJax = {
     tagformat: {
       number: function (n) {
         var chapter = document.body.getAttribute("data-chapter");
-        return chapter ? chapter + "." + n : String(n);
+        var number = n + Number(document.body.getAttribute("data-equation-offset"));
+        return chapter ? chapter + "." + number : String(number);
       }
     },
     macros: {
@@ -46,7 +47,7 @@ window.MathJax = {
 </script>
 <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/tex-chtml.js"></script>
 </head>
-<body{% if page.chapter_number %} data-chapter="{{ page.chapter_number }}"{% endif %} class="kind-{{ page.kind }}">
+<body{% if page.chapter_number %} data-chapter="{{ page.chapter_number }}"{% endif %}{% if page.equation_offset %} data-equation-offset="{{ page.equation_offset }}"{% endif %} class="kind-{{ page.kind }}">
 <a class="skip" href="#content">Skip to content</a>
 
 <header class="topbar">

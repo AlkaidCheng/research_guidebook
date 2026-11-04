@@ -4,9 +4,10 @@
 The book is described by ``book.yaml`` (parts and the chapters they contain). A
 chapter is a Markdown file with a YAML front matter block, or a directory holding an
 opener and one such file per section. The build numbers parts, chapters, sections,
-figures, tables and boxed environments, resolves citations against each page's
-reference list, rewrites ``.md`` links into site URLs, emits a search index, and
-fails on any broken internal link or unknown citation.
+figures, tables and boxed environments, counts equations so that MathJax can carry
+their numbers from page to page, resolves citations against each page's reference
+list, rewrites ``.md`` links into site URLs, emits a search index, and fails on any
+broken internal link, unknown citation or equation reference with no equation.
 """
 
 from __future__ import annotations
@@ -44,6 +45,39 @@ NUMBERED_BOXES = {
 
 # Boxed environments that carry a kind label but no running number.
 LABELLED_BOXES = {"warning": "Warning", "caution": "Caution", "note": "Note", "tip": "Tip"}
+
+# How MathJax numbers a display equation under ``tags: "all"``. These environments own
+# the display's numbers: the first set has one per row, the second one in all, and a
+# starred name means none unless a row carries ``\tag``. The third set takes no number
+# of its own and discards any ``\label``, ``\tag`` or ``\notag`` written inside it. Any
+# other display takes one number. These follow the MathJax version loaded in base.html,
+# so an upgrade must recheck them.
+# https://github.com/mathjax/MathJax-src/blob/3.2.2/ts/input/tex/ams/AmsMappings.ts#L102
+# https://github.com/mathjax/MathJax-src/blob/3.2.2/ts/input/tex/base/BaseMappings.ts#L703
+# https://github.com/mathjax/MathJax-src/blob/3.2.2/ts/input/tex/base/BaseItems.ts#L1105
+# https://github.com/mathjax/MathJax-src/blob/3.2.2/ts/input/tex/Tags.ts#L572
+ROW_ENVIRONMENTS = {
+    "align",
+    "align*",
+    "alignat",
+    "alignat*",
+    "eqnarray",
+    "eqnarray*",
+    "flalign",
+    "gather",
+    "gather*",
+    "xalignat",
+}
+ONE_ROW_ENVIRONMENTS = {"equation", "equation*", "multline", "multline*"}
+INNER_ENVIRONMENTS = {
+    "aligned",
+    "alignedat",
+    "flalign*",
+    "gathered",
+    "split",
+    "xalignat*",
+    "xxalignat",
+}
 
 MARKDOWN_EXTENSIONS = [
     "abbr",
@@ -99,6 +133,7 @@ class Page:
     section_pages: list[Page] = field(default_factory=list)
     sections: list[dict] = field(default_factory=list)  # headings within this page
     counters: dict[str, int] = field(default_factory=dict)  # shared across a chapter's pages
+    equation_offset: int = 0  # equations numbered on the chapter's earlier pages
     body_html: str = ""
     prev: Page | None = None
     next: Page | None = None
@@ -137,6 +172,15 @@ class Page:
 
     def href(self, target: Page) -> str:
         return self.root + target.url
+
+
+@dataclass
+class EquationRow:
+    """One row of a display equation that MathJax may number."""
+
+    label: str = ""
+    tag: str = ""  # the text of a manual ``\tag``
+    counted: bool = True  # takes the next number in the running count
 
 
 # --------------------------------------------------------------------- front matter
@@ -348,6 +392,115 @@ def number_boxes(page: Page) -> None:
     page.body_html = BOX.sub(replace, page.body_html)
 
 
+DISPLAY_MATH = re.compile(r'<div class="arithmatex">\\\[(.*?)\\\]</div>', re.S)
+TEX_COMMENT = re.compile(r"((?<!\\)(?:\\\\)*)%.*")
+TEX_TOKEN = re.compile(
+    r"""
+    \\begin\s*\{(?P<begin>[^}]*)\}
+    | \\end\s*\{(?P<end>[^}]*)\}
+    | \\label\s*\{(?P<label>[^}]*)\}
+    | \\tag\*?\s*\{(?P<tag>(?:[^{}]|\{[^{}]*\})*)\}
+    | (?P<notag>\\(?:notag|nonumber)\b)
+    | (?P<row_end>\\\\\*?(?:\[[^\]]*\])?|\\(?:cr|newline)\b)
+    | (?P<open>\{)
+    | (?P<close>\})
+    | \\.
+    """,
+    re.X | re.S,
+)
+ROW_MARKS = {"label", "tag", "notag"}
+
+
+def is_empty_row(tex: str) -> bool:
+    """Whether a row holds nothing but marks; MathJax drops such a row at a table's end."""
+    return not TEX_TOKEN.sub(lambda t: "" if t.lastgroup in ROW_MARKS else t.group(), tex).strip()
+
+
+def equation_rows(tex: str) -> list[EquationRow]:
+    """Split a display equation into the rows MathJax can number, in page order."""
+    tex = TEX_COMMENT.sub(r"\1", tex)
+    rows: list[EquationRow] = []
+    row = EquationRow()
+    environments: list[str] = []
+    braces = 0
+    outer = ""  # the environment that owns the display's numbers
+    row_start = 0
+
+    for token in TEX_TOKEN.finditer(tex):
+        kind = token.lastgroup
+        in_outer = bool(outer) and len(environments) == 1 and not braces
+        if kind == "begin":
+            name = token["begin"]
+            if not environments and name in ROW_ENVIRONMENTS | ONE_ROW_ENVIRONMENTS:
+                outer = name
+                row = EquationRow(counted=not name.endswith("*"))
+                row_start = token.end()
+            environments.append(name)
+        elif kind == "end":
+            if in_outer:
+                if not is_empty_row(tex[row_start:token.start()]):
+                    rows.append(row)
+                row = EquationRow()
+            del environments[-1:]
+        elif kind == "row_end" and in_outer and outer in ROW_ENVIRONMENTS:
+            rows.append(row)
+            row = EquationRow(counted=not outer.endswith("*"))
+            row_start = token.end()
+        elif kind == "open":
+            braces += 1
+        elif kind == "close":
+            braces -= 1
+        elif kind in ROW_MARKS and INNER_ENVIRONMENTS.isdisjoint(environments):
+            if kind == "label":
+                row.label = token["label"]
+            elif kind == "tag":
+                row.tag = token["tag"]
+                row.counted = False
+            else:
+                row.counted = False
+    return rows if outer else [row]
+
+
+def number_equations(page: Page, equation_labels: dict[str, tuple[Page, str]]) -> None:
+    """Carry the chapter's equation count through this page and record its labels."""
+    counters = page.counters
+    prefix = f"{page.chapter_number}." if page.chapter_number else ""
+    page.equation_offset = counters.get("equation", 0)
+    for tex in DISPLAY_MATH.findall(page.body_html):
+        for row in equation_rows(html.unescape(tex)):
+            number = row.tag
+            if row.counted:
+                counters["equation"] = counters.get("equation", 0) + 1
+                number = f"{prefix}{counters['equation']}"
+            if not row.label or not number:
+                continue
+            if row.label in equation_labels:
+                other = equation_labels[row.label][0].source
+                raise BuildError(f"{page.source}: equation label {row.label} is also used in {other}")
+            equation_labels[row.label] = (page, number)
+
+
+MATH = re.compile(r'<(div|span) class="arithmatex">.*?</\1>', re.S)
+EQUATION_REF = re.compile(r"\\(eqref|ref)\s*\{([^}]*)\}")
+
+
+def resolve_equation_refs(page: Page, equation_labels: dict[str, tuple[Page, str]]) -> None:
+    """Check every equation reference and turn those that leave the page into links."""
+
+    def replace(match: re.Match) -> str:
+        command, label = match.group(1), match.group(2)
+        if label not in equation_labels:
+            raise BuildError(f"{page.source}: \\{command}{{{label}}} matches no numbered equation")
+        target, number = equation_labels[label]
+        if target is page:
+            return match.group(0)  # MathJax resolves references within a page
+        text = f"({number})" if command == "eqref" else number
+        anchor = "mjx-eqn:" + re.sub(r"\s", "_", label)
+        return rf"\href{{{page.href(target)}#{anchor}}}{{\text{{{text}}}}}"
+
+    page.body_html = MATH.sub(lambda m: EQUATION_REF.sub(replace, m.group(0)), page.body_html)
+
+
 CITE = re.compile(r"\[@([^\]]+)\]")
 
 
@@ -487,6 +640,7 @@ def render_pages(config: dict, pages: list[Page]) -> list[dict]:
     md = make_markdown()
     pages_by_source = {p.source: p for p in pages}
     assets: set[Path] = set()
+    equation_labels: dict[str, tuple[Page, str]] = {}
     index: list[dict] = []
     warnings: list[str] = []
 
@@ -505,10 +659,15 @@ def render_pages(config: dict, pages: list[Page]) -> list[dict]:
         number_headings(page)
         number_figures_and_tables(page)
         number_boxes(page)
+        number_equations(page, equation_labels)
         warnings += resolve_citations(page, md)
         rewrite_links(page, pages_by_source, assets)
         mark_external_links(page)
         index += search_entries(page)
+
+    # A reference can point forward, so this waits until every page is numbered.
+    for page in pages:
+        resolve_equation_refs(page, equation_labels)
 
     if SITE_DIR.exists():
         shutil.rmtree(SITE_DIR)
