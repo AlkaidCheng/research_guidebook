@@ -105,7 +105,7 @@ window.MathJax = {
       </section>
       {% endfor %}
       <div class="sidebar-foot">
-        <a href="{{ book.repo }}" class="external" rel="noopener">Source on GitHub</a>
+        <a href="{{ book.repo }}" class="external" rel="noopener">Source on {{ book.repo_host }}</a>
       </div>
     </div>
   </nav>
@@ -133,7 +133,7 @@ window.MathJax = {
 
     <footer class="colophon">
       <span>{{ book.title }} · {{ book.author }} · Revised {{ build_date }}</span>
-      <span><a href="{{ book.repo }}/blob/main/book/{{ page.source.as_posix() }}" class="external" rel="noopener">Edit this page</a></span>
+      <span><a href="{{ book.edit_url }}{{ page.source.as_posix() }}" class="external" rel="noopener">Edit this page</a></span>
     </footer>
   </main>
 </div>
