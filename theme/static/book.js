@@ -52,6 +52,16 @@
     headings.forEach(function (h) { observer.observe(h); });
   }
 
+  /* ---------------------------------------------- equation links on arrival */
+
+  /* An equation's anchor exists only once MathJax has typeset the page. */
+  if (/^#mjx-eqn/.test(window.location.hash) && window.MathJax && MathJax.startup) {
+    MathJax.startup.promise.then(function () {
+      var target = document.getElementById(decodeURIComponent(window.location.hash.slice(1)));
+      if (target) target.scrollIntoView({ block: "start" });
+    });
+  }
+
   /* -------------------------------------------------------- copy permalinks */
 
   document.querySelectorAll("a.anchor").forEach(function (a) {
