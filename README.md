@@ -77,5 +77,3 @@ GitHub Pages.
 ## License
 
 [MIT](LICENSE)
-
-Developed with the assistance of Claude Code.
