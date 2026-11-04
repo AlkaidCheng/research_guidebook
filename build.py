@@ -267,13 +267,14 @@ def number_figures_and_tables(page: Page) -> None:
         )
 
     def table(match: re.Match) -> str:
-        tab[0] += 1
         body, caption = match.group(1), match.group(2)
+        if not caption:
+            # Only captioned tables are numbered, so the numbers run without gaps.
+            return f'<figure class="table"><div class="table-wrap">{body}</div></figure>'
+        tab[0] += 1
         cap = (
             f'<figcaption><span class="caplabel">Table {label}{tab[0]}</span> {caption}'
             f'{anchor_link(f"tab-{tab[0]}")}</figcaption>'
-            if caption
-            else ""
         )
         return f'<figure class="table" id="tab-{tab[0]}">{cap}<div class="table-wrap">{body}</div></figure>'
 
