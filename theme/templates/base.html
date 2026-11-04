@@ -46,7 +46,7 @@ window.MathJax = {
 </script>
 <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/tex-chtml.js"></script>
 </head>
-<body{% if page.kind == "chapter" %} data-chapter="{{ page.number }}"{% endif %} class="kind-{{ page.kind }}">
+<body{% if page.chapter_number %} data-chapter="{{ page.chapter_number }}"{% endif %} class="kind-{{ page.kind }}">
 <a class="skip" href="#content">Skip to content</a>
 
 <header class="topbar">
@@ -55,10 +55,10 @@ window.MathJax = {
   </button>
   <a class="brand" href="{{ page.root }}">{{ book.title }}</a>
   <div class="running-head">
-    {% if page.kind == "chapter" %}
+    {% if page.chapter_number %}
       <span class="rh-part">Part {{ page.part.number }} · {{ page.part.title }}</span>
       <span class="rh-sep">/</span>
-      <span class="rh-chapter">Chapter {{ page.number }}</span>
+      <span class="rh-chapter">Chapter {{ page.chapter_number }}</span>
     {% elif page.kind == "part" %}
       <span class="rh-part">Part {{ page.number }}</span>
     {% endif %}
@@ -86,13 +86,28 @@ window.MathJax = {
         </a>
         <ol class="toc-chapters">
           {% for chapter in part.chapters %}
-          <li class="{% if chapter == page %}active{% endif %}">
+          <li class="{% if chapter == page or chapter == page.chapter %}active{% endif %}">
             <a href="{{ page.href(chapter) }}">
               <span class="toc-num">{{ chapter.number }}</span>
               <span class="toc-title">{{ chapter.title }}</span>
               {% if chapter.status %}<span class="toc-status" title="{{ chapter.status | replace('-', ' ') | capitalize }}"></span>{% endif %}
             </a>
-            {% if chapter == page and page.sections %}
+            {% if chapter.section_pages and (chapter == page or chapter == page.chapter) %}
+            <ol class="toc-sections">
+              {% for section in chapter.section_pages %}
+              <li{% if section == page %} class="active"{% endif %}>
+                <a href="{{ page.href(section) }}"><span class="toc-num">{{ section.number }}</span><span class="toc-title">{{ section.title }}</span></a>
+                {% if section == page and page.sections %}
+                <ol class="toc-sections toc-subsections">
+                  {% for s in page.sections if s.level == 2 and s.number %}
+                  <li><a href="#{{ s.id }}"><span class="toc-num">{{ s.number }}</span><span class="toc-title">{{ s.title }}</span></a></li>
+                  {% endfor %}
+                </ol>
+                {% endif %}
+              </li>
+              {% endfor %}
+            </ol>
+            {% elif chapter == page and page.sections %}
             <ol class="toc-sections">
               {% for s in page.sections if s.level == 2 %}
               <li{% if not s.number %} class="unnumbered"{% endif %}><a href="#{{ s.id }}">{% if s.number %}<span class="toc-num">{{ s.number }}</span>{% endif %}<span class="toc-title">{{ s.title }}</span></a></li>
@@ -119,13 +134,13 @@ window.MathJax = {
       {% if page.prev %}
       <a class="pagenav-prev" href="{{ page.href(page.prev) }}">
         <span class="pagenav-label">Previous</span>
-        <span class="pagenav-title">{% if page.prev.kind == 'chapter' %}{{ page.prev.number }}. {% elif page.prev.kind == 'part' %}Part {{ page.prev.number }}: {% endif %}{{ page.prev.title }}</span>
+        <span class="pagenav-title">{% if page.prev.kind == 'chapter' %}{{ page.prev.number }}. {% elif page.prev.kind == 'section' %}{{ page.prev.number }} {% elif page.prev.kind == 'part' %}Part {{ page.prev.number }}: {% endif %}{{ page.prev.title }}</span>
       </a>
       {% else %}<span></span>{% endif %}
       {% if page.next %}
       <a class="pagenav-next" href="{{ page.href(page.next) }}">
         <span class="pagenav-label">Next</span>
-        <span class="pagenav-title">{% if page.next.kind == 'chapter' %}{{ page.next.number }}. {% elif page.next.kind == 'part' %}Part {{ page.next.number }}: {% endif %}{{ page.next.title }}</span>
+        <span class="pagenav-title">{% if page.next.kind == 'chapter' %}{{ page.next.number }}. {% elif page.next.kind == 'section' %}{{ page.next.number }} {% elif page.next.kind == 'part' %}Part {{ page.next.number }}: {% endif %}{{ page.next.title }}</span>
       </a>
       {% endif %}
     </nav>

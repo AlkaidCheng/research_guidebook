@@ -33,7 +33,7 @@
 
   /* -------------------------------------------------- active section marker */
 
-  var sectionLinks = Array.prototype.slice.call(document.querySelectorAll(".toc-sections a"));
+  var sectionLinks = Array.prototype.slice.call(document.querySelectorAll('.toc-sections a[href^="#"]'));
   if (sectionLinks.length && "IntersectionObserver" in window) {
     var byId = {};
     sectionLinks.forEach(function (a) { byId[a.getAttribute("href").slice(1)] = a; });

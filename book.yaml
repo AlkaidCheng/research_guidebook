@@ -10,8 +10,9 @@ edit_url: https://github.com/AlkaidCheng/research_guidebook/blob/main/book/
 
 # Parts are categories; chapters are the topics inside them. Chapters are
 # numbered continuously through the book, parts with Roman numerals.
-# Each part directory needs an index.md; each chapter is one Markdown file
-# with a YAML front matter block (title, summary, optional status, references).
+# Each part directory needs an index.md. A chapter is one Markdown file with a
+# YAML front matter block (title, summary, optional status, references), or a
+# directory (dir) with an index.md opener and one such file per section page.
 parts:
   - dir: hep
     title: High Energy Physics

@@ -50,6 +50,24 @@ the `§` mark that appears beside it copies a URL that opens the book at that
 place. Section anchors are derived from the heading text, so renaming a
 heading changes its link. Figures and tables open enlarged when clicked.
 
+A chapter can also span several pages. Make it a directory in the part, with
+an `index.md` opener and one Markdown file per section, and list them in
+`book.yaml`:
+
+```yaml
+chapters:
+  - dir: statistical-inference
+    sections:
+      - likelihoods.md
+      - hypothesis-tests.md
+```
+
+Each section page is numbered within the chapter (3.1, 3.2), its `##` headings
+become subsections (3.1.1), and figures, tables and numbered boxes keep one
+running count through the chapter. Equations do not: their numbers restart on
+each page, and `\eqref` finds only equations on the same page. Each page has
+its own `references` map and reference list.
+
 A new part is a new directory with an `index.md` opener and an entry in
 `book.yaml`.
 
