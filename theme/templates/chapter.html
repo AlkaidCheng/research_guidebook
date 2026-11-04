@@ -25,5 +25,23 @@
   <div class="prose">
     {{ page.body_html | safe }}
   </div>
+  {% if page.section_pages %}
+  <section class="part-contents">
+    <h2 class="unnumbered" id="sections">Sections</h2>
+    <ol class="chapter-list">
+      {% for section in page.section_pages %}
+      <li>
+        <a href="{{ page.href(section) }}">
+          <span class="chapter-list-num">{{ section.number }}</span>
+          <span class="chapter-list-body">
+            <span class="chapter-list-title">{{ section.title }}{% if section.status %} <span class="badge">{{ section.status | replace('-', ' ') }}</span>{% endif %}</span>
+            {% if section.summary %}<span class="chapter-list-summary">{{ section.summary }}</span>{% endif %}
+          </span>
+        </a>
+      </li>
+      {% endfor %}
+    </ol>
+  </section>
+  {% endif %}
 </article>
 {% endblock %}

@@ -1,11 +1,12 @@
 #!/usr/bin/env python3
 """Build the guidebook: Markdown chapters in ``book/`` become a static site in ``site/``.
 
-The book is described by ``book.yaml`` (parts and the chapters they contain). Each
-chapter is a Markdown file with a YAML front matter block. The build numbers parts,
-chapters, sections, figures, tables and boxed environments, resolves citations
-against each chapter's reference list, rewrites ``.md`` links into site URLs,
-emits a search index, and fails on any broken internal link or unknown citation.
+The book is described by ``book.yaml`` (parts and the chapters they contain). A
+chapter is a Markdown file with a YAML front matter block, or a directory holding an
+opener and one such file per section. The build numbers parts, chapters, sections,
+figures, tables and boxed environments, resolves citations against each page's
+reference list, rewrites ``.md`` links into site URLs, emits a search index, and
+fails on any broken internal link or unknown citation.
 """
 
 from __future__ import annotations
@@ -83,18 +84,21 @@ class BuildError(Exception):
 
 @dataclass
 class Page:
-    """One output page: the home page, a part opener or a chapter."""
+    """One output page: the home page, a part opener, a chapter or a chapter's section."""
 
-    kind: str  # "home" | "part" | "chapter"
+    kind: str  # "home" | "part" | "chapter" | "section"
     source: Path  # Markdown source, relative to BOOK_DIR
     url: str  # site-relative URL ending in "/" ("" for the home page)
     meta: dict
     body_md: str
     title: str = ""
-    number: str = ""  # "1" for a chapter, "I" for a part
+    number: str = ""  # "1" for a chapter, "I" for a part, "1.3" for a section page
     part: Page | None = None
+    chapter: Page | None = None  # the chapter a section page belongs to
     chapters: list[Page] = field(default_factory=list)
-    sections: list[dict] = field(default_factory=list)
+    section_pages: list[Page] = field(default_factory=list)
+    sections: list[dict] = field(default_factory=list)  # headings within this page
+    counters: dict[str, int] = field(default_factory=dict)  # shared across a chapter's pages
     body_html: str = ""
     prev: Page | None = None
     next: Page | None = None
@@ -106,6 +110,18 @@ class Page:
     @property
     def summary(self) -> str:
         return str(self.meta.get("summary", "")).strip()
+
+    @property
+    def chapter_number(self) -> str:
+        """The number of the chapter this page is in, empty outside chapters."""
+        if self.kind == "section":
+            return self.chapter.number
+        return self.number if self.kind == "chapter" else ""
+
+    @property
+    def has_numbered_headings(self) -> bool:
+        """Whether H2/H3 are numbered; an opener with section pages leaves them plain."""
+        return self.kind == "section" or (self.kind == "chapter" and not self.section_pages)
 
     @property
     def output_path(self) -> Path:
@@ -162,14 +178,31 @@ def load_book() -> tuple[dict, list[Page]]:
         part = read_page("part", Path(directory) / "index.md", f"{directory}/")
         part.number = ROMAN[index]
         pages.append(part)
-        for name in part_cfg.get("chapters", []):
+        for entry in part_cfg.get("chapters", []):
             chapter_no += 1
-            stem = PurePosixPath(name).stem
-            chapter = read_page("chapter", Path(directory) / name, f"{directory}/{stem}/")
+            if isinstance(entry, str):
+                chapter_dir = PurePosixPath(entry).stem
+                source, section_names = Path(directory) / entry, []
+            else:
+                chapter_dir = entry["dir"].strip("/")
+                source = Path(directory) / chapter_dir / "index.md"
+                section_names = entry.get("sections", [])
+            chapter = read_page("chapter", source, f"{directory}/{chapter_dir}/")
             chapter.number = str(chapter_no)
             chapter.part = part
             part.chapters.append(chapter)
             pages.append(chapter)
+            for section_no, name in enumerate(section_names, start=1):
+                stem = PurePosixPath(name).stem
+                section = read_page(
+                    "section", Path(directory) / chapter_dir / name, f"{directory}/{chapter_dir}/{stem}/"
+                )
+                section.number = f"{chapter.number}.{section_no}"
+                section.part = part
+                section.chapter = chapter
+                section.counters = chapter.counters
+                chapter.section_pages.append(section)
+                pages.append(section)
     for before, after in zip(pages, pages[1:]):
         before.next = after
         after.prev = before
@@ -213,7 +246,7 @@ def number_headings(page: Page) -> None:
                 counters[0] += 1
         elif not unnumbered:
             counters[1] += 1
-        if unnumbered or page.kind != "chapter":
+        if unnumbered or not page.has_numbered_headings:
             label = ""
         elif level == 2:
             label = f"{page.number}.{counters[0]}"
@@ -250,32 +283,32 @@ def inline_svg(page: Page, img: str, caption: str) -> str | None:
 
 
 def number_figures_and_tables(page: Page) -> None:
-    label = f"{page.number}." if page.kind == "chapter" else ""
-    fig = [0]
-    tab = [0]
+    label = f"{page.chapter_number}." if page.chapter_number else ""
+    counters = page.counters
 
     def figure(match: re.Match) -> str:
-        fig[0] += 1
+        fig = counters["figure"] = counters.get("figure", 0) + 1
         img = match.group(1)
         alt = IMG_ALT.search(img)
         caption = alt.group(1) if alt else ""
         body = inline_svg(page, img, caption) or img
         return (
-            f'<figure id="fig-{fig[0]}">{body}<figcaption>'
-            f'<span class="caplabel">Figure {label}{fig[0]}</span> {caption}'
-            f'{anchor_link(f"fig-{fig[0]}")}</figcaption></figure>'
+            f'<figure id="fig-{fig}">{body}<figcaption>'
+            f'<span class="caplabel">Figure {label}{fig}</span> {caption}'
+            f'{anchor_link(f"fig-{fig}")}</figcaption></figure>'
         )
 
     def table(match: re.Match) -> str:
-        tab[0] += 1
         body, caption = match.group(1), match.group(2)
+        if not caption:
+            # Only captioned tables are numbered, so the numbers run without gaps.
+            return f'<figure class="table"><div class="table-wrap">{body}</div></figure>'
+        tab = counters["table"] = counters.get("table", 0) + 1
         cap = (
-            f'<figcaption><span class="caplabel">Table {label}{tab[0]}</span> {caption}'
-            f'{anchor_link(f"tab-{tab[0]}")}</figcaption>'
-            if caption
-            else ""
+            f'<figcaption><span class="caplabel">Table {label}{tab}</span> {caption}'
+            f'{anchor_link(f"tab-{tab}")}</figcaption>'
         )
-        return f'<figure class="table" id="tab-{tab[0]}">{cap}<div class="table-wrap">{body}</div></figure>'
+        return f'<figure class="table" id="tab-{tab}">{cap}<div class="table-wrap">{body}</div></figure>'
 
     page.body_html = FIGURE.sub(figure, page.body_html)
     page.body_html = TABLE_CAPTION.sub(table, page.body_html)
@@ -287,8 +320,8 @@ BOX = re.compile(
 
 
 def number_boxes(page: Page) -> None:
-    counters: dict[str, int] = {}
-    label = f"{page.number}." if page.kind == "chapter" else ""
+    counters = page.counters
+    label = f"{page.chapter_number}." if page.chapter_number else ""
 
     def replace(match: re.Match) -> str:
         kind, extra, title = match.group(1), match.group(2) or "", match.group(3)
@@ -422,10 +455,11 @@ def search_entries(page: Page) -> list[dict]:
             text = text[len(section):].strip() if text.startswith(section) else text
         else:
             section, anchor = "", ""
+        prefix = {"chapter": f"{page.number}. ", "section": f"{page.number} "}.get(page.kind, "")
         entries.append(
             {
                 "url": page.url + anchor,
-                "page": (f"{page.number}. " if page.kind == "chapter" else "") + page.title,
+                "page": prefix + page.title,
                 "section": section,
                 "text": text[:1200],
             }

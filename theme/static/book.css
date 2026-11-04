@@ -211,6 +211,8 @@ kbd {
 .toc-sections > li > a .toc-num { font-weight: 400; }
 .toc-sections > li.unnumbered > a { grid-template-columns: 1fr; }
 .toc-sections > li.active > a { color: var(--accent-ink); }
+.toc-subsections { margin-bottom: 0.2rem; }
+.toc-subsections > li > a { grid-template-columns: 2.6rem 1fr; }
 .sidebar-foot { margin-top: 1.5rem; padding-top: 0.75rem; border-top: 1px solid var(--rule); font-size: 0.78rem; }
 .sidebar-foot a { color: var(--ink-3); }
 .scrim { position: fixed; inset: 0; background: rgba(0,0,0,0.35); z-index: 35; }
@@ -234,6 +236,7 @@ kbd {
   margin: 0 0 0.25rem;
   font-weight: 600;
 }
+.chapter-kicker a { color: inherit; }
 .chapter-number {
   font-size: 4.5rem;
   font-weight: 300;
@@ -345,6 +348,7 @@ code, pre, .highlight { font-family: var(--mono); font-feature-settings: normal;
   padding: 0.05em 0.35em;
   hyphens: none;
 }
+.prose p code, .prose li code { overflow-wrap: anywhere; }
 .prose pre code, .highlight code { background: none; border: 0; padding: 0; font-size: inherit; }
 .highlight {
   margin: 1.25rem 0;
@@ -691,10 +695,9 @@ h2:hover .anchor, h3:hover .anchor, figcaption:hover .anchor, .admonition-title:
   padding: 0.2em 0.6em;
   border-radius: 3px;
   pointer-events: none;
-  opacity: 0;
-  transition: opacity 0.15s;
+  display: none;
 }
-.anchor.copied::after { opacity: 1; }
+.anchor.copied::after { display: block; }
 @media (hover: none) { .anchor { opacity: 0.55; } }
 h2:target, h3:target { scroll-margin-top: calc(var(--topbar) + 1rem); }
 h2:target .secnum, h3:target .secnum, figure:target .caplabel, .admonition:target .boxlabel,
