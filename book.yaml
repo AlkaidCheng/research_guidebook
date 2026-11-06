@@ -7,6 +7,10 @@ repo: https://github.com/AlkaidCheng/research_guidebook
 repo_host: GitHub
 # A page's edit link is this prefix followed by its path under book/.
 edit_url: https://github.com/AlkaidCheng/research_guidebook/blob/main/book/
+mathjax_macros:
+  dd: \mathrm{d}
+  pT: p_{\mathrm{T}}
+  vec: ['\boldsymbol{#1}', 1]
 
 # Parts are categories; chapters are the topics inside them. Chapters are
 # numbered continuously through the book, parts with Roman numerals.
