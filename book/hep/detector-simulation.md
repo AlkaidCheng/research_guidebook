@@ -283,12 +283,29 @@ The CMS-like card writes the branches in Table 2.2.
 Table: The branches written by the CMS-like card. Other cards add or omit
 collections; the card is the authoritative list.
 
-The `Particle` branch is the generator record as Delphes received it: `PID`
-and `Status` are the generator's, the mother and daughter fields `M1`, `M2`,
-`D1`, `D2` are indices into the same branch (−1 when absent), momenta are in
-GeV, and the production vertex `X`, `Y`, `Z` is in mm with `T` in the same
-units. Status 1 particles are the ones that were propagated; everything else
-is history, available for truth labels.
+The `Particle` branch is the generator record as Delphes received it. `PID`
+and `Status` are the generator's, momenta are in GeV, and the production vertex
+`X`, `Y`, `Z` is in mm; the production time `T` is in seconds, converted by the
+`TreeWriter` from the generator's $ct$ in mm. The mother and daughter fields
+`M1`, `M2`, `D1`, `D2` keep the meaning of Pythia's record (Section 1.6.2) in
+Delphes's numbering: positions in the event's `Particle` array counted from 0,
+with −1 for none. `DelphesPythia8` stores Pythia's indices less one, since it
+leaves out Pythia's entry 0. `DelphesHepMC3` takes the first and last particle
+entering a particle's production vertex and leaving its end vertex, so in its
+output `D1` equal to `D2` means a single daughter, where from `DelphesPythia8`
+it marks a carbon copy. Status 1 particles are the ones that were propagated;
+everything else is history, available for truth labels.
+
+!!! warning "The indices count positions in the whole record"
+    `M1` to `D2` are positions in `Delphes/allParticles`, and the `TreeWriter`
+    copies them unchanged whichever array a branch is written from. They can be
+    followed only in a branch that holds the whole array, as the `Particle`
+    branch of the CMS-like card does. A card that writes a subset instead, as
+    the `CMS_PhaseII_140PU_conf4.tcl` card shipped with Delphes 3.5.1 writes
+    the output of a `StatusPidFilter` as its `GenParticles` branch, keeps
+    indices that point past the end of the branch or at other particles. A
+    selection on the particle arrays after reading has the same effect, so the
+    history is followed before the arrays are cut.
 
 Reconstructed objects keep links back to that history. `Track.Particle`,
 `Electron.Particle` and `Muon.Particle` are references to the generator
@@ -418,7 +435,9 @@ bug, and disagreement in a mean is.
       tracking and calorimetry smear them; particle flow joins the two; jets,
       leptons, tags and missing momentum are built from the candidates.
     - The output tree is a set of parallel collections with references back
-      to the generator record. Pick one layer; do not sum overlapping ones.
+      to the generator record, whose mother and daughter indices are positions
+      in the whole `Particle` array. Pick one layer; do not sum overlapping
+      ones.
     - Validate against a reference from the generator level outward, and pin
       the Delphes release together with the card.
 

@@ -636,11 +636,15 @@ MadSpin (Section 1.3.4) did not deliver the request. Each `<event>` opens with t
 subprocess id, the event weight, the hard scale in GeV and the values of
 $\alpha_\mathrm{em}$ and $\alpha_\mathrm{s}$ at that scale. Each particle line
 then gives the PDG id; the status (−1 incoming, 1 outgoing, 2 intermediate
-resonance); two mother indices (1-based positions in the event, 0 for
-incoming); two colour-flow indices (colour, anticolour; 0 for none, so a
-quark has only the first and an antiquark only the second); $p_x$, $p_y$,
-$p_z$, $E$ and $m$ in GeV; the proper lifetime in mm (0 for prompt); and the
-helicity (±1, or 9 for unknown). In the example the colour line 501 connects
+resonance); the positions of its first and last mother, counted from 1 within
+the event, with 0 for none [@boos2001]; two colour-flow indices (colour,
+anticolour; 0 for none, so a quark has only the first and an antiquark only
+the second); $p_x$, $p_y$, $p_z$, $E$ and $m$ in GeV; the proper lifetime in mm
+(0 for prompt); and the helicity (±1, or 9 for unknown). The incoming partons
+have no mother, a decay product has one and repeats it or leaves the second
+index at 0, and the outgoing particles of a $2 \to n$ process name both
+incoming partons, as the top and antitop of the example name entries 1 and 2.
+The record has no daughter indices. In the example the colour line 501 connects
 the two gluons, 503 flows from the second gluon to the top and 502 from the
 first gluon to the antitop.
 
@@ -658,6 +662,49 @@ of vertices and particles: every particle has a production vertex and, unless
 it is final, an end vertex, and vertices carry positions, so that decay
 lengths are preserved. The record is written in a plain-text (Asciiv3) or ROOT
 format and read by Delphes, Rivet and most analysis frameworks.
+
+The generator's own record is a list rather than a graph. Pythia's event
+record, which `Next:numberShowEvent` prints (Section 1.4.2) and from which the
+HepMC3 file is written, numbers its entries from 0: entry 0 stands for the
+event as a whole, and entries 1 and 2 for the two beams. Each entry names its
+relatives with four indices: `mother1` and `mother2`, the positions of its
+first and last mother, and `daughter1` and `daughter2`, those of its first and
+last daughter, with 0 for none. Two numbers are enough because they bound a
+range. Pythia stores a particle's decay products next to one another, so any
+number of them is the range from `daughter1` to `daughter2`, and the cases
+that are not a plain range are told apart by how the two numbers compare
+(Tables 1.4 and 1.5). Each particle's `motherList()` and `daughterList()`
+methods expand the pairs into full lists. HepMC3 needs no such encoding,
+since a vertex holds any number of incoming and outgoing particles.
+
+| `mother1`, `mother2` | Meaning | Where it occurs |
+|---|---|---|
+| Both 0 | No mother | Entry 0, the event as a whole, and the beams, entries 1 and 2 |
+| Equal, above 0 | A carbon copy of its mother, with its momentum changed by a recoil | A parton that absorbs recoil in the shower |
+| `mother1` above 0, `mother2` = 0 | One mother | The products of a shower branching or of a decay |
+| `mother1` < `mother2`, status ±81 to ±86 | Every entry from `mother1` to `mother2` is a mother | A primary hadron from a fragmenting string; status ±101 to ±106 marks an R-hadron |
+| `mother1` < `mother2`, any other status | Two different mothers | An outgoing particle of a hard $2 \to n$ process |
+| `mother2` < `mother1` | Two different mothers, stored in swapped order | Two nearby partons joined into one, status 73 or 74; in $g\,q \to q$ the quark is made the first mother to keep track of the flavour |
+
+Table: The mother indices of Pythia's event record and the cases their values
+encode, with 0 for none. Delphes stores each index less one (Section 2.4).
+
+| `daughter1`, `daughter2` | Meaning | Where it occurs |
+|---|---|---|
+| Both 0 | No daughters, so far | A final particle |
+| Equal, above 0 | Its only daughter is a carbon copy of it | A parton that absorbs recoil in the shower |
+| `daughter1` above 0, `daughter2` = 0 | One daughter | A beam, whose daughter is the initiator of the hardest interaction; a parton entering a $2 \to 1$ process or joined with a neighbour |
+| `daughter1` < `daughter2` | The daughters are the entries from `daughter1` to `daughter2` | The products of a decay |
+| `daughter2` < `daughter1` | Two daughters stored apart | The backward evolution of the initial-state shower |
+
+Table: The daughter indices of Pythia's event record. A carbon copy appears in
+both tables: the original names the copy as its only daughter, and the copy
+names the original as its only mother.
+
+A decay product has a single mother, so a particle's ancestry along a decay
+chain is found by following `mother1`. Its descendants are found either by
+handling every case of Table 1.5 or by searching for the particles whose
+ancestry leads back to it.
 
 | Status | Meaning |
 |---|---|
@@ -772,6 +819,8 @@ Pythia 8 online manual
     (`JetMatching:*`),
     [Particle Decays](https://pythia.org/latest-manual/ParticleDecays.html)
     (`limitTau0`, `tau0Max`),
+    [Particle Properties](https://pythia.org/latest-manual/ParticleProperties.html)
+    (the event record's mother and daughter indices),
     [Random Number Seed](https://pythia.org/latest-manual/RandomNumberSeed.html),
     [Tunes](https://pythia.org/latest-manual/Tunes.html) and
     [PDF Selection](https://pythia.org/latest-manual/PDFSelection.html). The
