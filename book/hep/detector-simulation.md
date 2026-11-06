@@ -286,8 +286,9 @@ collections; the card is the authoritative list.
 The `Particle` branch is the generator record as Delphes received it: `PID`
 and `Status` are the generator's, the mother and daughter fields `M1`, `M2`,
 `D1`, `D2` are indices into the same branch (−1 when absent), momenta are in
-GeV, and the production vertex `X`, `Y`, `Z` is in mm with `T` in the same
-units. Status 1 particles are the ones that were propagated; everything else
+GeV, and the production vertex `X`, `Y`, `Z` is in mm; the production time `T`
+is in seconds, converted by the `TreeWriter` from the generator's $ct$ in mm.
+Status 1 particles are the ones that were propagated; everything else
 is history, available for truth labels.
 
 Reconstructed objects keep links back to that history. `Track.Particle`,
