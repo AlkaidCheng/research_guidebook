@@ -1,0 +1,2098 @@
+# Field meanings of the SLD mini-DST banks, with the basis of each meaning.
+# Written from the archived DUCS templates, the 1994 and 1995 mini-DST memos, SLD papers,
+# the jazelle_reader sources and the decoding specifications, and checked field by field
+# against those sources. make_banks.py reads it with data/banks_layout.yaml.
+MCHEAD:
+  purpose: 'Monte Carlo event header: the generated event type and the generated interaction point. One
+    entry per record; MC records fill it, and data records carry it filled with zeros.'
+  purpose_source: mchead.template (rev 0.00, 20 Nov 1988); BEAM.md (decoding notes) for the zero-filled
+    data entry
+  fields:
+    ntot:
+      meaning: Total number of final-state particles in the generated event
+      basis: template
+      source: mchead.template (rev 0.00, 20 Nov 1988)
+      doubt: Usually several times the number of MCPART entries stored in the mini-DST, so it counts particles
+        the mini-DST did not keep. What exactly it counts has not been checked.
+    origin:
+      meaning: 'Event-type bit word: the bit of the generated process is set (see bits)'
+      basis: template
+      source: mchead.template (rev 0.00, 20 Nov 1988)
+      doubt: The reader header (MCHEAD.hpp) defines the template numbers as plain values, but the template
+        calls them bits and the stored words have a single bit set (1, 2, 4, 8, 16), bit n matching the
+        primary quark flavour 501+n. Read them as bit positions.
+      bits:
+      - bit: 0
+        name: UUBAR
+        meaning: u ubar event
+      - bit: 1
+        name: DDBAR
+        meaning: d dbar event
+      - bit: 2
+        name: SSBAR
+        meaning: s sbar event
+      - bit: 3
+        name: CCBAR
+        meaning: c cbar event
+      - bit: 4
+        name: BBBAR
+        meaning: b bbar event
+      - bit: 5
+        name: TTBAR
+        meaning: t tbar event
+      - bit: 6
+        name: EE
+        meaning: e+e- event
+      - bit: 7
+        name: MUMU
+        meaning: mu+mu- event
+      - bit: 8
+        name: TAUTAU
+        meaning: tau+tau- event
+      - bit: 12
+        name: TWOPHOT
+        meaning: two-photon event
+    ipx:
+      meaning: Generated interaction point x (cm, detector frame)
+      basis: template
+      source: mchead.template (rev 0.00, 20 Nov 1988); unit and frame from MCBEAM.yaml (decoding spec)
+      doubt: The jazelle README calls them a primary-vertex momentum; they are a position, equal to
+        MCBEAM ip_x, ip_y and ip_z.
+    ipy:
+      meaning: Generated interaction point y (cm, detector frame)
+      basis: template
+      source: mchead.template (rev 0.00, 20 Nov 1988); unit and frame from MCBEAM.yaml (decoding spec)
+      doubt: The jazelle README calls them a primary-vertex momentum; they are a position, equal to
+        MCBEAM ip_x, ip_y and ip_z.
+    ipz:
+      meaning: Generated interaction point z (cm, detector frame)
+      basis: template
+      source: mchead.template (rev 0.00, 20 Nov 1988); unit and frame from MCBEAM.yaml (decoding spec)
+      doubt: The jazelle README calls them a primary-vertex momentum; they are a position, equal to
+        MCBEAM ip_x, ip_y and ip_z.
+MCPART:
+  purpose: One entry per stored MC particle, from the event generator and from the detector simulation,
+    with its momentum, type, charge, parent and termination point. MC only; the mini-DST keeps a subset
+    of the simulated particles, and the compressor drops E for the species whose mass it assumes.
+  purpose_source: mcpart.template (rev 0.52, 1 Apr 1991); compress.html; The Parnassus study (arXiv:2609.25061); the decoding
+    review of the bank lab
+  fields:
+    px:
+      meaning: x momentum (GeV) of the particle at its point of origin
+      basis: template
+      source: mcpart.template (rev 0.52, 1 Apr 1991); unit from MCPART.hpp
+    py:
+      meaning: y momentum (GeV) of the particle at its point of origin
+      basis: template
+      source: mcpart.template (rev 0.52, 1 Apr 1991); unit from MCPART.hpp
+    pz:
+      meaning: z momentum (GeV) of the particle at its point of origin
+      basis: template
+      source: mcpart.template (rev 0.52, 1 Apr 1991); unit from MCPART.hpp
+    id_word:
+      meaning: 'Packed word: own bank id, parent bank id, charge code and E-omitted flag'
+      basis: memo
+      source: compress.html (compressed mini-DST memo, 2 Dec 1995)
+      doubt: The memo fixes the content (13-bit ids, 4-bit charge, one E flag) but not the bit positions,
+        which come from the reader (MCPART.cpp).
+      bits:
+      - range: 0-12
+        name: id
+        meaning: MCPART bank id of this entry (template maximum 5000)
+        basis: memo
+        source: compress.html; mcpart.template (Maxid=5000)
+      - range: 13-25
+        name: parent_id
+        meaning: Bank id of the parent MCPART entry (template PARENT key)
+        basis: memo
+        source: compress.html; mcpart.template (rev 0.52, 1 Apr 1991)
+      - range: 26-28
+        name: charge magnitude index
+        meaning: Index of |charge| in 0, 1/3, 2/3, 1, 2, 3, 4, 5 (units of e)
+        basis: memo
+        source: compress.html (assumption 2); index order from MCPART.cpp
+        doubt: The memo lists the magnitudes but not their code order. jazelle <= 0.4.0 swaps 1/3 and
+          2/3; the corrected reader on the development branch uses the memo order, checked against matched
+          track charges.
+      - range: '29'
+        name: charge negative
+        meaning: 'Sign bit: set means the charge is negative'
+        basis: reader
+        source: MCPART.cpp of the corrected reader on the development branch
+        doubt: jazelle <= 0.4.0, and parquet files translated with it, invert the charge sign. The fixed
+          reading makes matched MC and track charges agree.
+      - range: '30'
+        name: E omitted
+        meaning: Set when E is not stored and must be rebuilt from the particle mass
+        basis: memo
+        source: compress.html; bit position from MCPART.cpp
+    ptype:
+      meaning: Particle type code, not a PDG id; numbering undocumented, inferred as JETSET 6
+      basis: template
+      source: mcpart.template (rev 0.52, 1 Apr 1991) for 'Particle type'; numbering inferred in the decoding
+        review of the bank lab and The Parnassus study (arXiv:2609.25061)
+      doubt: The template names no numbering. The JETSET 6 reading (1 gamma, 7 e-, 8 nu_e, 9 mu-, 10 nu_mu,
+        12 nu_tau, 17 pi+, 18 K+, 23 pi0, 37 K0S, 38 K0L, 41 p, 42 n; quarks 501-505; negative for antiparticles)
+        is inferred from two-body decay masses and production patterns, not documented. The Parnassus study [@lo2026parnassus]
+        independently identifies codes 7-10 and 41-42 as e, nu_e, mu, nu_mu, p, n. The reader docs (MCPART.hpp,
+        README) wrongly call it LUND/PDG.
+    origin:
+      meaning: Bit word recording where the particle came from and how it ended (see bits)
+      basis: template
+      source: mcpart.template (rev 0.52, 1 Apr 1991)
+      doubt: Bit 8 (PRIMARY) was not seen set in a check of mini-DST MC records, so it cannot select generator
+        particles.
+      bits:
+      - bit: 0
+        name: DECAYED
+        meaning: decayed by the generator
+      - bit: 1
+        name: DECAYFLT
+        meaning: decayed in flight in the detector simulation
+      - bit: 2
+        name: BEAMPIPE
+        meaning: left down the beam pipe without hitting the detector
+      - bit: 3
+        name: NOINTER
+        meaning: traversed the detector without interacting
+      - bit: 4
+        name: STOPPED
+        meaning: energy below the cut; other bits may say why
+      - bit: 5
+        name: INTERACT
+        meaning: interacted
+      - bit: 6
+        name: INTSHDEP
+        meaning: interacted; outcome depends on the shower-deposition choice
+      - bit: 8
+        name: PRIMARY
+        meaning: from the e+e- primary interaction vertex
+      - bit: 9
+        name: ISTOP1
+        meaning: GEANT ISTOP=1 with KCASE not DCAY, HADR or photon PAIR
+      - bit: 10
+        name: ISTOP2
+        meaning: GEANT ISTOP=2 with KCASE not STOP
+      - bit: 11
+        name: KALTOCDC
+        meaning: shower albedo from the calorimeter back into the central detector
+      - bit: 12
+        name: SWERROR
+        meaning: error while tracking the particle through the detector
+      - bit: 13
+        name: SW2MNYST
+        meaning: tracking aborted after too many steps
+      - bit: 14
+        name: SWOUTOFT
+        meaning: tracking aborted outside the detector's sensitive time
+      - bit: 15
+        name: EMAXTERM
+        meaning: EM shower axis terminated at sufficient depth
+      - bit: 16
+        name: NOTTRACK
+        meaning: not tracked by request (e.g. neutrinos)
+      - bit: 17
+        name: ISR
+        meaning: initial-state radiation
+      - bit: 18
+        name: BEAM
+        meaning: initial-state beam particle
+      - bit: 19
+        name: PREFRAG
+        meaning: pre-fragmentation particle (parton, gluon)
+      - bit: 20
+        name: SWUM
+        meaning: produced by the detector simulation
+    xt_x:
+      meaning: x (cm) of the termination point, where the particle decayed, interacted or stopped
+      basis: template
+      source: mcpart.template (rev 0.52, 1 Apr 1991); unit from MCPART.hpp
+    xt_y:
+      meaning: y (cm) of the termination point, where the particle decayed, interacted or stopped
+      basis: template
+      source: mcpart.template (rev 0.52, 1 Apr 1991); unit from MCPART.hpp
+    xt_z:
+      meaning: z (cm) of the termination point, where the particle decayed, interacted or stopped
+      basis: template
+      source: mcpart.template (rev 0.52, 1 Apr 1991); unit from MCPART.hpp
+    e:
+      meaning: Energy (GeV); stored only for species outside the compressor's fixed mass list
+      basis: template
+      source: mcpart.template (rev 0.52, 1 Apr 1991); compress.html; unit from MCPART.hpp
+      doubt: 'When E is omitted (gamma, nu, e, mu, pi, K, p, n, with the 1992 PDG masses [@junk1995compress]),
+        jazelle <= 0.4.0 rebuilds it with masses in another numbering: e gets the K+ mass, mu the proton
+        mass, nu_e the K0 mass, nu_mu the neutron mass and the photon the electron mass, while pi, K, p
+        and n get zero.'
+MCPNT:
+  purpose: 'Relational table linking MC particles (MCPART) to reconstructed particles (PHPOINT), with
+    the reason for each link: tracking hits or calorimeter energy. MC only, one entry per related pair,
+    stored as a 16-byte pass in MCPART order and a 4-byte pass in PHPOINT order.'
+  purpose_source: mcpnt.template (rev 0.01, 4 Jan 1994); compress.html
+  fields:
+    header:
+      meaning: MCPNT id (high 16 bits) plus MCPART id (pass 1) or PHPOINT id (pass 2)
+      basis: memo
+      source: compress.html (two-key banks); mcpnt.template (rev 0.01, 4 Jan 1994)
+      doubt: The memo describes the pass-2 pair of 16-bit ids; the pass-1 packing and the half order come
+        from the reader. The decoding checks find the KAL-bit entries one to one with PHKMC1, which supports
+        both ids.
+      bits:
+      - block: pass 1
+        range: 0-15
+        name: MCPART id
+        meaning: MCPART bank id of the MC particle
+        basis: reader
+        source: MCPNT.cpp
+      - block: pass 1
+        range: 16-31
+        name: MCPNT id
+        meaning: MCPNT bank id of this entry
+        basis: reader
+        source: MCPNT.cpp
+      - block: pass 2
+        range: 0-15
+        name: PHPOINT id
+        meaning: PHPOINT bank id of the reconstructed particle
+        basis: memo
+        source: compress.html; JazelleFile.cpp
+      - block: pass 2
+        range: 16-31
+        name: MCPNT id
+        meaning: MCPNT bank id, the key that joins pass 2 to pass 1
+        basis: memo
+        source: compress.html; JazelleFile.cpp
+    reason:
+      meaning: 'Bit word: why the two particles are related, by subsystem (see bits)'
+      basis: template
+      source: mcpnt.template (rev 0.01, 4 Jan 1994)
+      bits:
+      - bit: 0
+        name: CDC
+        meaning: CDC hits of the MC particle contributed
+      - bit: 1
+        name: VTX
+        meaning: vertex-detector hits of the MC particle contributed
+      - bit: 2
+        name: EDCI
+        meaning: inner endcap drift chamber hits contributed
+      - bit: 3
+        name: EDCO
+        meaning: outer endcap drift chamber hits contributed
+      - bit: 4
+        name: WIC
+        meaning: WIC hits of the MC particle contributed
+      - bit: 8
+        name: KAL
+        meaning: the MC particle contributed energy to the calorimeter cluster
+      - bit: 24
+        name: VIRTUAL
+        meaning: the MC particle is identified with a virtual particle
+      - bit: 25
+        name: PARTIAL
+        meaning: one or more outgoing charged MC particles failed to be associated with the vertex
+    nhits:
+      meaning: Number of tracking-chamber hits the MC particle contributed
+      basis: template
+      source: mcpnt.template (rev 0.01, 4 Jan 1994)
+      doubt: The reader treats -999 as no tracking hits. Calorimeter-only entries hold -999 or a positive
+        count, whose meaning there is unchecked.
+    econtrib:
+      meaning: Energy (GeV, raw PHKLUS scale) the MC particle contributed to the calorimeter cluster
+      basis: template
+      source: mcpnt.template (rev 0.01, 4 Jan 1994); unit from PHKMC1_PASS1.yaml (equal to PHKMC1 e)
+MCBEAM:
+  purpose: 'Generated beam conditions of an MC event: interaction point, the two beam four-momenta, centre-of-mass
+    energy and electron-beam helicity, as produced by the beam simulation. MC only, one entry per record.'
+  purpose_source: MCBEAM.yaml (decoding spec); eventsim.html (SLD event simulation page, updated 25 Sep
+    1995)
+  fields:
+    name:
+      meaning: Entry label, always the string 'XBEAM   '
+      basis: plausible
+      source: MCBEAM.yaml (decoding spec)
+    ip_x:
+      meaning: Generated interaction point x (cm, detector frame), equal to MCHEAD ipx
+      basis: confirmed
+      source: MCBEAM.yaml (decoding spec)
+    ip_y:
+      meaning: Generated interaction point y (cm, detector frame), equal to MCHEAD ipy
+      basis: confirmed
+      source: MCBEAM.yaml (decoding spec)
+    ip_z:
+      meaning: Generated interaction point z (cm, detector frame), equal to MCHEAD ipz
+      basis: confirmed
+      source: MCBEAM.yaml (decoding spec)
+    px_total:
+      meaning: x momentum of the e+e- system (GeV), always 0
+      basis: plausible
+      source: MCBEAM.yaml (decoding spec)
+    py_total:
+      meaning: y momentum of the e+e- system (GeV), always 0
+      basis: plausible
+      source: MCBEAM.yaml (decoding spec)
+    pz_total:
+      meaning: z momentum of the e+e- system (GeV), beam1_pz + beam2_pz, MCBEAM z convention
+      basis: confirmed
+      source: MCBEAM.yaml (decoding spec)
+      doubt: Whether MCBEAM's momenta use a z-reversed generator frame or the generator applied the boost
+        with the opposite sign cannot be told from the data.
+    e_total:
+      meaning: Energy of the e+e- system (GeV), beam1_e + beam2_e
+      basis: confirmed
+      source: MCBEAM.yaml (decoding spec)
+    ecm:
+      meaning: Generated centre-of-mass energy sqrt(s) (GeV)
+      basis: confirmed
+      source: MCBEAM.yaml (decoding spec)
+    beam1_px:
+      meaning: Beam 1 x momentum (GeV), always 0
+      basis: plausible
+      source: MCBEAM.yaml (decoding spec)
+    beam1_py:
+      meaning: Beam 1 y momentum (GeV), always 0
+      basis: plausible
+      source: MCBEAM.yaml (decoding spec)
+    beam1_pz:
+      meaning: Beam 1 z momentum (GeV), equal to -beam1_e in MCBEAM's z convention
+      basis: plausible
+      source: MCBEAM.yaml (decoding spec)
+    beam1_e:
+      meaning: 'Beam 1 energy (GeV): the beam moving along +z in the detector frame'
+      basis: confirmed
+      source: MCBEAM.yaml (decoding spec)
+    beam2_px:
+      meaning: Beam 2 x momentum (GeV), always 0
+      basis: plausible
+      source: MCBEAM.yaml (decoding spec)
+    beam2_py:
+      meaning: Beam 2 y momentum (GeV), always 0
+      basis: plausible
+      source: MCBEAM.yaml (decoding spec)
+    beam2_pz:
+      meaning: Beam 2 z momentum (GeV), equal to +beam2_e in MCBEAM's z convention
+      basis: plausible
+      source: MCBEAM.yaml (decoding spec)
+    beam2_e:
+      meaning: 'Beam 2 energy (GeV): the beam moving along -z in the detector frame'
+      basis: confirmed
+      source: MCBEAM.yaml (decoding spec)
+    helicity:
+      meaning: 'Generated electron-beam helicity: -1 left-handed, +1 right-handed (full polarisation)'
+      basis: confirmed
+      source: MCBEAM.yaml (decoding spec)
+PHKMC1:
+  purpose: Relational table linking MC particles to calorimeter clusters (PHKLUS), with the energy each
+    particle left in the cluster and where it entered the LAC. MC only, one entry per particle-cluster
+    pair, stored as a 20-byte pass and a 4-byte pass joined by the relation id.
+  purpose_source: PHKMC1_PASS1.yaml, PHKMC1_PASS2.yaml (decoding specs); phkmc1.template (rev 0.11, 11
+    Apr 1994); the dataset paper
+  fields:
+    mcpart_id:
+      meaning: MCPART id of the particle (low half of the packed pass-1 word)
+      basis: confirmed
+      source: PHKMC1_PASS1.yaml (decoding spec)
+    own_id:
+      meaning: PHKMC1 relation id (high half), joining pass 1 to pass 2; skips dropped banks
+      basis: confirmed
+      source: PHKMC1_PASS1.yaml, PHKMC1_PASS2.yaml (decoding specs)
+    e:
+      meaning: Truth energy (GeV, raw PHKLUS scale) the particle and its shower left in the cluster
+      basis: confirmed
+      source: PHKMC1_PASS1.yaml (decoding spec); agrees with phkmc1.template (rev 0.11, 11 Apr 1994)
+      doubt: 'An estimate, equal to MCPNT econtrib: summed per cluster it follows eraw but does not partition
+        it exactly.'
+    x:
+      meaning: x (cm) where the particle entered the LAC, or its termination point if earlier
+      basis: confirmed
+      source: PHKMC1_PASS1.yaml (decoding spec); agrees with phkmc1.template (rev 0.11, 11 Apr 1994)
+    y:
+      meaning: y (cm) where the particle entered the LAC, or its termination point if earlier
+      basis: confirmed
+      source: PHKMC1_PASS1.yaml (decoding spec); agrees with phkmc1.template (rev 0.11, 11 Apr 1994)
+    z:
+      meaning: z (cm) where the particle entered the LAC, or its termination point if earlier
+      basis: confirmed
+      source: PHKMC1_PASS1.yaml (decoding spec); agrees with phkmc1.template (rev 0.11, 11 Apr 1994)
+    phklus_id:
+      meaning: PHKLUS id of the linked cluster (low half of the packed pass-2 word)
+      basis: confirmed
+      source: PHKMC1_PASS2.yaml (decoding spec)
+PHWMC:
+  purpose: 'Relational table attributing the hits of each WIC muon-system track (PHWIC) to MC particles.
+    MC only, one bank per PHWIC bank: a 20-byte header followed by one 8-byte pair per contribution.'
+  purpose_source: PHWMC_HEADER.yaml, PHWMC_PAIR.yaml (decoding specs); the dataset paper
+  fields:
+    phwmc_id:
+      meaning: Bank id, 1..n in storage order
+      basis: plausible
+      source: PHWMC_HEADER.yaml (decoding spec)
+    n_pairs_word1:
+      meaning: A count equal to n_pairs, most likely a second copy of the pair count
+      basis: plausible
+      source: PHWMC_HEADER.yaml (decoding spec)
+      doubt: Whether the format reads the pair count from this word or from n_pairs is open.
+    phwic_id:
+      meaning: Id of the PHWIC muon-system track whose hits this bank attributes
+      basis: confirmed
+      source: PHWMC_HEADER.yaml (decoding spec)
+      doubt: It always equals phwmc_id, so a pointer and a copy of the own id cannot be told apart.
+    total_hits:
+      meaning: Total number of hits of the WIC cluster, the sum of the pair hit counts
+      basis: confirmed
+      source: PHWMC_HEADER.yaml (decoding spec)
+    n_pairs:
+      meaning: Number of 8-byte pairs that follow the header
+      basis: plausible
+      source: PHWMC_HEADER.yaml (decoding spec)
+    contribution_code:
+      meaning: 'Hit origin: 0 own hits, 1 hits of its interaction products, 11 no MC particle'
+      basis: confirmed
+      source: PHWMC_PAIR.yaml (decoding spec)
+      doubt: 'Code 11 hits are most likely background. The code describes the hits, not the particle:
+        one particle can have a code-0 and a code-1 pair in the same bank.'
+    n_hits:
+      meaning: Number of the cluster's hits attributed to this contribution
+      basis: confirmed
+      source: PHWMC_PAIR.yaml (decoding spec)
+    mcpart_id:
+      meaning: MCPART id of the particle that made the hits; 0 for code 11
+      basis: confirmed
+      source: PHWMC_PAIR.yaml (decoding spec)
+      doubt: Some ids point at particles the mini-DST did not keep, so the MCPART lookup can fail.
+PHCHRG:
+  purpose: 'One entry per reconstructed charged track, combining the drift-chamber (CDC) and vertex-detector
+    (VXD) fits: helix, track parameters at the first CDC hit, impact parameters, hit counts, fit quality
+    and dE/dx. Present in data and MC.'
+  purpose_source: mdst.html (1994 Mini-DST memo, PHCHRG entry); the dataset paper (Sec. 2.1)
+  fields:
+    hlxpar:
+      meaning: helix phi (rad), 1/pT (1/GeV), tan(lambda), and reference point x, y, z (cm)
+      basis: template
+      source: PHCHRG.TEMPLATE v0.03 (06 Oct 1994), note 3, quoted in SLD Workbook datajob1.html (13 Jan
+        1995)
+      doubt: The template gives no units, and the SLD Workbook gives HLXPAR(2) in 1/GeV. 1/pT is stored
+        positive for both charges, and the sign is in charge. The notes on reconstruction 12A put the reference
+        point at the closest approach to the beam line, except for tracks whose swim was not attempted
+        (SWMSTAT 30).
+    dhlxpar:
+      meaning: covariance of (phi, 1/pT, tan lambda, TSI, ETA), 15 packed elements
+      basis: template
+      source: PHCHRG.TEMPLATE v0.03 (06 Oct 1994), note 3, via datajob1.html; packing order from phdc.template
+        v2.10 (16 Feb 1996)
+      doubt: 'TSI and ETA are the two distances of the helix from a reference point that note 3 of the
+        PHCHRG template defines (TSI = TN.DELTA, ETA = TQ.DELTA). The packing order (1,1), (2,1), (2,2),
+        (3,1), ... is stated for DTKPAR in the PHDC template, not for DHLXPAR. The data check under bnorm
+        fits it.'
+    bnorm:
+      meaning: normalisation of the 2D impact parameter
+      basis: reader
+      source: PHCHRG.cpp ('Normalization factor')
+      doubt: The reader header calls bnorm the 2D impact parameter and impact its error or significance,
+        the reverse of the reader source. The SLD Workbook uses IMPACT as the impact parameter in cm, which
+        sides with the source. In a data check impact/bnorm equals the square root of dhlxpar element 10
+        (the TSI variance), so bnorm reads as the impact-parameter significance, which no document states.
+        The stored impact has no sign in the data checked, and its reference point is not documented.
+    impact:
+      meaning: 2D impact parameter (cm)
+      basis: reader
+      source: PHCHRG.cpp; SLD Workbook datajob1.html (IMPACT in cm); the dataset paper lists 2D and 3D impact
+        parameters
+      doubt: The reader header calls bnorm the 2D impact parameter and impact its error or significance,
+        the reverse of the reader source. The SLD Workbook uses IMPACT as the impact parameter in cm, which
+        sides with the source. In a data check impact/bnorm equals the square root of dhlxpar element 10
+        (the TSI variance), so bnorm reads as the impact-parameter significance, which no document states.
+        The stored impact has no sign in the data checked, and its reference point is not documented.
+    b3norm:
+      meaning: normalisation of the 3D impact parameter
+      basis: reader
+      source: PHCHRG.cpp ('3D normalization')
+      doubt: The reader header calls b3norm the 3D impact parameter and impact3 its error or significance,
+        the reverse of the reader source. The reconstruction-12 notes call the pair (IMPACT3, B3NORM) the
+        3D impact parameter values, computed with correct IP handling from reconstruction 12 on, and speak
+        of the impact parameter and its error estimate without saying which word holds which. Both hold
+        -999 when the 3D impact parameter was not computed.
+    impact3:
+      meaning: 3D impact parameter (cm)
+      basis: reader
+      source: PHCHRG.cpp; RECON12.HTML (SLD reconstruction notes)
+      doubt: The reader header calls b3norm the 3D impact parameter and impact3 its error or significance,
+        the reverse of the reader source. The reconstruction-12 notes call the pair (IMPACT3, B3NORM) the
+        3D impact parameter values, computed with correct IP handling from reconstruction 12 on, and speak
+        of the impact parameter and its error estimate without saying which word holds which. Both hold
+        -999 when the 3D impact parameter was not computed.
+    charge:
+      meaning: track charge, +1 or -1
+      basis: paper
+      source: 'the dataset paper (Sec. 2.1: the charge of a track must decode to +-1); PHCHRG.cpp'
+    smwstat:
+      meaning: status of the swim (extrapolation) of the track to the beam line
+      basis: reader
+      source: PHCHRG.cpp ('Swim status'); recon12a.html (SWMSTAT)
+      doubt: The SLD reconstruction notes spell the word SWMSTAT. They document only the value 30, swim
+        not attempted, for which hlxpar is not at the closest approach to the beam line. The same notes
+        say reconstruction 12A swam those tracks. Other codes are not documented.
+    status:
+      meaning: track status bits, including a CUTFLAG bit that excludes the track from jet finding
+      basis: memo
+      source: mdst.html (1994 Mini-DST memo, 'Using the Mini-DST')
+      doubt: The bit position of CUTFLAG in PHCHRG is not documented (it is bit 0 in the PHPSUM template).
+        Stored tracks carry several low bits set by the reconstruction, whose meanings are not documented.
+    tkpar0:
+      meaning: 'zero track parameter: radius rho (cm) of the first CDC hit'
+      basis: template
+      source: phdc.template v2.10 (16 Feb 1996), same-named PHDC field and note 1; phcdc.template v0.00
+        (25 Oct 1988), RHO
+      doubt: PHCHRG does not store REFSYS. In the endcap reference system the zero parameter would be
+        z instead of rho. The reader calls it the initial or reference-point track parameter.
+    tkpar:
+      meaning: 'parameters at first CDC hit: xphi (rad), z (cm), phi, lambda (rad), q/pT (1/GeV)'
+      basis: template
+      source: phdc.template v2.10 (16 Feb 1996) and phdcv.template v0.03 (Sep 1995), same-named fields,
+        note 1 (REFSYS STANDARD)
+      doubt: 'The PHDC template names the first parameter PHI, the PHDCV template XPHI, the azimuth of the starting
+        point. A data check agrees with the PHDCV order: tkpar(4) closely follows the arctangent of hlxpar
+        tan(lambda) and the sign of tkpar(5) is the charge. The templates give no units. The reader calls
+        tkpar alternative fit parameters, for example at the calorimeter face.'
+    dtkpar:
+      meaning: error matrix of tkpar, packed (1,1), (2,1), (2,2), (3,1), ...
+      basis: template
+      source: phdc.template v2.10 (16 Feb 1996), same-named PHDC field
+    length:
+      meaning: fitted track length (cm)
+      basis: template
+      source: phdc.template v2.10 (16 Feb 1996), same-named PHDC field
+      doubt: The template gives no unit, so the cm is an assumption.
+    chi2dt:
+      meaning: chi-squared of the CDC drift-time fit
+      basis: template
+      source: phdc.template v2.10 (16 Feb 1996), same-named PHDC field
+    imc:
+      meaning: 'MC only: Monte Carlo track id, the MCPART id of the track''s particle'
+      basis: template
+      source: phdc.template v2.10 (16 Feb 1996), IMC; phdcv.template v0.03 (Sep 1995), note 4 (MCPART
+        ID)
+    ndfdt:
+      meaning: degrees of freedom of the drift-time fit chi2dt
+      basis: template
+      source: phdc.template v2.10 (16 Feb 1996), same-named PHDC field
+    nhit:
+      meaning: number of CDC hits used in the drift-time fit
+      basis: template
+      source: phdc.template v2.10 (16 Feb 1996), same-named PHDC field
+      doubt: PHDCV also has an NHIT, the total number of hits in the combined CDC+VXD fit, and the reader's
+        "total number of hits on track" fits that one. The PHDC reading rests on the position of nhit
+        among the PHDC words (chi2dt, ndfdt, nhite, nhitp).
+    nhite:
+      meaning: number of expected CDC hits
+      basis: template
+      source: phdc.template v2.10 (16 Feb 1996), same-named PHDC field
+    nhitp:
+      meaning: number of potential CDC hits
+      basis: template
+      source: phdc.template v2.10 (16 Feb 1996), same-named PHDC field
+      doubt: The reader header calls it the number of hits used in the final fit. The reader source and
+        the PHDC template call it the number of potential hits.
+    nmisht:
+      meaning: 'MC only: number of missing hits'
+      basis: template
+      source: phdc.template v2.10 (16 Feb 1996), same-named PHDC field ('if MC track')
+    nwrght:
+      meaning: 'MC only: number of wrongly associated hits'
+      basis: template
+      source: phdc.template v2.10 (16 Feb 1996), same-named PHDC field ('if MC track')
+      doubt: The reader source calls them wrong-way hits and the reader header wrong or noise hits. The
+        PHDC template says wrong associated hits, filled for MC tracks.
+    nhitv:
+      meaning: number of VXD hits used in the combined CDC+VXD fit
+      basis: template
+      source: phdcv.template v0.03 (Sep 1995), same-named PHDCV field; the dataset paper (Sec. 2.1)
+    chi2:
+      meaning: total chi-squared of the combined CDC+VXD fit
+      basis: template
+      source: phdcv.template v0.03 (Sep 1995), same-named PHDCV field
+    chi2v:
+      meaning: chi-squared contribution from the VXD hits
+      basis: template
+      source: phdcv.template v0.03 (Sep 1995), same-named PHDCV field
+    vxdhit:
+      meaning: bit pattern of the VXD3 sub-layers hit, bits 0-11
+      basis: template
+      source: phdcv.template v0.03 (Sep 1995), VXDHITS and note 2; the dataset paper (Sec. 2.1)
+      doubt: PHDCV holds this as a 16-bit word followed by the 16-bit HITEXP, the sub-layers hit by the
+        MC track. PHCHRG stores one 32-bit word, and in MC its bits 16-27 repeat the sub-layers whose
+        hit comes from the track's own MC particle (the PHVXOV decoding), which fits HITEXP.
+    mustat:
+      meaning: muon (WIC) identification status code
+      basis: reader
+      source: PHCHRG.cpp; PHCHRG.hpp
+      doubt: The codes are not documented. The PHCHRG template, as the SLD Workbook quotes it, gives the
+        word a nonzero default value.
+    estat:
+      meaning: electron identification status code
+      basis: reader
+      source: PHCHRG.cpp; PHCHRG.hpp
+      doubt: The codes are not documented. The PHCHRG template, as the SLD Workbook quotes it, gives the
+        word a nonzero default value.
+    dedx:
+      meaning: CDC dE/dx word, a 32-bit integer of undocumented encoding
+      basis: template
+      source: 'PHCHRG.TEMPLATE version history (v0.02, 05 Mar 1994: dE/dx word added; v0.03, 06 Oct 1994:
+        changed to I*4), via datajob1.html; the dataset paper (Sec. 2.1, dE/dx from the CDC)'
+      doubt: The encoding is not documented. PHDC stores DEDX, DDEDX and NHITDE as separate words, so
+        the 32-bit word may pack several of them. The reader exposes the raw integer.
+PHPSUM:
+  purpose: 'Particle summary: one entry per reconstructed particle, a charged track or a neutral calorimeter
+    cluster, with its momentum, starting position and charge. Present in data and MC.'
+  purpose_source: phpsum.template (v0.01, 11 Apr 1994); mdst.html (1994 Mini-DST memo); the dataset paper
+    (Sec. 2.1)
+  fields:
+    px:
+      meaning: x momentum (GeV) of the particle at its track origin
+      basis: template
+      source: phpsum.template (v0.01, 11 Apr 1994), P(3)
+      doubt: The 1994 memo speaks of a four-momentum, but the bank stores only the 3-momentum. The energy
+        follows from a mass hypothesis. The template gives no unit. GeV is supported by the dilepton mass
+        peak at M_Z in the dataset paper, whose event four-vectors come from PHPSUM.
+      used_by_analysis: true
+    py:
+      meaning: y momentum (GeV) of the particle at its track origin
+      basis: template
+      source: phpsum.template (v0.01, 11 Apr 1994), P(3)
+      used_by_analysis: true
+    pz:
+      meaning: z momentum (GeV) of the particle at its track origin
+      basis: template
+      source: phpsum.template (v0.01, 11 Apr 1994), P(3)
+      used_by_analysis: true
+    x:
+      meaning: x position (cm) at which the momentum is given
+      basis: template
+      source: phpsum.template (v0.01, 11 Apr 1994), X(3)
+      doubt: The reader README calls x, y, z a geometric event-vertex summary, which contradicts the template's
+        per-particle position. The template gives no unit. The cm is supported by the impact-parameter
+        cuts of the sld-resurrect analysis, set in cm.
+      used_by_analysis: true
+    y:
+      meaning: y position (cm) at which the momentum is given
+      basis: template
+      source: phpsum.template (v0.01, 11 Apr 1994), X(3)
+      used_by_analysis: true
+    z:
+      meaning: z position (cm) at which the momentum is given
+      basis: template
+      source: phpsum.template (v0.01, 11 Apr 1994), X(3)
+      used_by_analysis: true
+    charge:
+      meaning: particle charge, stored as a real number
+      basis: template
+      source: phpsum.template (v0.01, 11 Apr 1994), CHARGE
+      doubt: The reader README calls it the total measured charge, which contradicts the template.
+      used_by_analysis: true
+    status:
+      meaning: status bits, bit 0 (CUTFLAG) excludes the particle from jet and shape finding
+      basis: template
+      source: phpsum.template (v0.01, 11 Apr 1994), PARAMETER CUTFLAG = 0; mdst.html (CUTFLAG use)
+      doubt: CUTFLAG is a user flag set during analysis. Other bits are not documented.
+PHPOINT:
+  purpose: 'Pointers to particle information: one entry per PHPSUM particle, holding the ids of its PHPSUM,
+    PHCHRG, PHKLUS, PHKELID, PHWIC and PHCRID entries where they exist. Present in data and MC.'
+  purpose_source: phpoint.template (v0.02, 09 Nov 1994); compress.html (1995 compressed mini-DST memo);
+    the dataset paper (Sec. 2.1)
+  fields:
+    header:
+      meaning: PHPOINT id (bits 0-15) and mask of stored pointers (bits 16-31)
+      basis: memo
+      source: compress.html (PHPOINT section)
+      doubt: The memo says the id and the pointer mask share one word but gives no bit positions. The
+        split at bit 16 is the reader's (PHPOINT.cpp).
+    pointers:
+      meaning: 16-bit bank ids of the linked entries, stored only for set mask bits
+      basis: memo
+      source: compress.html (PHPOINT section); phpoint.template (v0.02, 09 Nov 1994) for the six targets
+      doubt: 'The mask-bit assignments in the table are the reader''s, and their order differs from the
+        template''s pointer order.
+        The memo says the PHPSUM pointer is omitted when the PHPSUM id equals the PHPOINT id, flagged
+        by one bit, and that zero pointers are not stored. A data check supports bits 2 and 3: under this
+        order every charged PHPSUM entry has a PHCHRG pointer and every neutral one a PHKLUS pointer.
+        Bits 1, 4 and 5 are not checked.'
+      bits:
+      - bit: 0
+        name: PHPSUM
+        meaning: PHPSUM id, and when clear the PHPSUM id equals the PHPOINT id
+        basis: reader
+      - bit: 1
+        name: PHCRID
+        meaning: CRID (Cherenkov) entry
+        basis: reader
+      - bit: 2
+        name: PHCHRG
+        meaning: charged-track entry
+        basis: reader
+      - bit: 3
+        name: PHKLUS
+        meaning: calorimeter-cluster entry
+        basis: reader
+      - bit: 4
+        name: PHKELID
+        meaning: electron-identification (calorimeter hypothesis) entry
+        basis: reader
+      - bit: 5
+        name: PHWIC
+        meaning: muon-system (WIC) entry
+        basis: reader
+      used_by_analysis: true
+PHVXOV:
+  purpose: 'Vertex-detector (VXD3) hits of one track candidate: a 16-byte header followed by one 80-byte
+    entry per CCD hit. Present in data and MC, one bank per PHCHRG track with VXD hits plus VXD-only candidates.
+    No archived template.'
+  purpose_source: PHVXOV_HEADER.yaml and PHVXOV_HIT.yaml (decoding specs)
+  fields:
+    id:
+      meaning: 'bank id: position of the bank in the record, 1 to n_phvxov'
+      basis: plausible
+      source: PHVXOV_HEADER.yaml (decoding spec)
+    n_hits:
+      meaning: number of VXD hits in the bank, each an 80-byte hit entry
+      basis: confirmed
+      source: PHVXOV_HEADER.yaml (decoding spec)
+    link:
+      meaning: PHCHRG id of the track owning the hits, 0 for a VXD-only candidate
+      basis: confirmed
+      source: PHVXOV_HEADER.yaml (decoding spec)
+      doubt: VXD-only candidates (link 0) can share hits with other banks and need not be distinct particles.
+    n_hits_list:
+      meaning: repeat of n_hits, one copy possibly the converter's block-length word
+      basis: confirmed
+      source: PHVXOV_HEADER.yaml (decoding spec)
+      doubt: The label covers the value. The data cannot tell which of the two copies is the bank attribute
+        and which the length word.
+    ccd:
+      meaning: 'CCD 1-96 (layer 1: 1-24, 2: 25-56, 3: 57-96), odd z<0, even z>0'
+      basis: confirmed
+      source: PHVXOV_HIT.yaml (decoding spec)
+    mc_particle:
+      meaning: 'MC: MCPART id of the particle that made the hit, -9999 if none or data'
+      basis: confirmed
+      source: PHVXOV_HIT.yaml (decoding spec)
+    n_pixels:
+      meaning: cluster size in pixels
+      basis: confirmed
+      source: PHVXOV_HIT.yaml (decoding spec)
+    pulse_height:
+      meaning: cluster pulse height, summed ADC counts
+      basis: confirmed
+      source: PHVXOV_HIT.yaml (decoding spec)
+    x:
+      meaning: global hit x (cm), SLD detector frame
+      basis: confirmed
+      source: PHVXOV_HIT.yaml (decoding spec)
+    y:
+      meaning: global hit y (cm), SLD detector frame
+      basis: confirmed
+      source: PHVXOV_HIT.yaml (decoding spec)
+    z:
+      meaning: global hit z (cm), SLD detector frame
+      basis: confirmed
+      source: PHVXOV_HIT.yaml (decoding spec)
+    u:
+      meaning: local coordinate across the CCD (cm, 0 to 1.6), increasing with azimuth
+      basis: confirmed
+      source: PHVXOV_HIT.yaml (decoding spec)
+    v:
+      meaning: local coordinate along the CCD (cm, 0 to 8.0), from its end near z=0
+      basis: confirmed
+      source: PHVXOV_HIT.yaml (decoding spec)
+    w:
+      meaning: 'local coordinate normal to the CCD (cm): CCD surface height, constant -0.0013 in MC'
+      basis: plausible
+      source: PHVXOV_HIT.yaml (decoding spec)
+      doubt: Data-derived only. In data it is a fixed surface map of each CCD, and no physics check reaches
+        it.
+    var_xx:
+      meaning: global covariance xx (cm^2) = (2 sigma_u)^2 sin^2(phi_hit), phi_hit being the azimuth of
+        the hit
+      basis: confirmed
+      source: PHVXOV_HIT.yaml (decoding spec)
+    cov_xy:
+      meaning: always 0, xy slot of the packed covariance [xx, xy, xz, yy, yz, zz]
+      basis: unknown
+      source: PHVXOV_HIT.yaml (decoding spec)
+    cov_xz:
+      meaning: always 0, xz slot of the packed covariance
+      basis: unknown
+      source: PHVXOV_HIT.yaml (decoding spec)
+    var_yy:
+      meaning: global covariance yy (cm^2) = (2 sigma_u)^2 cos^2(phi_hit)
+      basis: confirmed
+      source: PHVXOV_HIT.yaml (decoding spec)
+    cov_yz:
+      meaning: always 0, yz slot of the packed covariance
+      basis: unknown
+      source: PHVXOV_HIT.yaml (decoding spec)
+    var_zz:
+      meaning: global covariance zz (cm^2) = (2 sigma_v)^2
+      basis: confirmed
+      source: PHVXOV_HIT.yaml (decoding spec)
+    sigma_u:
+      meaning: cluster position error across the CCD (cm), (pitch/sqrt 12) 2^(-3/4) for one-pixel clusters,
+        with the 20 µm pixel pitch
+      basis: confirmed
+      source: PHVXOV_HIT.yaml (decoding spec)
+    sigma_v:
+      meaning: cluster position error along the CCD (cm), same one-pixel cap as sigma_u
+      basis: confirmed
+      source: PHVXOV_HIT.yaml (decoding spec)
+    word_64:
+      meaning: always 0
+      basis: unknown
+      source: PHVXOV_HIT.yaml (decoding spec)
+    u_true:
+      meaning: 'MC: true local u (cm), 0 without an MC particle and in data'
+      basis: confirmed
+      source: PHVXOV_HIT.yaml (decoding spec)
+    v_true:
+      meaning: 'MC: true local v (cm), 0 without an MC particle and in data'
+      basis: confirmed
+      source: PHVXOV_HIT.yaml (decoding spec)
+    w_true:
+      meaning: 'MC: true local w (cm), constant -0.001195, 0 without an MC particle'
+      basis: plausible
+      source: PHVXOV_HIT.yaml (decoding spec)
+      doubt: A constant, so no physics check reaches it. 0 in all data.
+PHKLUS:
+  purpose: One entry per calorimeter cluster in the Liquid Argon Calorimeter (LAC), in data and MC. It
+    holds the raw cluster energy, its energy-weighted direction and widths, the energy in each layer,
+    and the direction and widths of the cluster in the first two electromagnetic layers; hadronic-layer
+    details other than the layer energies are not kept.
+  fields:
+    status:
+      meaning: Cluster status bits; the CUTFLAG bit excludes the cluster from jet and shape finding.
+      basis: memo
+      source: mdst.html (1994)
+      doubt: No other bit is documented; the reader header's barrel/endcap reading has no source.
+    eraw:
+      meaning: Raw cluster energy before e/pi correction, in GeV at the minimum-ionising (MIP) scale.
+      basis: template
+      source: ERAW line of the KLUSALL example bank in datajob1.html (13 Jan 1995); same wording in PHKLUS.cpp
+      doubt: 'The SLD Workbook labels its example bank fictitious, so the template origin of eraw, cth,
+        wcth, phi and wphi is inferred. GeV and MIP scale are inferred: eraw equals the elayer sum.'
+      used_by_analysis: true
+    cth:
+      meaning: Energy-weighted mean cos(theta) of the cluster.
+      basis: template
+      source: CTH line of the KLUSALL example bank in datajob1.html (13 Jan 1995); same wording in PHKLUS.cpp
+    wcth:
+      meaning: Width (RMS) of the cluster energy in cos(theta).
+      basis: template
+      source: WCTH line of the KLUSALL example bank in datajob1.html (13 Jan 1995); RMS form from PHKLUS.hpp
+    phi:
+      meaning: Energy-weighted mean azimuth of the cluster, radians.
+      basis: template
+      source: PHI line of the KLUSALL example bank in datajob1.html (13 Jan 1995); same wording in PHKLUS.cpp
+    wphi:
+      meaning: Width (RMS) of the cluster energy in phi, radians; one tower gives 2pi/192/sqrt(12).
+      basis: template
+      source: WPHI line of the KLUSALL example bank in datajob1.html (13 Jan 1995); RMS form from PHKLUS.hpp
+    elayer:
+      meaning: 'Layer energies (MIP scale): luminosity-monitor EM1/EM2, LAC EM1/EM2/HAD1/HAD2, WIC pads
+        1/2.'
+      basis: template
+      source: ELAYER(0:7) line of the KLUSALL example bank and the layer list of datajob1.html (13 Jan
+        1995); MFIT.IDA; PHKLUS.cpp agrees
+      doubt: The MIP-scale wording comes from the fictitious example bank and an example macro of the SLD
+        Workbook; the layer order comes from the Workbook's description of PHKLUS.
+    nhit2:
+      meaning: Number of towers hit in LAC EM1.
+      basis: template
+      source: PHKLUS.TEMPLATE block LAYER(2:3) quoted in datajob1.html (13 Jan 1995)
+    cth2:
+      meaning: Energy-weighted mean cos(theta) of the cluster in LAC EM1.
+      basis: template
+      source: PHKLUS.TEMPLATE block LAYER(2:3) quoted in datajob1.html (13 Jan 1995)
+    wcth2:
+      meaning: Width (RMS) of the cluster energy in cos(theta) in LAC EM1.
+      basis: template
+      source: PHKLUS.TEMPLATE block LAYER(2:3) quoted in datajob1.html (13 Jan 1995); RMS form from PHKLUS.hpp
+    phi2:
+      meaning: Energy-weighted mean azimuth of the cluster in LAC EM1, radians.
+      basis: template
+      source: PHKLUS.TEMPLATE block LAYER(2:3) quoted in datajob1.html (13 Jan 1995)
+    whphi2:
+      meaning: Width (RMS) of the cluster energy in phi in LAC EM1, radians.
+      basis: template
+      source: PHKLUS.TEMPLATE block LAYER(2:3) quoted in datajob1.html (13 Jan 1995); RMS form from PHKLUS.hpp
+    nhit3:
+      meaning: Number of towers hit in LAC EM2.
+      basis: template
+      source: PHKLUS.TEMPLATE block LAYER(2:3) quoted in datajob1.html (13 Jan 1995)
+    cth3:
+      meaning: Energy-weighted mean cos(theta) of the cluster in LAC EM2.
+      basis: template
+      source: PHKLUS.TEMPLATE block LAYER(2:3) quoted in datajob1.html (13 Jan 1995)
+    wcth3:
+      meaning: Width (RMS) of the cluster energy in cos(theta) in LAC EM2.
+      basis: template
+      source: PHKLUS.TEMPLATE block LAYER(2:3) quoted in datajob1.html (13 Jan 1995); RMS form from PHKLUS.hpp
+    phi3:
+      meaning: Energy-weighted mean azimuth of the cluster in LAC EM2, radians.
+      basis: template
+      source: PHKLUS.TEMPLATE block LAYER(2:3) quoted in datajob1.html (13 Jan 1995)
+    wphi3:
+      meaning: Width (RMS) of the cluster energy in phi in LAC EM2, radians.
+      basis: template
+      source: PHKLUS.TEMPLATE block LAYER(2:3) quoted in datajob1.html (13 Jan 1995); RMS form from PHKLUS.hpp
+PHKELID:
+  purpose: 'Electron identification for one charged track from its shower in the LAC: the angular and
+    momentum match between track and cluster, the electromagnetic and first hadronic layer energies, and
+    energy sums in tower windows around the track. One entry per charged track that was evaluated, in
+    data and MC; in the compressed mini-DST it took the place of PHKTRK.'
+  fields:
+    header:
+      meaning: Bits 0-15 entry id; bits 16-31 id of the evaluated PHCHRG track.
+      basis: reader
+      source: PHKELID.cpp
+    idstat:
+      meaning: Electron-identification status code of the track.
+      basis: reader
+      source: PHKELID.hpp, PHKELID.cpp
+      doubt: Codes are undocumented; in the data checked it equals PHCHRG estat of the same track.
+    prob:
+      meaning: Probability or confidence level of the electron hypothesis, as a 16-bit integer.
+      basis: reader
+      source: PHKELID.hpp, PHKELID.cpp
+      doubt: Integer scale undocumented; -32768 occurs as a sentinel.
+    phi:
+      meaning: Azimuth at the calorimeter, of the extrapolated track or of the cluster; radians.
+      basis: reader
+      source: PHKELID.hpp, PHKELID.cpp
+      doubt: The reader header gives the track azimuth at the calorimeter face, the reader source the
+        measured cluster azimuth. A data check of theta favours the track.
+    theta:
+      meaning: Polar angle at the calorimeter, of the extrapolated track or of the cluster; radians.
+      basis: reader
+      source: PHKELID.hpp, PHKELID.cpp
+      doubt: The reader header gives the track polar angle at the calorimeter face, the reader source
+        the measured cluster polar angle. In data it follows the track closely.
+    qp:
+      meaning: Charge over momentum of the track, 1/GeV.
+      basis: reader
+      source: PHKELID.hpp, PHKELID.cpp
+    dphi:
+      meaning: Uncertainty of the phi match, or track-cluster phi difference; radians.
+      basis: reader
+      source: PHKELID.hpp, PHKELID.cpp
+      doubt: The reader header calls them the errors of the phi and theta match, the reader source the
+        track-cluster differences. Values are small and positive, as for errors.
+    dtheta:
+      meaning: Uncertainty of the theta match, or track-cluster theta difference; radians.
+      basis: reader
+      source: PHKELID.hpp, PHKELID.cpp
+      doubt: The reader header calls them the errors of the phi and theta match, the reader source the
+        track-cluster differences. Values are small and positive, as for errors.
+    dqp:
+      meaning: Uncertainty of qp, 1/GeV.
+      basis: reader
+      source: PHKELID.hpp, PHKELID.cpp
+    tphi:
+      meaning: Azimuth from the track extrapolation, or of the cluster centroid; radians.
+      basis: reader
+      source: PHKELID.hpp, PHKELID.cpp
+      doubt: The reader header gives the cluster centroid azimuth, the reader source the expected azimuth
+        from the track extrapolation. In data it is not the cluster centroid.
+    ttheta:
+      meaning: Polar angle from the track extrapolation, or of the cluster centroid; radians.
+      basis: reader
+      source: PHKELID.hpp, PHKELID.cpp
+      doubt: The reader header gives the cluster centroid polar angle, the reader source the expected
+        value from the track extrapolation. In data it matches the track.
+    isolat:
+      meaning: Isolation of the candidate, the energy around the cluster; units undocumented.
+      basis: reader
+      source: PHKELID.hpp, PHKELID.cpp
+      doubt: -1 occurs as a sentinel; the window and units are not documented.
+    em1:
+      meaning: Energy in LAC EM1 associated with the track.
+      basis: reader
+      source: PHKELID.hpp, PHKELID.cpp
+      doubt: Units and summation region undocumented; it differs from PHKLUS elayer EM1 of the matched
+        cluster.
+    em12:
+      meaning: Energy in LAC EM1 plus EM2 associated with the track.
+      basis: reader
+      source: PHKELID.hpp, PHKELID.cpp
+      doubt: Units and summation region undocumented.
+    dem12:
+      meaning: Uncertainty of em12.
+      basis: reader
+      source: PHKELID.hpp, PHKELID.cpp
+    had1:
+      meaning: Energy in LAC HAD1, used to reject hadrons.
+      basis: reader
+      source: PHKELID.hpp, PHKELID.cpp
+    emphi:
+      meaning: Azimuth of the EM shower centroid, or the shower width in phi.
+      basis: reader
+      source: PHKELID.hpp, PHKELID.cpp
+      doubt: The reader header gives a phi width, the reader source the centroid azimuth. Values span
+        0 to 2pi near the cluster azimuth, as for a centroid.
+    emtheta:
+      meaning: Polar angle of the EM shower centroid, or the shower width in theta.
+      basis: reader
+      source: PHKELID.hpp, PHKELID.cpp
+      doubt: The reader header gives a theta width, the reader source the centroid polar angle. Values
+        lie near the cluster polar angle, as for a centroid.
+    phiwid:
+      meaning: Width of the EM shower in phi; units undocumented.
+      basis: reader
+      source: PHKELID.hpp, PHKELID.cpp
+      doubt: Values reach several units, so probably not radians.
+    thewid:
+      meaning: Width of the EM shower in theta; units undocumented.
+      basis: reader
+      source: PHKELID.hpp, PHKELID.cpp
+      doubt: Values reach several units and are occasionally negative; definition unclear.
+    em1x1:
+      meaning: EM energy in the single tower at the track.
+      basis: reader
+      source: PHKELID.hpp, PHKELID.cpp
+      doubt: Layer undocumented; in data it behaves as an EM1 sum.
+    em2x2a:
+      meaning: EM energy in a 2x2 tower window, variant a.
+      basis: reader
+      source: PHKELID.hpp, PHKELID.cpp
+      doubt: The reader header calls the 2x2 windows configurations A and B and the 3x3 windows the shower
+        core and an extended block; the reader source calls both pairs offsets A and B. In data the a sums
+        follow EM1 and the b sums EM2.
+    em2x2b:
+      meaning: EM energy in a 2x2 tower window, variant b.
+      basis: reader
+      source: PHKELID.hpp, PHKELID.cpp
+      doubt: The reader header calls the 2x2 windows configurations A and B and the 3x3 windows the shower
+        core and an extended block; the reader source calls both pairs offsets A and B. In data the a sums
+        follow EM1 and the b sums EM2.
+    em3x3a:
+      meaning: EM energy in a 3x3 tower window, variant a.
+      basis: reader
+      source: PHKELID.hpp, PHKELID.cpp
+      doubt: The reader header calls the 2x2 windows configurations A and B and the 3x3 windows the shower
+        core and an extended block; the reader source calls both pairs offsets A and B. In data the a sums
+        follow EM1 and the b sums EM2.
+    em3x3b:
+      meaning: EM energy in a 3x3 tower window, variant b.
+      basis: reader
+      source: PHKELID.hpp, PHKELID.cpp
+      doubt: The reader header calls the 2x2 windows configurations A and B and the 3x3 windows the shower
+        core and an extended block; the reader source calls both pairs offsets A and B. In data the a sums
+        follow EM1 and the b sums EM2.
+PHCRID:
+  purpose: 'Particle identification from the Cherenkov Ring Imaging Detector (CRID) for one charged track:
+    a 16-byte header followed by one CRIDHYP block for the liquid (C6F14) and one for the gas (C5F12)
+    radiator, whose log-likelihoods add up, with norm, to the combined value per hypothesis. One entry
+    per track with CRID information, in data and MC.'
+  fields:
+    ctlword:
+      meaning: Bits 0-15 entry id; bit 16 liquid block full; bit 17 gas block full.
+      basis: reader
+      source: PHCRID.cpp
+    norm:
+      meaning: Normalisation added equally to the five combined log-likelihoods.
+      basis: memo
+      source: compress.html (1995), assumption 8; PHCRID.cpp and PIDVEC.cpp apply it
+    rc:
+      meaning: Return code of the CRID reconstruction for this track.
+      basis: reader
+      source: PHCRID.hpp, PHCRID.cpp
+      doubt: Bit meanings undocumented.
+    geom:
+      meaning: Geometry region or geometry version flag; reader sources disagree.
+      basis: reader
+      source: PHCRID.hpp, PHCRID.cpp
+      doubt: The reader header gives the barrel or endcap region, the reader source a geometry version
+        or status. Values look like bit flags.
+    trkp:
+      meaning: Track pointer or index, or a momentum bin; reader sources disagree.
+      basis: reader
+      source: PHCRID.hpp, PHCRID.cpp
+      doubt: In data it is neither the track id nor correlated with the track momentum.
+    nhits:
+      meaning: Number of Cherenkov photon hits associated with the track.
+      basis: reader
+      source: PHCRID.hpp, PHCRID.cpp
+      doubt: The reader header says liquid plus gas hits, but in data it is mostly not the sum of the two
+        block counts.
+CRIDHYP:
+  caption: Fields of a CRID radiator block.
+  purpose: Per-radiator block inside each PHCRID entry, the liquid block first and the gas block second.
+    The full 36-byte form, with log-likelihoods for five particle hypotheses and hit counts, is stored
+    when the radiator's return code is not negative; otherwise only the 4-byte reduced form (rc, nhits)
+    is stored.
+  fields:
+    llik:
+      meaning: Log-likelihoods of the e, mu, pi, K and p hypotheses for this radiator.
+      basis: memo
+      source: compress.html (1995), assumption 8; hypothesis order from PIDVEC.cpp
+      doubt: The memo speaks of five particle hypotheses without naming them; the names and their order
+        are the reader's.
+    rc:
+      meaning: Radiator return code; negative means no likelihoods are stored (reduced form).
+      basis: memo
+      source: compress.html (1995), assumption 8
+    nhits:
+      meaning: Number of Cherenkov photon hits associated with the track in this radiator.
+      basis: reader
+      source: CRIDHYP.hpp
+    besthyp:
+      meaning: Best particle hypothesis.
+      basis: reader
+      source: CRIDHYP.hpp
+      doubt: The encoding in the reader header reads like a guess; the field is zero in all data examined.
+    nhexp:
+      meaning: Expected number of hits for the best hypothesis.
+      basis: reader
+      source: CRIDHYP.hpp
+      doubt: Stored values are far larger than plausible photon counts; scale or meaning unknown.
+    nhfnd:
+      meaning: Number of expected hits that were found.
+      basis: reader
+      source: CRIDHYP.hpp
+    nhbkg:
+      meaning: Number of hits attributed to background.
+      basis: reader
+      source: CRIDHYP.hpp
+    mskphot:
+      meaning: Mask of photons masked out or shared with other tracks.
+      basis: reader
+      source: CRIDHYP.hpp
+      doubt: Reader comment reads like a guess; encoding undocumented.
+PHWIC:
+  purpose: 'Muon identification from the Warm Iron Calorimeter (WIC), the instrumented iron flux return,
+    for one charged track: the WIC hit pattern, the penetration expected and observed, a track fit in
+    the iron, and its match to the drift-chamber track. Zero to a few entries per record, in data and
+    MC; the 1994 memo describes one entry per identified muon.'
+  fields:
+    idstat:
+      meaning: Muon-identification status code.
+      basis: reader
+      source: PHWIC.hpp, PHWIC.cpp
+      doubt: Codes are undocumented; in the data checked it equals PHCHRG mustat of the matched track.
+    nhit:
+      meaning: WIC hits, or WIC layers hit, associated with the track.
+      basis: reader
+      source: PHWIC.hpp, PHWIC.cpp
+      doubt: The reader header counts layers hit, the reader source hits.
+    nhit45:
+      meaning: Hits in the 45-degree stereo strips.
+      basis: reader
+      source: PHWIC.hpp, PHWIC.cpp
+      doubt: The reader source comment ('e.g., 45-degree') reads like a guess.
+    npat:
+      meaning: Number of WIC hit patterns found.
+      basis: reader
+      source: PHWIC.hpp, PHWIC.cpp
+    nhitpat:
+      meaning: Number of hits in the chosen WIC pattern.
+      basis: reader
+      source: PHWIC.hpp, PHWIC.cpp
+    syshit:
+      meaning: WIC subsystem hit flags (barrel, endcap).
+      basis: reader
+      source: PHWIC.hpp, PHWIC.cpp
+      doubt: The reader header gives a barrel/endcap/octant mask, the reader source 'flag or counter'.
+        Both read like guesses.
+    qpinit:
+      meaning: Track charge over momentum on entering the WIC, 1/GeV.
+      basis: reader
+      source: PHWIC.hpp, PHWIC.cpp
+      doubt: The reader source says 'from tracking'. In data the sign matches the track and |q/p| exceeds
+        the vertex value.
+    t1:
+      meaning: x component of the unit track direction in the WIC.
+      basis: reader
+      source: PHWIC.cpp ('direction'); .hpp says trajectory parameter
+      doubt: The vector (t1, t2, t3) has unit length and follows the MC particle direction (decoding
+        check).
+    t2:
+      meaning: y component of the unit track direction in the WIC.
+      basis: reader
+      source: PHWIC.cpp ('direction'); .hpp says trajectory parameter
+      doubt: The vector (t1, t2, t3) has unit length and follows the MC particle direction (decoding
+        check).
+    t3:
+      meaning: z component of the unit track direction in the WIC.
+      basis: reader
+      source: PHWIC.cpp ('direction'); .hpp says trajectory parameter
+      doubt: The vector (t1, t2, t3) has unit length and follows the MC particle direction (decoding
+        check).
+    hitmiss:
+      meaning: Bit mask of hit and missed WIC layers along the track.
+      basis: reader
+      source: PHWIC.hpp, PHWIC.cpp
+    itrlen:
+      meaning: Material traversed by the track, probably in interaction lengths.
+      basis: reader
+      source: PHWIC.hpp, PHWIC.cpp
+      doubt: The reader header says interaction length, the reader source 'interaction length/track length'.
+        Units unclear.
+    nlayexp:
+      meaning: Number of WIC layers the track is expected to reach.
+      basis: reader
+      source: PHWIC.hpp, PHWIC.cpp
+    nlaybey:
+      meaning: Number of layers hit beyond the expected penetration depth.
+      basis: reader
+      source: PHWIC.hpp, PHWIC.cpp
+    missprob:
+      meaning: Misidentification probability, that a non-muon gives this pattern.
+      basis: reader
+      source: PHWIC.hpp, PHWIC.cpp
+      doubt: Definition undocumented; the reader header specifies hadron punch-through.
+    phwicid:
+      meaning: WIC cluster id, or a link to the PHCHRG track; reader sources disagree.
+      basis: reader
+      source: PHWIC.hpp, PHWIC.cpp
+      doubt: In data it is a small integer, neither the entry id nor the track id.
+    nhitshar:
+      meaning: Number of WIC hits shared with another track.
+      basis: reader
+      source: PHWIC.hpp, PHWIC.cpp
+    nother:
+      meaning: Number of other nearby hits or clusters not assigned to the track.
+      basis: reader
+      source: PHWIC.hpp, PHWIC.cpp
+      doubt: The reader header and source comments differ in detail.
+    hitsused:
+      meaning: Hits used in the WIC track fit, as a mask or count.
+      basis: reader
+      source: PHWIC.hpp, PHWIC.cpp
+      doubt: Encoding undocumented; its bit count is not nhitpat or nhit.
+    pref1:
+      meaning: Reference vector of the WIC track; the reader calls it a point (x, y, z).
+      basis: reader
+      source: PHWIC.hpp, PHWIC.cpp
+      doubt: It has unit length in data, so it is not a position in cm.
+    pfit:
+      meaning: Parameters of the track fit within the WIC.
+      basis: reader
+      source: PHWIC.hpp, PHWIC.cpp
+      doubt: Parametrisation undocumented.
+    dpfit:
+      meaning: Error matrix of pfit, the 10 elements of a symmetric 4x4 matrix.
+      basis: reader
+      source: PHWIC.hpp, PHWIC.cpp
+      doubt: Element order undocumented.
+    chi2:
+      meaning: Chi-squared of the WIC track fit.
+      basis: reader
+      source: PHWIC.hpp, PHWIC.cpp
+    ndf:
+      meaning: Degrees of freedom of the WIC track fit.
+      basis: reader
+      source: PHWIC.hpp, PHWIC.cpp
+    punfit:
+      meaning: Points left out of the WIC fit, as a count or status.
+      basis: reader
+      source: PHWIC.hpp, PHWIC.cpp
+      doubt: Values in data are too large for a count of discarded points; meaning unclear.
+    matchChi2:
+      meaning: Chi-squared of the match between the drift-chamber track and the WIC track.
+      basis: reader
+      source: PHWIC.hpp, PHWIC.cpp
+    matchNdf:
+      meaning: Degrees of freedom of the track-WIC match.
+      basis: reader
+      source: PHWIC.hpp, PHWIC.cpp
+PHKTRK:
+  purpose: Electron identification for charged tracks in the 1994 mini-DST design, one entry per track.
+    The compressed mini-DST removed it from PHPOINT and put PHKELID in its place; the family is still
+    listed in the record but holds no entries, so it has no fields.
+  fields: {}
+RECORD_HEADER:
+  caption: Fields of the logical record header.
+  purpose: 'The header that opens every logical record of a Jazelle file, in data and MC: record type,
+    format and the byte positions of the event header, table of contents and data block. Offsets count
+    from the start of the record''s first physical record, the origin that usroff and tocoff1 use, so
+    the logical header proper starts at byte 8. datoff counts from the start of the physical record in
+    which the data block begins.'
+  size: 120
+  offset_origin: start of the record's first physical record (8-byte length prefix included)
+  block_name: 8 bytes of physical-record words, then the 112-byte record header
+  fields:
+    prlen:
+      offset: 0
+      type: i2
+      meaning: Physical record length (bytes).
+      basis: template
+      source: jiohead.template (v3.00, 16 Nov 1989)
+      doubt: The template documents these four words for a file's first record; the reader finds them
+        at the start of every physical record.
+    prres:
+      offset: 2
+      type: i2
+      meaning: Reserved.
+      basis: template
+      source: jiohead.template (v3.00, 16 Nov 1989)
+    lrlen:
+      offset: 4
+      type: i2
+      meaning: Logical record length.
+      basis: template
+      source: jiohead.template (v3.00, 16 Nov 1989)
+      doubt: Holds 0 in the event records checked, and the reader ignores it.
+    lrcnt:
+      offset: 6
+      type: bits16
+      meaning: 'Continuation bits: 1 continued on next physical record, 2 continued from previous.'
+      basis: template
+      source: jiohead.template (v3.00, 16 Nov 1989)
+    recno:
+      offset: 8
+      type: i4
+      meaning: Logical record number within the file.
+      basis: reader
+      source: JazelleFile.hpp (RecordHeader)
+      doubt: The reader gives only the field name. The JIOHDR template [@johnson1991jiohdr] defines RECNO
+        as the current logical record number of an open device, an in-memory field, and the stored values
+        count the file's logical records from 1.
+    t1:
+      offset: 12
+      type: i4
+      meaning: not documented
+      basis: none
+      source: JazelleFile.cpp
+      doubt: Read with t2 as the high longword, it decodes as a VMS time that increases record by record
+        within a file, plausibly the write time. Untested.
+    t2:
+      offset: 16
+      type: i4
+      meaning: not documented
+      basis: none
+      source: JazelleFile.cpp
+      doubt: Constant over long stretches of a file; see t1.
+    target:
+      offset: 20
+      type: i4
+      meaning: not documented
+      basis: none
+      source: JazelleFile.cpp
+    recordType:
+      offset: 24
+      type: ascii8
+      meaning: Record type name; EVENT for event records, EOF ends the file.
+      basis: reader
+      source: JazelleFile.cpp
+      doubt: The reader tests only for EOF, and its docs give DATA as an example value. EVENT is the value
+        read in event records. The Jazelle help on JZIORH calls this word the record name [@jazellehelp].
+    p1:
+      offset: 32
+      type: i4
+      meaning: not documented
+      basis: none
+      source: JazelleFile.cpp
+      doubt: Position and type fit the two application-defined parameters (PARAM) that the Jazelle help
+        on JZIORH lists after the record name [@jazellehelp]; untested. Holds 1 in event records.
+    p2:
+      offset: 36
+      type: i4
+      meaning: not documented
+      basis: none
+      source: JazelleFile.cpp
+      doubt: Second of the two PARAM words; see p1. Holds 1 in event records.
+    format:
+      offset: 40
+      type: ascii8
+      meaning: Record format name; MINIDST marks a compressed mini-DST record.
+      basis: reader
+      source: JazelleFile.cpp
+      doubt: The 1995 memo says Jazelle detects the compressed MiniDST format by itself but does not name
+        this field [@junk1995compress].
+    context:
+      offset: 48
+      type: ascii8
+      meaning: not documented
+      basis: none
+      source: JazelleFile.cpp
+      doubt: Holds JAZELLE in event records.
+    tocrec:
+      offset: 56
+      type: i4
+      meaning: not documented
+      basis: none
+      source: JazelleFile.cpp
+      doubt: By analogy with datrec, the physical-record position of the TOC; 0 in event records.
+    datrec:
+      offset: 60
+      type: i4
+      meaning: Nonzero when the data block starts in a later physical record.
+      basis: reader
+      source: JazelleFile.cpp
+      doubt: The reader only tests it for nonzero. Its value grows with the data size like the number
+        of physical records the block fills; inferred, not documented.
+    tocsiz:
+      offset: 64
+      type: i4
+      meaning: Declared size of the table-of-contents section (bytes).
+      basis: reader
+      source: JazelleFile.hpp (getDeclaredTocSize)
+      doubt: The reader says the value exceeds the PHMTOC size for an unknown reason. It equals the 32-byte
+        event header plus the 72-byte (v4.0) or 68-byte (v3.0) PHMTOC, so the section seems to run from
+        usroff to the end of the TOC.
+    datsiz:
+      offset: 68
+      type: i4
+      meaning: Size of the compressed data block (bytes).
+      basis: reader
+      source: JazelleFile.cpp
+    tocoff1:
+      offset: 72
+      type: i4
+      meaning: Byte offset of the PHMTOC table of contents.
+      basis: reader
+      source: JazelleFile.cpp
+    tocoff2:
+      offset: 76
+      type: i4
+      meaning: not documented
+      basis: none
+      source: JazelleFile.cpp
+      doubt: Equals the end of the PHMTOC in event records. The Jazelle routine JIOWLO writes up to three
+        table-of-contents blocks, the second and third zero if unused [@jazellehelp], so this may locate
+        an empty second block; untested.
+    tocoff3:
+      offset: 80
+      type: i4
+      meaning: not documented
+      basis: none
+      source: JazelleFile.cpp
+      doubt: Equals tocoff2 in event records; possibly the empty third TOC block, see tocoff2.
+    datoff:
+      offset: 84
+      type: i4
+      meaning: Byte offset where the data block starts in its physical record.
+      basis: reader
+      source: JazelleFile.cpp
+    segname:
+      offset: 88
+      type: ascii8
+      meaning: Segment name; MINIDST in mini-DST event records.
+      basis: reader
+      source: JazelleFile.hpp (RecordHeader)
+      doubt: The reader gives only the field name, and MINIDST is the value read in event records. The
+        Jazelle help on JZIORH lists a segment name among the record-header contents [@jazellehelp], and
+        the 1995 memo writes compressed records through an output segment list named MINIDST
+        [@junk1995compress].
+    usrnam:
+      offset: 96
+      type: ascii8
+      meaning: Name of the user-header bank at usroff; IJEVHD, the event header.
+      basis: reader
+      source: JazelleFile.cpp; ijevhd.template (v0.00, 13 May 1988)
+    usroff:
+      offset: 104
+      type: i4
+      meaning: Byte offset of the user-header bank (the event header).
+      basis: reader
+      source: JazelleFile.cpp
+    lrecflgs:
+      offset: 108
+      type: i4
+      meaning: not documented
+      basis: none
+      source: JazelleFile.hpp (RecordHeader)
+      doubt: The name suggests logical-record flags; 0 in event records.
+    spare1:
+      offset: 112
+      type: i4
+      meaning: Spare word, unused.
+      basis: reader
+      source: JazelleFile.cpp
+    spare2:
+      offset: 116
+      type: i4
+      meaning: Spare word, unused.
+      basis: reader
+      source: JazelleFile.cpp
+IEVENTH:
+  purpose: 'The event header: run and event numbers, event time, weight, event type and trigger mask.
+    One 32-byte block per record, in data and MC, stored as the IJEVHD user header at usroff ahead of
+    the table of contents, not in the compressed data block.'
+  doubt: The block on disk is the IJEVHD segment header, whose fields are those of IEVENTH plus a leading
+    pointer. The segment pointers and user flags of the IEVENTH template are not stored.
+  fields:
+    header:
+      meaning: Pointer to the header bank in this segment, internal to Jazelle.
+      basis: template
+      source: ijevhd.template (v0.00, 13 May 1988)
+      doubt: Holds 0 in event records, so it carries no event information on disk.
+    run:
+      meaning: Run number.
+      basis: template
+      source: ijevhd.template (v0.00, 13 May 1988); ieventh.template (v0.10, 7 Aug 1990)
+      doubt: In MC it is the label of the overlaid random-trigger data event, shared by several MC records,
+        so MC (run, event) does not identify the event.
+    event:
+      meaning: Event number.
+      basis: template
+      source: ijevhd.template (v0.00, 13 May 1988); ieventh.template (v0.10, 7 Aug 1990)
+      doubt: The reader docs add "within the run", which the templates do not state. In MC it is the overlaid
+        random-trigger event's number; see run.
+    evttime:
+      meaning: Time when the event was created.
+      basis: template
+      source: ijevhd.template (v0.00, 13 May 1988); ieventh.template (v0.10, 7 Aug 1990)
+      doubt: The template gives no encoding. The reader decodes a VMS time (100 ns ticks since 17 Nov
+        1858) and subtracts 0.73 s more than the exact epoch offset. The reader docs call it a UTC timestamp,
+        which no archived source states.
+      used_by_analysis: true
+    weight:
+      meaning: Event weight (1.0 for real data).
+      basis: template
+      source: ijevhd.template (v0.00, 13 May 1988); ieventh.template (v0.10, 7 Aug 1990)
+    evttype:
+      meaning: 'Event type: 0 PHYSICS (real data), 1 TRUTH, 2 FASTMC, 3 SLOWMC (GEANT), 4 MIDMC.'
+      basis: template
+      source: ieventh.template (v0.10, 7 Aug 1990)
+    trigger:
+      meaning: Trigger mask of the event.
+      basis: template
+      source: ijevhd.template (v0.00, 13 May 1988); ieventh.template (v0.10, 7 Aug 1990)
+      doubt: Bit assignments are not documented (the template says TBA). In data, PHEVCL bits 18 (random),
+        23 (energy), 17 (luminosity Bhabha), 21 (track) and 19 (laser) follow trigger bits 0, 2, 3, 4 and
+        25. MC trigger words
+        use another layout, with MC bit 18 in the role of data bit 2.
+PHMTOC:
+  purpose: 'Table of contents of a compressed mini-DST record: a format version and one bank count per
+    family, which fix where each family starts in the data block. One per record, 72 bytes in version
+    4.0 and 68 bytes, without the PHVXOV count, in version 3.0.'
+  doubt: 'The 1995 memo calls the TOC an incomplete list of the compressed banks: MCHEAD, MCPQRK and PHEVNT,
+    a pointer bank the decompressor rebuilds from PHBM and PHEVCL, have no count. The slot order of the
+    counts is known only from the reader.'
+  size: 72
+  fields:
+    version:
+      offset: 0
+      type: f4
+      meaning: 'TOC format version (VAX F-float): 4.0 with 17 counts, 3.0 with 16.'
+      basis: memo
+      source: compress.html (1995 compressed mini-DST memo); PHMTOC.cpp
+      doubt: The memo documents the version as the format switch; the values 4.0 and 3.0 are observed.
+    n_mcpart:
+      offset: 4
+      type: i4
+      meaning: Number of MCPART banks (generated particles); 0 in data.
+      basis: reader
+      source: PHMTOC.cpp
+    n_phpsum:
+      offset: 8
+      type: i4
+      meaning: Number of PHPSUM banks (reconstructed particles).
+      basis: reader
+      source: PHMTOC.cpp
+    n_phchrg:
+      offset: 12
+      type: i4
+      meaning: Number of PHCHRG banks (charged tracks).
+      basis: reader
+      source: PHMTOC.cpp
+    n_phklus:
+      offset: 16
+      type: i4
+      meaning: Number of PHKLUS banks (calorimeter clusters).
+      basis: reader
+      source: PHMTOC.cpp
+    n_phktrk:
+      offset: 20
+      type: i4
+      meaning: Number of PHKTRK banks; always 0.
+      basis: reader
+      source: PHMTOC.cpp
+      doubt: PHKTRK carries no bytes in these files. The 1995 memo records that PHKELID replaced PHKTRK
+        in PHPOINT.
+    n_phwic:
+      offset: 24
+      type: i4
+      meaning: Number of PHWIC banks (WIC muon-system entries).
+      basis: reader
+      source: PHMTOC.cpp
+    n_phwmc:
+      offset: 28
+      type: i4
+      meaning: Number of PHWMC banks (MC truth of WIC muon-system clusters); 0 in data.
+      basis: reader
+      source: PHMTOC.cpp
+    n_phcrid:
+      offset: 32
+      type: i4
+      meaning: Number of PHCRID banks (CRID particle identification).
+      basis: reader
+      source: PHMTOC.cpp
+    n_phpoint:
+      offset: 36
+      type: i4
+      meaning: Number of PHPOINT banks (per-particle cross-references).
+      basis: reader
+      source: PHMTOC.cpp
+    n_mcpnt:
+      offset: 40
+      type: i4
+      meaning: Number of MCPNT relations (reconstructed particles to MC particles); 0 in data.
+      basis: reader
+      source: PHMTOC.cpp
+    n_phkmc1:
+      offset: 44
+      type: i4
+      meaning: Number of PHKMC1 relations (calorimeter clusters to MC particles); 0 in data.
+      basis: reader
+      source: PHMTOC.cpp
+    n_phkchrg:
+      offset: 48
+      type: i4
+      meaning: Number of PHKCHRG relations (tracks to calorimeter clusters).
+      basis: reader
+      source: PHMTOC.cpp
+    n_phbm:
+      offset: 52
+      type: i4
+      meaning: Number of PHBM banks; one per record.
+      basis: reader
+      source: PHMTOC.cpp
+    n_phevcl:
+      offset: 56
+      type: i4
+      meaning: Number of PHEVCL banks; one per record.
+      basis: reader
+      source: PHMTOC.cpp
+    n_mcbeam:
+      offset: 60
+      type: i4
+      meaning: Number of MCBEAM banks; one in MC, 0 in data.
+      basis: reader
+      source: PHMTOC.cpp
+    n_phkelid:
+      offset: 64
+      type: i4
+      meaning: Number of PHKELID banks (calorimeter electron identification).
+      basis: reader
+      source: PHMTOC.cpp
+    n_phvxov:
+      offset: 68
+      type: i4
+      meaning: Number of PHVXOV banks (VXD3 hit lists); version 4.0 only.
+      basis: reader
+      source: PHMTOC.cpp
+PHBM:
+  purpose: Beam and interaction-point conditions of the event, in data and MC, one 60-byte entry per record.
+    It holds the centre-of-mass energy, the IP position with its errors, and the signed electron-beam
+    polarisation with the polarimeter measurement it comes from.
+  doubt: jazelle 0.4.0 and earlier decode MC PHBM from the preceding PHKMC1 bytes, so MC values from those
+    versions are wrong; data PHBM is read correctly. Those versions read only ecm to dpol.
+  fields:
+    ecm:
+      meaning: Centre-of-mass energy (GeV); -999 when not measured; MC smears the generated value.
+      basis: confirmed
+      source: PHBM.yaml (decoding spec)
+    decm:
+      meaning: Uncertainty or spread of ecm (GeV); -999 together with ecm; 0.05 in MC.
+      basis: confirmed
+      source: PHBM.yaml (decoding spec)
+    pos_x:
+      meaning: Interaction-point x (cm); 0 in MC.
+      basis: confirmed
+      source: PHBM.yaml (decoding spec)
+      doubt: Shared by a block of consecutive events (an IP block). The reader comment says the IP comes
+        from the SLC and the analysis code [@sldresurrect] cites beam-position monitors, but a refit of
+        the block's VXD tracks reproduces it.
+      used_by_analysis: true
+    pos_y:
+      meaning: Interaction-point y (cm); 0 in MC.
+      basis: confirmed
+      source: PHBM.yaml (decoding spec)
+      doubt: Shared by a block of consecutive events (an IP block). The reader comment says the IP comes
+        from the SLC and the analysis code [@sldresurrect] cites beam-position monitors, but a refit of
+        the block's VXD tracks reproduces it.
+      used_by_analysis: true
+    pos_z:
+      meaning: Event vertex z (cm); the IP-block z centre without a vertex; MC fallback -0.53 cm.
+      basis: confirmed
+      source: PHBM.yaml (decoding spec)
+      doubt: The reader docs and the analysis code treat pos_z as the IP z; the decoding specification
+        finds a per-event vertex z [@banklab].
+      used_by_analysis: true
+    dpos_xx:
+      meaning: 1-sigma error (cm) of the IP-block fit in x; packed-matrix xx slot; fixed in MC.
+      basis: confirmed
+      source: PHBM.yaml (decoding spec)
+      doubt: The reader calls dpos a symmetric error matrix; its diagonal holds sigmas, not variances.
+    dpos_xy:
+      meaning: xy slot of the packed IP error matrix; always 0.
+      basis: plausible
+      source: PHBM.yaml (decoding spec)
+    dpos_yy:
+      meaning: 1-sigma error (cm) of the IP-block fit in y; packed-matrix yy slot; fixed in MC.
+      basis: confirmed
+      source: PHBM.yaml (decoding spec)
+      doubt: The reader calls dpos a symmetric error matrix; its diagonal holds sigmas, not variances.
+    dpos_xz:
+      meaning: xz slot of the packed IP error matrix; always 0.
+      basis: plausible
+      source: PHBM.yaml (decoding spec)
+    dpos_yz:
+      meaning: yz slot of the packed IP error matrix; always 0.
+      basis: plausible
+      source: PHBM.yaml (decoding spec)
+    dpos_zz:
+      meaning: Luminous-region length sigma_z of the IP block (cm); error of the pos_z fallback.
+      basis: confirmed
+      source: PHBM.yaml (decoding spec)
+      doubt: The reader calls dpos a symmetric error matrix; its diagonal holds sigmas, not variances.
+    pol:
+      meaning: Signed e- beam polarisation, helicity times |P| (negative = left-handed); 0 if missing;
+        MC ±1.
+      basis: confirmed
+      source: PHBM.yaml (decoding spec)
+      doubt: The reader comment calls it the average polarisation measured by the Compton polarimeter
+        (-1 to 1); the decoding specification finds the event's helicity sign times the measured magnitude
+        [@banklab].
+      used_by_analysis: true
+    dpol:
+      meaning: Uncertainty of the assigned polarimeter measurement; 1 when pol is missing; 0 in MC.
+      basis: confirmed
+      source: PHBM.yaml (decoding spec)
+      used_by_analysis: true
+    pol_dt:
+      meaning: Days between the event and its polarimeter measurement; 999 none; 0 fixed average.
+      basis: confirmed
+      source: PHBM.yaml (decoding spec)
+    reserved_56:
+      meaning: Unused word, always 0; no status word or helicity sign (BPOL) stored.
+      basis: plausible
+      source: PHBM.yaml (decoding spec)
+      doubt: The reader header keeps commented-out status and bpol fields; neither is stored here.
+PHEVCL:
+  purpose: Event classification and detector-status summary, in data and MC, one 72-byte entry per record.
+    The 30-byte template block sits at +40 and the first 40 bytes lie outside the template.
+  doubt: jazelle 0.4.0 and earlier read the 30-byte template block from offset 0, so their PHEVCL fields
+    are misplaced.
+  fields:
+    zero_00:
+      meaning: Always 0; not in the 1996 template (unfilled slot or padding).
+      basis: unknown
+      source: PHEVCL.yaml (decoding spec)
+    zero_04:
+      meaning: Always 0; not in the 1996 template (unfilled slot or padding).
+      basis: unknown
+      source: PHEVCL.yaml (decoding spec)
+    zero_08:
+      meaning: Always 0; not in the 1996 template (unfilled slot or padding).
+      basis: unknown
+      source: PHEVCL.yaml (decoding spec)
+    zero_12:
+      meaning: Always 0; not in the 1996 template (unfilled slot or padding).
+      basis: unknown
+      source: PHEVCL.yaml (decoding spec)
+    zero_16:
+      meaning: Always 0; not in the 1996 template (unfilled slot or padding).
+      basis: unknown
+      source: PHEVCL.yaml (decoding spec)
+    zero_20:
+      meaning: Always 0; not in the 1996 template (unfilled slot or padding).
+      basis: unknown
+      source: PHEVCL.yaml (decoding spec)
+    zero_24:
+      meaning: Always 0; not in the 1996 template (unfilled slot or padding).
+      basis: unknown
+      source: PHEVCL.yaml (decoding spec)
+    zero_28:
+      meaning: Always 0; not in the 1996 template (unfilled slot or padding).
+      basis: unknown
+      source: PHEVCL.yaml (decoding spec)
+    word_32:
+      meaning: 0 whenever the event has charged tracks; leftover storage otherwise; purpose unknown.
+      basis: plausible
+      source: PHEVCL.yaml (decoding spec)
+      doubt: Only zeros are written, so the type is untested, and the relation repeats the writer condition
+        of word_36.
+      open_item: true
+    word_36:
+      meaning: 12 for 1-63 charged tracks, 0 for 64 or more; leftover without tracks; purpose unknown.
+      basis: plausible
+      source: PHEVCL.yaml (decoding spec)
+      doubt: A 32-bit 12 cannot be told from a 16-bit 12 followed by a 16-bit 0.
+      open_item: true
+    evtclass:
+      meaning: Event-class bits, template EVTCLASS numbering; results of the PASS1 and PASS2 filters, calibration
+        streams included; bits 17, 19, 25 and 29 are named from the template alone.
+      basis: confirmed
+      source: PHEVCL.yaml (decoding spec); phevcl.template (v0.07, 15 Apr 1996)
+      doubt: MC simulates only bit 23; bit 18 and the rare others come from the overlaid random-trigger
+        data event.
+      support_legend:
+        physics_check: an independent physics selection follows the bit
+        trigger_bit: the bit follows an IEVENTH trigger bit; the name rests on the template
+        template_only: the content is characterized, but nothing tests the template name
+      bits:
+      - bit: 6
+        name: ECTAUS
+        meaning: energy concentration (template endcap tau filter, PASS1)
+        template: Endcap tau filter - PASS1
+        support: physics_check
+        observed: energy concentrated within 10 deg of the hardest-cluster axis; not an endcap selection
+      - bit: 8
+        name: EE
+        meaning: e+e- candidate
+        template: e+e- candidate
+        support: physics_check
+        observed: 'Bhabha-like: at most 3 tracks, E_raw >= 35 GeV, electromagnetic'
+      - bit: 14
+        name: TAKAL2
+        meaning: left–right asymmetry tracking filter (PASS2)
+        template: Alr tracking filter - PASS2
+        support: physics_check
+        observed: hadronic selection; implies bit 23 (energy filter plus tracks)
+      - bit: 15
+        name: TRKHAD2
+        meaning: tracking hadron filter (PASS2)
+        template: passed tracking hadron filter - PASS2
+        support: physics_check
+        observed: hadronic selection based on charged tracks
+      - bit: 17
+        name: LUMBHA
+        meaning: luminosity Bhabha
+        template: Luminosity bhabha
+        support: trigger_bit
+        observed: implies trigger bit 3; central detector mostly empty; a forward-energy test failed
+      - bit: 18
+        name: RNDMTRG
+        meaning: random trigger
+        template: random trigger
+        support: trigger_bit
+        observed: equals trigger bit 0 in data; set in every MC record by the overlay
+      - bit: 19
+        name: LASER
+        meaning: CDC laser record
+        template: CDC laser record
+        support: trigger_bit
+        observed: equals trigger bit 25
+      - bit: 21
+        name: TRK
+        meaning: track trigger
+        template: track trigger
+        support: trigger_bit
+        observed: trigger bit 4 alone among bits 0-7; low-energy tracks
+      - bit: 23
+        name: EIT
+        meaning: LAC energy trigger (PASS1)
+        template: LAC energy trigger - PASS1
+        support: physics_check
+        observed: calorimeter energy E_raw >= 20 GeV; always with trigger bit 2; simulated in MC
+      - bit: 24
+        name: MUPAIR
+        meaning: mu-pair filter (PASS1), which also accepts cosmic rays
+        template: passed mu-pair filter - PASS1
+        support: physics_check
+        observed: mu-pair-like with WIC tracks; also fires on cosmic rays
+      - bit: 25
+        name: TAUPAIR
+        meaning: tau-pair filter (PASS1)
+        template: passed tau-pair filter - PASS1
+        support: template_only
+        observed: an event with a charged track above 1 GeV
+      - bit: 27
+        name: EIT2
+        meaning: LAC energy trigger (PASS2)
+        template: LAC energy trigger - PASS2
+        support: physics_check
+        observed: hadronic selection; implies bit 23
+      - bit: 28
+        name: MUPAIR2
+        meaning: mu-pair filter (PASS2)
+        template: passed mu-pair filter - PASS2
+        support: physics_check
+        observed: two tracks from the IP, mu+mu-; implies bit 24
+      - bit: 29
+        name: TAUPAIR2
+        meaning: tau-pair filter (PASS2)
+        template: passed tau-pair filter - PASS2
+        support: template_only
+        observed: implies bit 25 and charged sum p + E_clus > 10 GeV
+      bits_never_set: 0 BACK, 1 BEAMGAS, 2 COSMIC, 3, 4 GAMGAM, 5 NUNUGAM, 7, 9 MUMU, 10 TAUTAU, 11, 12
+        EEGG, 13, 16 QQ, 20 QOMPTON, 22 KZ0F, 26 KZ0F2, 30 TRGVETO, 31 NOINFO
+    zero_44:
+      meaning: Always 0; template THRUST(3) x slot, never filled (no thrust axis stored).
+      basis: unknown
+      source: PHEVCL.yaml (decoding spec)
+    zero_48:
+      meaning: Always 0; template THRUST(3) y slot, never filled.
+      basis: unknown
+      source: PHEVCL.yaml (decoding spec)
+    zero_52:
+      meaning: Always 0; template THRUST(3) z slot, never filled.
+      basis: unknown
+      source: PHEVCL.yaml (decoding spec)
+    vxdstat:
+      meaning: MC-only VXD status code keyed to the overlaid random-trigger event; 0 in data.
+      basis: plausible
+      source: PHEVCL.yaml (decoding spec); phevcl.template (v0.07, 15 Apr 1996)
+      doubt: Its main values go with VXD sectors dead in all three layers, but it is not a dead-sector
+        bitmask, the bit-to-sector rule is unknown, and the mapping has no out-of-sample check. The template
+        gives only the name.
+    cdcstat:
+      meaning: MC-only CDC status; 0 in data; bit 15 is named from the template alone.
+      basis: confirmed
+      source: PHEVCL.yaml (decoding spec); phevcl.template (v0.07, 15 Apr 1996)
+      bits:
+      - bit: 0-9
+        name: CDCHV0-CDCHV9
+        meaning: one bit per superlayer, set when its high voltage is off
+        template: high voltage for superlayer n is off
+        support: physics_check
+        observed: each set bit removes one 8-layer superlayer; bit 0 is the innermost
+      - bit: 15
+        name: VETO
+        meaning: CDC would not have been read out
+        template: CDC would not have been read out
+        support: template_only
+        observed: drawn per MC event
+    zero_60:
+      meaning: Always 0; template KALSTAT slot, never filled.
+      basis: unknown
+      source: PHEVCL.yaml (decoding spec)
+    crdstat:
+      meaning: CRID status (template CRDSTAT); bit 0 BRLOFF is physics-checked, the other bit names come
+        from the template.
+      basis: confirmed
+      source: PHEVCL.yaml (decoding spec); phevcl.template (v0.07, 15 Apr 1996)
+      doubt: Bit 12 failed its check on the holdout, and ECSOFF and ECNOFF could be swapped. Bits 1, 5,
+        6, 9 and 10 are always set together.
+      bits:
+      - bit: 0
+        name: BRLOFF
+        meaning: barrel high voltage low
+        template: Barrel HV is low
+        support: physics_check
+        observed: barrel tracks then have no PHCRID entry
+      - bit: 1
+        name: NOVCALB
+        meaning: no barrel velocity calibration
+        template: no barrel velocity calibration
+        support: template_only
+        observed: always set together with bits 5, 6, 9 and 10
+      - bit: 2
+        name: XVCALB
+        meaning: poor barrel velocity calibration
+        template: poor barrel velocity calibration
+        support: template_only
+        observed: its PHCRID deficit comes from co-occurrence with bit 0
+      - bit: 4
+        name: ECSOFF
+        meaning: south endcap high voltage low
+        template: South EC HV is low
+        support: template_only
+        observed: endcap PHCRID rate unchanged
+      - bit: 5
+        name: NOVCALES
+        meaning: no south endcap velocity calibration
+        template: no EC S velocity calibration
+        support: template_only
+        observed: always set together with bits 1, 6, 9 and 10
+      - bit: 6
+        name: XVCALES
+        meaning: poor south endcap velocity calibration
+        template: poor EC S velocity calibration
+        support: template_only
+        observed: always set together with bits 1, 5, 9 and 10
+      - bit: 8
+        name: ECNOFF
+        meaning: north endcap high voltage low
+        template: North EC HV is low
+        support: template_only
+        observed: set in every record
+      - bit: 9
+        name: NOVCALEN
+        meaning: no north endcap velocity calibration
+        template: no EC N velocity calibration
+        support: template_only
+        observed: always set together with bits 1, 5, 6 and 10
+      - bit: 10
+        name: XVCALEN
+        meaning: poor north endcap velocity calibration
+        template: poor EC N velocity calibration
+        support: template_only
+        observed: always set together with bits 1, 5, 6 and 9
+      - bit: 12
+        name: MANGLED
+        meaning: CRID raw data mangled or truncated
+        template: CRIDWSM data mangled or truncated
+        support: template_only
+        observed: set per event, more often in busy events; the check against the cluster count failed on
+          the holdout
+      - bit: 13
+        name: LOCRvsDC
+        meaning: CRID data size suspiciously low against the drift chamber's
+        template: CRID/DC data size suspiciously low
+        support: template_only
+        observed: set together with bit 0
+      bits_never_set: 3, 7, 11, 14, 15 NOCINFO
+    zero_64:
+      meaning: Always 0; template WICSTAT slot, never filled.
+      basis: unknown
+      source: PHEVCL.yaml (decoding spec)
+    word_66:
+      meaning: Template CONDITI1 slot, the condition flags of the raw-data consistency check STRGCHK; 0 in
+        MC; data content not condition-like.
+      basis: unknown
+      source: PHEVCL.yaml (decoding spec); phevcl.template (v0.07, 15 Apr 1996)
+      open_item: true
+    word_68:
+      meaning: Template CONDITI2 slot, the second word of STRGCHK condition flags; 0 in MC; data content
+        not condition-like.
+      basis: unknown
+      source: PHEVCL.yaml (decoding spec); phevcl.template (v0.07, 15 Apr 1996)
+      open_item: true
+    word_70:
+      meaning: Alignment word after the template block (1995 memo note 12); never written, leftover content.
+      basis: unknown
+      source: PHEVCL.yaml (decoding spec); compress.html (note 12)
+      open_item: true
+GAP_WORD:
+  caption: Fields of the reserved word.
+  purpose: One reserved 4-byte word per record, in data and MC, after the last fixed-size tail bank (PHEVCL
+    in data, MCBEAM in MC) and before the PHVXOV banks.
+  fields:
+    reserved_end_word:
+      meaning: Reserved word, always 0, closing the version-3 record; PHVXOV banks follow in v4.0.
+      basis: plausible
+      source: GAP_WORD.yaml (decoding spec)
+      doubt: An untested candidate from the archived documents is the in-record count (0 or 1) of MCPQRK,
+        a compressed bank without a TOC count.
+PHKCHRG:
+  purpose: Relation table linking reconstructed tracks (PHCHRG) to LAC clusters (PHKLUS), with the probability
+    and the pulls of the match. Data and MC, one entry per track-cluster pair with a match probability
+    above 0.01, stored as a 16-byte pass and a 4-byte pass joined by the relation id.
+  fields:
+    phchrg_id:
+      meaning: PHCHRG id of the track (low half of the packed pass-1 word); each track appears at most
+        once per record
+      basis: confirmed
+      source: PHKCHRG_PASS1.yaml (decoding spec)
+    phkchrg_id:
+      meaning: Relation id (high half), the key that joins the two passes
+      basis: confirmed
+      source: PHKCHRG_PASS1.yaml, PHKCHRG_PASS2.yaml
+    match_probability:
+      meaning: Match probability, at least 0.01; for most relations the two-degree-of-freedom chi-squared
+        probability of the EM1 residuals with 10 mrad added in quadrature
+      basis: confirmed
+      source: PHKCHRG_PASS1.yaml (decoding spec)
+    polar_pull:
+      meaning: (cos theta of the EM1 sub-cluster - cos theta of the track) / wcth2
+      basis: confirmed
+      source: PHKCHRG_PASS1.yaml (decoding spec)
+    azimuthal_pull:
+      meaning: (phi of the EM1 sub-cluster - phi of the track) / whphi2, track swum to an effective depth,
+        r = 198 cm or |z| = 232 cm
+      basis: confirmed
+      source: PHKCHRG_PASS1.yaml (decoding spec), with the depth at 0.6 T
+    phklus_id:
+      meaning: PHKLUS id of the cluster; one cluster can match several tracks
+      basis: confirmed
+      source: PHKCHRG_PASS2.yaml (decoding spec)

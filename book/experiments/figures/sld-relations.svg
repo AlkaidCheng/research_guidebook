@@ -1,0 +1,121 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 470">
+  <defs>
+    <marker id="rl-arrow-ink-2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="var(--ink-2, #4a463f)"/></marker>
+  </defs>
+  <style>
+    .t { fill: var(--ink, #1d1b17); font-size: 12px; }
+    .t2 { fill: var(--ink-2, #4a463f); font-size: 11px; }
+    .t3 { fill: var(--ink-3, #7a756b); font-size: 10px; }
+    .tb { font-weight: 600; }
+    .ti { font-style: italic; }
+    .ta { fill: var(--accent-ink, #6a2522); }
+    .caps { letter-spacing: 1.4px; }
+    .mono { font-family: var(--mono, monospace); }
+    .start { text-anchor: start; }
+    .mid { text-anchor: middle; }
+    .end { text-anchor: end; }
+    .ln { stroke: var(--ink-2, #4a463f); stroke-width: 1.2; fill: none; }
+    .ln3 { stroke: var(--ink-3, #7a756b); stroke-width: 1; fill: none; }
+    .thin { stroke-width: 0.7; }
+    .dash { stroke-dasharray: 4 3; }
+    .box { stroke: var(--ink-2, #4a463f); stroke-width: 1.2; fill: none; }
+    .paper { fill: var(--paper, #fbfaf7); }
+
+    .seg { stroke: var(--ink-2, #4a463f); stroke-width: 1; }
+    .hdr { fill: var(--paper-3, #e9e5db); stroke: var(--ink-2, #4a463f); stroke-width: 1; }
+    .ghost { fill: none; stroke: var(--ink-3, #7a756b); stroke-width: 1; stroke-dasharray: 3 3; }
+    .brace { stroke: var(--ink-3, #7a756b); stroke-width: 1; fill: none; }
+    .nm { fill: var(--ink, #1d1b17); font-size: 11px; font-weight: 600; }
+    .sz { fill: var(--ink-2, #4a463f); font-size: 9.5px; }
+    .gh { fill: var(--ink-3, #7a756b); font-size: 9.5px; }
+    .tf { stroke-width: 1; }
+  </style>
+  <line class="ln3 dash" x1="250" y1="60" x2="80" y2="170"/>
+  <line class="ln3 dash" x1="250" y1="60" x2="480" y2="60"/>
+  <line class="ln3 dash" x1="250" y1="230" x2="80" y2="170"/>
+  <line class="ln3 dash" x1="250" y1="230" x2="480" y2="230"/>
+  <line class="ln3 dash" x1="362" y1="180" x2="480" y2="130"/>
+  <line class="ln3 dash" x1="362" y1="180" x2="480" y2="230"/>
+  <line class="ln thin" x1="289" y1="330" x2="441" y2="330" marker-end="url(#rl-arrow-ink-2)"/>
+  <text class="gh mid" x="365" y="325">phwic_id</text>
+  <line class="ln thin" x1="235.12" y1="316" x2="94.88" y2="184" marker-end="url(#rl-arrow-ink-2)"/>
+  <text class="gh mid" x="121" y="250">mcpart_id</text>
+  <line class="ln thin" x1="519" y1="60" x2="641" y2="60" marker-end="url(#rl-arrow-ink-2)"/>
+  <text class="gh mid" x="580" y="55">mask bit 0</text>
+  <line class="ln thin" x1="480" y1="74" x2="480" y2="116" marker-end="url(#rl-arrow-ink-2)"/>
+  <text class="gh mid" x="498" y="89">bit 2</text>
+  <line class="ln thin" x1="641" y1="130" x2="519" y2="130" marker-end="url(#rl-arrow-ink-2)"/>
+  <text class="gh mid" x="580" y="125">link</text>
+  <line class="ln thin" x1="652" y1="216" x2="508" y2="144" marker-end="url(#rl-arrow-ink-2)"/>
+  <text class="gh mid" x="612" y="174">header</text>
+  <line class="ln thin" x1="441" y1="133.9" x2="119" y2="166.1" marker-end="url(#rl-arrow-ink-2)"/>
+  <text class="gh mid" x="310" y="136">imc (MC only)</text>
+  <path class="ln thin" d="M660 116 V108 Q660 102 654 102 H72 Q66 102 66 108 V156" marker-end="url(#rl-arrow-ink-2)"/>
+  <text class="gh mid" x="580" y="97">hit mc_particle (MC only)</text>
+  <rect class="paper" x="41" y="46" width="78" height="28" rx="3"/>
+  <rect class="tf" x="41" y="46" width="78" height="28" rx="3" fill="var(--box-warning, #a3471e)" fill-opacity="0.16" stroke="var(--box-warning, #a3471e)"/>
+  <text class="nm mid" x="80" y="64">MCHEAD</text>
+  <rect class="paper" x="41" y="156" width="78" height="28" rx="3"/>
+  <rect class="tf" x="41" y="156" width="78" height="28" rx="3" fill="var(--box-warning, #a3471e)" fill-opacity="0.16" stroke="var(--box-warning, #a3471e)"/>
+  <text class="nm mid" x="80" y="174">MCPART</text>
+  <rect class="paper" x="41" y="286" width="78" height="28" rx="3"/>
+  <rect class="tf" x="41" y="286" width="78" height="28" rx="3" fill="var(--box-warning, #a3471e)" fill-opacity="0.16" stroke="var(--box-warning, #a3471e)"/>
+  <text class="nm mid" x="80" y="304">MCBEAM</text>
+  <rect class="paper" x="211" y="46" width="78" height="28" rx="3"/>
+  <rect class="tf" x="211" y="46" width="78" height="28" rx="3" fill="var(--box-recipe, #5a4b82)" fill-opacity="0.16" stroke="var(--box-recipe, #5a4b82)"/>
+  <text class="nm mid" x="250" y="64">MCPNT</text>
+  <rect class="paper" x="211" y="216" width="78" height="28" rx="3"/>
+  <rect class="tf" x="211" y="216" width="78" height="28" rx="3" fill="var(--box-recipe, #5a4b82)" fill-opacity="0.16" stroke="var(--box-recipe, #5a4b82)"/>
+  <text class="nm mid" x="250" y="234">PHKMC1</text>
+  <rect class="paper" x="211" y="316" width="78" height="28" rx="3"/>
+  <rect class="tf" x="211" y="316" width="78" height="28" rx="3" fill="var(--box-warning, #a3471e)" fill-opacity="0.16" stroke="var(--box-warning, #a3471e)"/>
+  <text class="nm mid" x="250" y="334">PHWMC</text>
+  <rect class="paper" x="323" y="166" width="78" height="28" rx="3"/>
+  <rect class="tf" x="323" y="166" width="78" height="28" rx="3" fill="var(--box-recipe, #5a4b82)" fill-opacity="0.16" stroke="var(--box-recipe, #5a4b82)"/>
+  <text class="nm mid" x="362" y="184">PHKCHRG</text>
+  <rect class="paper" x="441" y="46" width="78" height="28" rx="3"/>
+  <rect class="tf" x="441" y="46" width="78" height="28" rx="3" fill="var(--accent, #7f2e2a)" fill-opacity="0.16" stroke="var(--accent, #7f2e2a)"/>
+  <text class="nm mid" x="480" y="64">PHPOINT</text>
+  <rect class="paper" x="441" y="116" width="78" height="28" rx="3"/>
+  <rect class="tf" x="441" y="116" width="78" height="28" rx="3" fill="var(--box-definition, #2f5d7c)" fill-opacity="0.16" stroke="var(--box-definition, #2f5d7c)"/>
+  <text class="nm mid" x="480" y="134">PHCHRG</text>
+  <rect class="paper" x="441" y="216" width="78" height="28" rx="3"/>
+  <rect class="tf" x="441" y="216" width="78" height="28" rx="3" fill="var(--box-remark, #7a6a3b)" fill-opacity="0.16" stroke="var(--box-remark, #7a6a3b)"/>
+  <text class="nm mid" x="480" y="234">PHKLUS</text>
+  <rect class="paper" x="441" y="316" width="78" height="28" rx="3"/>
+  <rect class="tf" x="441" y="316" width="78" height="28" rx="3" fill="var(--ink-2, #4a463f)" fill-opacity="0.16" stroke="var(--ink-2, #4a463f)"/>
+  <text class="nm mid" x="480" y="334">PHWIC</text>
+  <rect class="paper" x="641" y="46" width="78" height="28" rx="3"/>
+  <rect class="tf" x="641" y="46" width="78" height="28" rx="3" fill="var(--accent, #7f2e2a)" fill-opacity="0.16" stroke="var(--accent, #7f2e2a)"/>
+  <text class="nm mid" x="680" y="64">PHPSUM</text>
+  <rect class="paper" x="641" y="116" width="78" height="28" rx="3"/>
+  <rect class="tf" x="641" y="116" width="78" height="28" rx="3" fill="var(--box-definition, #2f5d7c)" fill-opacity="0.16" stroke="var(--box-definition, #2f5d7c)"/>
+  <text class="nm mid" x="680" y="134">PHVXOV</text>
+  <rect class="paper" x="641" y="216" width="78" height="28" rx="3"/>
+  <rect class="tf" x="641" y="216" width="78" height="28" rx="3" fill="var(--box-remark, #7a6a3b)" fill-opacity="0.16" stroke="var(--box-remark, #7a6a3b)"/>
+  <text class="nm mid" x="680" y="234">PHKELID</text>
+  <rect class="paper" x="641" y="316" width="78" height="28" rx="3"/>
+  <rect class="tf" x="641" y="316" width="78" height="28" rx="3" fill="var(--box-example, #3f6b3f)" fill-opacity="0.16" stroke="var(--box-example, #3f6b3f)"/>
+  <text class="nm mid" x="680" y="334">PHCRID</text>
+  <text class="gh mid" x="480" y="22">PHPOINT also points to PHCRID (bit 1), PHKLUS (3), PHKELID (4), PHWIC (5)</text>
+  <path class="ln thin" d="M41 164 C14 160 14 190 41 184" marker-end="url(#rl-arrow-ink-2)"/>
+  <text class="gh start" x="20" y="208">parent_id</text>
+  <line class="ln thin" x1="20" y1="370" x2="60" y2="370" marker-end="url(#rl-arrow-ink-2)"/>
+  <text class="sz start" x="66" y="374">pointer: the id of another entry, stored in this one</text>
+  <line class="ln3 dash" x1="400" y1="370" x2="440" y2="370"/>
+  <text class="sz start" x="446" y="374">relation table: pairs of ids, in two passes</text>
+  <text class="t3 caps start" x="10" y="404">TWO-PASS STORAGE OF A RELATION TABLE WITH n ROWS</text>
+  <rect class="tf" x="10" y="412" width="150" height="24" fill="var(--box-recipe, #5a4b82)" fill-opacity="0.14" stroke="var(--box-recipe, #5a4b82)"/>
+  <text class="sz mono mid" x="85" y="428">A id | own id | payload</text>
+  <rect class="tf" x="163" y="412" width="30" height="24" fill="var(--box-recipe, #5a4b82)" fill-opacity="0.14" stroke="var(--box-recipe, #5a4b82)"/>
+  <text class="sz mono mid" x="178" y="428">…</text>
+  <rect class="tf" x="196" y="412" width="150" height="24" fill="var(--box-recipe, #5a4b82)" fill-opacity="0.14" stroke="var(--box-recipe, #5a4b82)"/>
+  <text class="sz mono mid" x="271" y="428">A id | own id | payload</text>
+  <rect class="tf" x="361" y="412" width="100" height="24" fill="var(--box-recipe, #5a4b82)" fill-opacity="0.06" stroke="var(--box-recipe, #5a4b82)"/>
+  <text class="sz mono mid" x="411" y="428">B id | own id</text>
+  <rect class="tf" x="464" y="412" width="30" height="24" fill="var(--box-recipe, #5a4b82)" fill-opacity="0.06" stroke="var(--box-recipe, #5a4b82)"/>
+  <text class="sz mono mid" x="479" y="428">…</text>
+  <rect class="tf" x="497" y="412" width="100" height="24" fill="var(--box-recipe, #5a4b82)" fill-opacity="0.06" stroke="var(--box-recipe, #5a4b82)"/>
+  <text class="sz mono mid" x="547" y="428">B id | own id</text>
+  <text class="gh start" x="10" y="454">Pass 1 holds n rows, then pass 2 holds n rows; the rows of the two passes with the same own id form one relation.</text>
+</svg>

@@ -1,0 +1,229 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 384">
+  <style>
+    .t { fill: var(--ink, #1d1b17); font-size: 12px; }
+    .t2 { fill: var(--ink-2, #4a463f); font-size: 11px; }
+    .t3 { fill: var(--ink-3, #7a756b); font-size: 10px; }
+    .tb { font-weight: 600; }
+    .ti { font-style: italic; }
+    .ta { fill: var(--accent-ink, #6a2522); }
+    .caps { letter-spacing: 1.4px; }
+    .mono { font-family: var(--mono, monospace); }
+    .start { text-anchor: start; }
+    .mid { text-anchor: middle; }
+    .end { text-anchor: end; }
+    .ln { stroke: var(--ink-2, #4a463f); stroke-width: 1.2; fill: none; }
+    .ln3 { stroke: var(--ink-3, #7a756b); stroke-width: 1; fill: none; }
+    .thin { stroke-width: 0.7; }
+    .dash { stroke-dasharray: 4 3; }
+    .box { stroke: var(--ink-2, #4a463f); stroke-width: 1.2; fill: none; }
+    .paper { fill: var(--paper, #fbfaf7); }
+
+    .seg { stroke: var(--ink-2, #4a463f); stroke-width: 1; }
+    .hdr { fill: var(--paper-3, #e9e5db); stroke: var(--ink-2, #4a463f); stroke-width: 1; }
+    .ghost { fill: none; stroke: var(--ink-3, #7a756b); stroke-width: 1; stroke-dasharray: 3 3; }
+    .brace { stroke: var(--ink-3, #7a756b); stroke-width: 1; fill: none; }
+    .nm { fill: var(--ink, #1d1b17); font-size: 11px; font-weight: 600; }
+    .sz { fill: var(--ink-2, #4a463f); font-size: 9.5px; }
+    .gh { fill: var(--ink-3, #7a756b); font-size: 9.5px; }
+    .tf { stroke-width: 1; }
+  </style>
+  <text class="t3 caps start" x="10" y="16">(a) DATA RECORD</text>
+  <rect class="" x="10" y="24" width="70.4" height="4" fill="var(--box-warning, #a3471e)" stroke="none"/>
+  <rect class="tf" x="10" y="24" width="70.4" height="46" fill="var(--box-warning, #a3471e)" fill-opacity="0.1" stroke="var(--box-warning, #a3471e)"/>
+  <text class="nm mid" x="45.2" y="44">MCHEAD</text>
+  <text class="sz mid" x="45.2" y="58">20 B</text>
+  <text class="gh mid" x="45.2" y="83">always one</text>
+  <rect class="ghost" x="84.4" y="24" width="70.4" height="46"/>
+  <text class="gh mid" x="119.6" y="44">MCPART</text>
+  <text class="gh mid" x="119.6" y="58">absent</text>
+  <rect class="" x="158.8" y="24" width="70.4" height="4" fill="var(--accent, #7f2e2a)" stroke="none"/>
+  <rect class="tf" x="158.8" y="24" width="70.4" height="46" fill="var(--accent, #7f2e2a)" fill-opacity="0.1" stroke="var(--accent, #7f2e2a)"/>
+  <text class="nm mid" x="194" y="44">PHPSUM</text>
+  <text class="sz mid" x="194" y="58">4 + 32 B</text>
+  <text class="gh mid" x="194" y="83">n_phpsum</text>
+  <rect class="" x="233.2" y="24" width="70.4" height="4" fill="var(--box-definition, #2f5d7c)" stroke="none"/>
+  <rect class="tf" x="233.2" y="24" width="70.4" height="46" fill="var(--box-definition, #2f5d7c)" fill-opacity="0.1" stroke="var(--box-definition, #2f5d7c)"/>
+  <text class="nm mid" x="268.4" y="44">PHCHRG</text>
+  <text class="sz mid" x="268.4" y="58">4 + 236 B</text>
+  <text class="gh mid" x="268.4" y="83">n_phchrg</text>
+  <rect class="" x="307.6" y="24" width="70.4" height="4" fill="var(--box-remark, #7a6a3b)" stroke="none"/>
+  <rect class="tf" x="307.6" y="24" width="70.4" height="46" fill="var(--box-remark, #7a6a3b)" fill-opacity="0.1" stroke="var(--box-remark, #7a6a3b)"/>
+  <text class="nm mid" x="342.8" y="44">PHKLUS</text>
+  <text class="sz mid" x="342.8" y="58">4 + 96 B</text>
+  <text class="gh mid" x="342.8" y="83">n_phklus</text>
+  <rect class="" x="382" y="24" width="70.4" height="4" fill="var(--ink-2, #4a463f)" stroke="none"/>
+  <rect class="tf" x="382" y="24" width="70.4" height="46" fill="var(--ink-2, #4a463f)" fill-opacity="0.1" stroke="var(--ink-2, #4a463f)"/>
+  <text class="nm mid" x="417.2" y="44">PHWIC</text>
+  <text class="sz mid" x="417.2" y="58">4 + 140 B</text>
+  <text class="gh mid" x="417.2" y="83">n_phwic</text>
+  <rect class="" x="456.4" y="24" width="70.4" height="4" fill="var(--box-example, #3f6b3f)" stroke="none"/>
+  <rect class="tf" x="456.4" y="24" width="70.4" height="46" fill="var(--box-example, #3f6b3f)" fill-opacity="0.1" stroke="var(--box-example, #3f6b3f)"/>
+  <text class="nm mid" x="491.6" y="44">PHCRID</text>
+  <text class="sz mid" x="491.6" y="58">24, 56 or 88 B</text>
+  <text class="gh mid" x="491.6" y="83">n_phcrid</text>
+  <rect class="" x="530.8" y="24" width="70.4" height="4" fill="var(--box-remark, #7a6a3b)" stroke="none"/>
+  <rect class="tf" x="530.8" y="24" width="70.4" height="46" fill="var(--box-remark, #7a6a3b)" fill-opacity="0.1" stroke="var(--box-remark, #7a6a3b)"/>
+  <text class="nm mid" x="566" y="44">PHKTRK</text>
+  <text class="sz mid" x="566" y="58">0 B</text>
+  <text class="gh mid" x="566" y="83">always 0</text>
+  <rect class="" x="605.2" y="24" width="70.4" height="4" fill="var(--box-remark, #7a6a3b)" stroke="none"/>
+  <rect class="tf" x="605.2" y="24" width="70.4" height="46" fill="var(--box-remark, #7a6a3b)" fill-opacity="0.1" stroke="var(--box-remark, #7a6a3b)"/>
+  <text class="nm mid" x="640.4" y="44">PHKELID</text>
+  <text class="sz mid" x="640.4" y="58">96 B</text>
+  <text class="gh mid" x="640.4" y="83">n_phkelid</text>
+  <rect class="" x="679.6" y="24" width="70.4" height="4" fill="var(--accent, #7f2e2a)" stroke="none"/>
+  <rect class="tf" x="679.6" y="24" width="70.4" height="46" fill="var(--accent, #7f2e2a)" fill-opacity="0.1" stroke="var(--accent, #7f2e2a)"/>
+  <text class="nm mid" x="714.8" y="44">PHPOINT</text>
+  <text class="sz mid" x="714.8" y="58">4 + 4⌈k/2⌉ B</text>
+  <text class="gh mid" x="714.8" y="83">n_phpoint</text>
+  <rect class="ghost" x="10" y="96" width="70.4" height="46"/>
+  <text class="gh mid" x="45.2" y="116">PHWMC</text>
+  <text class="gh mid" x="45.2" y="130">absent</text>
+  <rect class="ghost" x="84.4" y="96" width="70.4" height="46"/>
+  <text class="gh mid" x="119.6" y="116">MCPNT</text>
+  <text class="gh mid" x="119.6" y="130">absent</text>
+  <rect class="" x="158.8" y="96" width="70.4" height="4" fill="var(--box-recipe, #5a4b82)" stroke="none"/>
+  <rect class="tf" x="158.8" y="96" width="70.4" height="46" fill="var(--box-recipe, #5a4b82)" fill-opacity="0.1" stroke="var(--box-recipe, #5a4b82)"/>
+  <text class="nm mid" x="194" y="116">PHKCHRG</text>
+  <text class="sz mid" x="194" y="130">16 + 4 B</text>
+  <text class="gh mid" x="194" y="155">n_phkchrg</text>
+  <rect class="ghost" x="233.2" y="96" width="70.4" height="46"/>
+  <text class="gh mid" x="268.4" y="116">PHKMC1</text>
+  <text class="gh mid" x="268.4" y="130">absent</text>
+  <rect class="" x="307.6" y="96" width="70.4" height="4" fill="var(--ink-3, #7a756b)" stroke="none"/>
+  <rect class="tf" x="307.6" y="96" width="70.4" height="46" fill="var(--ink-3, #7a756b)" fill-opacity="0.1" stroke="var(--ink-3, #7a756b)"/>
+  <text class="nm mid" x="342.8" y="116">PHBM</text>
+  <text class="sz mid" x="342.8" y="130">60 B</text>
+  <text class="gh mid" x="342.8" y="155">n_phbm</text>
+  <rect class="" x="382" y="96" width="70.4" height="4" fill="var(--ink-3, #7a756b)" stroke="none"/>
+  <rect class="tf" x="382" y="96" width="70.4" height="46" fill="var(--ink-3, #7a756b)" fill-opacity="0.1" stroke="var(--ink-3, #7a756b)"/>
+  <text class="nm mid" x="417.2" y="116">PHEVCL*</text>
+  <text class="sz mid" x="417.2" y="130">72 B</text>
+  <text class="gh mid" x="417.2" y="155">n_phevcl</text>
+  <rect class="ghost" x="456.4" y="96" width="70.4" height="46"/>
+  <text class="gh mid" x="491.6" y="116">MCBEAM</text>
+  <text class="gh mid" x="491.6" y="130">absent</text>
+  <rect class="" x="530.8" y="96" width="70.4" height="4" fill="var(--ink-3, #7a756b)" stroke="none"/>
+  <rect class="tf" x="530.8" y="96" width="70.4" height="46" fill="var(--ink-3, #7a756b)" fill-opacity="0.1" stroke="var(--ink-3, #7a756b)"/>
+  <text class="nm mid" x="566" y="116">reserved*</text>
+  <text class="sz mid" x="566" y="130">4 B</text>
+  <text class="gh mid" x="566" y="155">always one</text>
+  <rect class="" x="605.2" y="96" width="70.4" height="4" fill="var(--box-definition, #2f5d7c)" stroke="none"/>
+  <rect class="tf" x="605.2" y="96" width="70.4" height="46" fill="var(--box-definition, #2f5d7c)" fill-opacity="0.1" stroke="var(--box-definition, #2f5d7c)"/>
+  <text class="nm mid" x="640.4" y="116">PHVXOV*</text>
+  <text class="sz mid" x="640.4" y="130">16 + 80k B</text>
+  <text class="gh mid" x="640.4" y="155">n_phvxov</text>
+  <text class="t3 caps start" x="10" y="188">(b) MC RECORD</text>
+  <rect class="" x="10" y="196" width="70.4" height="4" fill="var(--box-warning, #a3471e)" stroke="none"/>
+  <rect class="tf" x="10" y="196" width="70.4" height="46" fill="var(--box-warning, #a3471e)" fill-opacity="0.1" stroke="var(--box-warning, #a3471e)"/>
+  <text class="nm mid" x="45.2" y="216">MCHEAD</text>
+  <text class="sz mid" x="45.2" y="230">20 B</text>
+  <text class="gh mid" x="45.2" y="255">always one</text>
+  <rect class="" x="84.4" y="196" width="70.4" height="4" fill="var(--box-warning, #a3471e)" stroke="none"/>
+  <rect class="tf" x="84.4" y="196" width="70.4" height="46" fill="var(--box-warning, #a3471e)" fill-opacity="0.1" stroke="var(--box-warning, #a3471e)"/>
+  <text class="nm mid" x="119.6" y="216">MCPART</text>
+  <text class="sz mid" x="119.6" y="230">36 or 40 B</text>
+  <text class="gh mid" x="119.6" y="255">n_mcpart</text>
+  <rect class="" x="158.8" y="196" width="70.4" height="4" fill="var(--accent, #7f2e2a)" stroke="none"/>
+  <rect class="tf" x="158.8" y="196" width="70.4" height="46" fill="var(--accent, #7f2e2a)" fill-opacity="0.1" stroke="var(--accent, #7f2e2a)"/>
+  <text class="nm mid" x="194" y="216">PHPSUM</text>
+  <text class="sz mid" x="194" y="230">4 + 32 B</text>
+  <text class="gh mid" x="194" y="255">n_phpsum</text>
+  <rect class="" x="233.2" y="196" width="70.4" height="4" fill="var(--box-definition, #2f5d7c)" stroke="none"/>
+  <rect class="tf" x="233.2" y="196" width="70.4" height="46" fill="var(--box-definition, #2f5d7c)" fill-opacity="0.1" stroke="var(--box-definition, #2f5d7c)"/>
+  <text class="nm mid" x="268.4" y="216">PHCHRG</text>
+  <text class="sz mid" x="268.4" y="230">4 + 236 B</text>
+  <text class="gh mid" x="268.4" y="255">n_phchrg</text>
+  <rect class="" x="307.6" y="196" width="70.4" height="4" fill="var(--box-remark, #7a6a3b)" stroke="none"/>
+  <rect class="tf" x="307.6" y="196" width="70.4" height="46" fill="var(--box-remark, #7a6a3b)" fill-opacity="0.1" stroke="var(--box-remark, #7a6a3b)"/>
+  <text class="nm mid" x="342.8" y="216">PHKLUS</text>
+  <text class="sz mid" x="342.8" y="230">4 + 96 B</text>
+  <text class="gh mid" x="342.8" y="255">n_phklus</text>
+  <rect class="" x="382" y="196" width="70.4" height="4" fill="var(--ink-2, #4a463f)" stroke="none"/>
+  <rect class="tf" x="382" y="196" width="70.4" height="46" fill="var(--ink-2, #4a463f)" fill-opacity="0.1" stroke="var(--ink-2, #4a463f)"/>
+  <text class="nm mid" x="417.2" y="216">PHWIC</text>
+  <text class="sz mid" x="417.2" y="230">4 + 140 B</text>
+  <text class="gh mid" x="417.2" y="255">n_phwic</text>
+  <rect class="" x="456.4" y="196" width="70.4" height="4" fill="var(--box-example, #3f6b3f)" stroke="none"/>
+  <rect class="tf" x="456.4" y="196" width="70.4" height="46" fill="var(--box-example, #3f6b3f)" fill-opacity="0.1" stroke="var(--box-example, #3f6b3f)"/>
+  <text class="nm mid" x="491.6" y="216">PHCRID</text>
+  <text class="sz mid" x="491.6" y="230">24, 56 or 88 B</text>
+  <text class="gh mid" x="491.6" y="255">n_phcrid</text>
+  <rect class="" x="530.8" y="196" width="70.4" height="4" fill="var(--box-remark, #7a6a3b)" stroke="none"/>
+  <rect class="tf" x="530.8" y="196" width="70.4" height="46" fill="var(--box-remark, #7a6a3b)" fill-opacity="0.1" stroke="var(--box-remark, #7a6a3b)"/>
+  <text class="nm mid" x="566" y="216">PHKTRK</text>
+  <text class="sz mid" x="566" y="230">0 B</text>
+  <text class="gh mid" x="566" y="255">always 0</text>
+  <rect class="" x="605.2" y="196" width="70.4" height="4" fill="var(--box-remark, #7a6a3b)" stroke="none"/>
+  <rect class="tf" x="605.2" y="196" width="70.4" height="46" fill="var(--box-remark, #7a6a3b)" fill-opacity="0.1" stroke="var(--box-remark, #7a6a3b)"/>
+  <text class="nm mid" x="640.4" y="216">PHKELID</text>
+  <text class="sz mid" x="640.4" y="230">96 B</text>
+  <text class="gh mid" x="640.4" y="255">n_phkelid</text>
+  <rect class="" x="679.6" y="196" width="70.4" height="4" fill="var(--accent, #7f2e2a)" stroke="none"/>
+  <rect class="tf" x="679.6" y="196" width="70.4" height="46" fill="var(--accent, #7f2e2a)" fill-opacity="0.1" stroke="var(--accent, #7f2e2a)"/>
+  <text class="nm mid" x="714.8" y="216">PHPOINT</text>
+  <text class="sz mid" x="714.8" y="230">4 + 4⌈k/2⌉ B</text>
+  <text class="gh mid" x="714.8" y="255">n_phpoint</text>
+  <rect class="" x="10" y="268" width="70.4" height="4" fill="var(--box-warning, #a3471e)" stroke="none"/>
+  <rect class="tf" x="10" y="268" width="70.4" height="46" fill="var(--box-warning, #a3471e)" fill-opacity="0.1" stroke="var(--box-warning, #a3471e)"/>
+  <text class="nm mid" x="45.2" y="288">PHWMC</text>
+  <text class="sz mid" x="45.2" y="302">20 + 8k B</text>
+  <text class="gh mid" x="45.2" y="327">n_phwmc</text>
+  <rect class="" x="84.4" y="268" width="70.4" height="4" fill="var(--box-recipe, #5a4b82)" stroke="none"/>
+  <rect class="tf" x="84.4" y="268" width="70.4" height="46" fill="var(--box-recipe, #5a4b82)" fill-opacity="0.1" stroke="var(--box-recipe, #5a4b82)"/>
+  <text class="nm mid" x="119.6" y="288">MCPNT</text>
+  <text class="sz mid" x="119.6" y="302">16 + 4 B</text>
+  <text class="gh mid" x="119.6" y="327">n_mcpnt</text>
+  <rect class="" x="158.8" y="268" width="70.4" height="4" fill="var(--box-recipe, #5a4b82)" stroke="none"/>
+  <rect class="tf" x="158.8" y="268" width="70.4" height="46" fill="var(--box-recipe, #5a4b82)" fill-opacity="0.1" stroke="var(--box-recipe, #5a4b82)"/>
+  <text class="nm mid" x="194" y="288">PHKCHRG</text>
+  <text class="sz mid" x="194" y="302">16 + 4 B</text>
+  <text class="gh mid" x="194" y="327">n_phkchrg</text>
+  <rect class="" x="233.2" y="268" width="70.4" height="4" fill="var(--box-recipe, #5a4b82)" stroke="none"/>
+  <rect class="tf" x="233.2" y="268" width="70.4" height="46" fill="var(--box-recipe, #5a4b82)" fill-opacity="0.1" stroke="var(--box-recipe, #5a4b82)"/>
+  <text class="nm mid" x="268.4" y="288">PHKMC1*</text>
+  <text class="sz mid" x="268.4" y="302">20 + 4 B</text>
+  <text class="gh mid" x="268.4" y="327">n_phkmc1</text>
+  <rect class="" x="307.6" y="268" width="70.4" height="4" fill="var(--ink-3, #7a756b)" stroke="none"/>
+  <rect class="tf" x="307.6" y="268" width="70.4" height="46" fill="var(--ink-3, #7a756b)" fill-opacity="0.1" stroke="var(--ink-3, #7a756b)"/>
+  <text class="nm mid" x="342.8" y="288">PHBM</text>
+  <text class="sz mid" x="342.8" y="302">60 B</text>
+  <text class="gh mid" x="342.8" y="327">n_phbm</text>
+  <rect class="" x="382" y="268" width="70.4" height="4" fill="var(--ink-3, #7a756b)" stroke="none"/>
+  <rect class="tf" x="382" y="268" width="70.4" height="46" fill="var(--ink-3, #7a756b)" fill-opacity="0.1" stroke="var(--ink-3, #7a756b)"/>
+  <text class="nm mid" x="417.2" y="288">PHEVCL*</text>
+  <text class="sz mid" x="417.2" y="302">72 B</text>
+  <text class="gh mid" x="417.2" y="327">n_phevcl</text>
+  <rect class="" x="456.4" y="268" width="70.4" height="4" fill="var(--box-warning, #a3471e)" stroke="none"/>
+  <rect class="tf" x="456.4" y="268" width="70.4" height="46" fill="var(--box-warning, #a3471e)" fill-opacity="0.1" stroke="var(--box-warning, #a3471e)"/>
+  <text class="nm mid" x="491.6" y="288">MCBEAM*</text>
+  <text class="sz mid" x="491.6" y="302">76 B</text>
+  <text class="gh mid" x="491.6" y="327">n_mcbeam</text>
+  <rect class="" x="530.8" y="268" width="70.4" height="4" fill="var(--ink-3, #7a756b)" stroke="none"/>
+  <rect class="tf" x="530.8" y="268" width="70.4" height="46" fill="var(--ink-3, #7a756b)" fill-opacity="0.1" stroke="var(--ink-3, #7a756b)"/>
+  <text class="nm mid" x="566" y="288">reserved*</text>
+  <text class="sz mid" x="566" y="302">4 B</text>
+  <text class="gh mid" x="566" y="327">always one</text>
+  <rect class="" x="605.2" y="268" width="70.4" height="4" fill="var(--box-definition, #2f5d7c)" stroke="none"/>
+  <rect class="tf" x="605.2" y="268" width="70.4" height="46" fill="var(--box-definition, #2f5d7c)" fill-opacity="0.1" stroke="var(--box-definition, #2f5d7c)"/>
+  <text class="nm mid" x="640.4" y="288">PHVXOV*</text>
+  <text class="sz mid" x="640.4" y="302">16 + 80k B</text>
+  <text class="gh mid" x="640.4" y="327">n_phvxov</text>
+  <rect class="tf" x="10" y="343" width="10" height="10" fill="var(--box-warning, #a3471e)" fill-opacity="0.5" stroke="var(--box-warning, #a3471e)"/>
+  <text class="sz start" x="24" y="352">Simulation truth</text>
+  <rect class="tf" x="200" y="343" width="10" height="10" fill="var(--box-recipe, #5a4b82)" fill-opacity="0.5" stroke="var(--box-recipe, #5a4b82)"/>
+  <text class="sz start" x="214" y="352">Relation tables</text>
+  <rect class="tf" x="390" y="343" width="10" height="10" fill="var(--accent, #7f2e2a)" fill-opacity="0.5" stroke="var(--accent, #7f2e2a)"/>
+  <text class="sz start" x="404" y="352">Particle summary and pointers</text>
+  <rect class="tf" x="580" y="343" width="10" height="10" fill="var(--box-definition, #2f5d7c)" fill-opacity="0.5" stroke="var(--box-definition, #2f5d7c)"/>
+  <text class="sz start" x="594" y="352">Tracking</text>
+  <rect class="tf" x="10" y="359" width="10" height="10" fill="var(--box-remark, #7a6a3b)" fill-opacity="0.5" stroke="var(--box-remark, #7a6a3b)"/>
+  <text class="sz start" x="24" y="368">Calorimetry</text>
+  <rect class="tf" x="200" y="359" width="10" height="10" fill="var(--box-example, #3f6b3f)" fill-opacity="0.5" stroke="var(--box-example, #3f6b3f)"/>
+  <text class="sz start" x="214" y="368">Cherenkov particle ID</text>
+  <rect class="tf" x="390" y="359" width="10" height="10" fill="var(--ink-2, #4a463f)" fill-opacity="0.5" stroke="var(--ink-2, #4a463f)"/>
+  <text class="sz start" x="404" y="368">Muon system</text>
+  <rect class="tf" x="580" y="359" width="10" height="10" fill="var(--ink-3, #7a756b)" fill-opacity="0.5" stroke="var(--ink-3, #7a756b)"/>
+  <text class="sz start" x="594" y="368">Beam and event</text>
+  <text class="gh end" x="750" y="18">* not decoded by jazelle 0.4.0</text>
+</svg>

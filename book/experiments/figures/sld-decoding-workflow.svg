@@ -1,0 +1,117 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 476">
+  <defs>
+    <marker id="dw-arrow-ink-2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="var(--ink-2, #4a463f)"/></marker>
+  </defs>
+  <style>
+    .t { fill: var(--ink, #1d1b17); font-size: 12px; }
+    .t2 { fill: var(--ink-2, #4a463f); font-size: 11px; }
+    .t3 { fill: var(--ink-3, #7a756b); font-size: 10px; }
+    .tb { font-weight: 600; }
+    .ti { font-style: italic; }
+    .ta { fill: var(--accent-ink, #6a2522); }
+    .caps { letter-spacing: 1.4px; }
+    .mono { font-family: var(--mono, monospace); }
+    .start { text-anchor: start; }
+    .mid { text-anchor: middle; }
+    .end { text-anchor: end; }
+    .ln { stroke: var(--ink-2, #4a463f); stroke-width: 1.2; fill: none; }
+    .ln3 { stroke: var(--ink-3, #7a756b); stroke-width: 1; fill: none; }
+    .thin { stroke-width: 0.7; }
+    .dash { stroke-dasharray: 4 3; }
+    .box { stroke: var(--ink-2, #4a463f); stroke-width: 1.2; fill: none; }
+    .paper { fill: var(--paper, #fbfaf7); }
+
+    .st { fill: var(--ink, #1d1b17); font-size: 12px; font-weight: 600; }
+    .sub { fill: var(--ink-2, #4a463f); font-size: 10.5px; }
+    .note { fill: var(--ink-3, #7a756b); font-size: 10px; }
+    .lane { fill: var(--ink-3, #7a756b); font-size: 10.5px; letter-spacing: 1.4px; }
+    .tf { stroke-width: 1.1; }
+  </style>
+  <text class="lane start" x="10" y="20">LEVEL 1: STRUCTURE, DETERMINISTIC</text>
+  <rect class="paper" x="10" y="32" width="170" height="58" rx="4"/>
+  <rect class="tf" x="10" y="32" width="170" height="58" rx="4" fill="var(--ink-2, #4a463f)" fill-opacity="0.1" stroke="var(--ink-2, #4a463f)"/>
+  <text class="st mid" x="95" y="52">Census</text>
+  <text class="sub mid" x="95" y="66">every record: header,</text>
+  <text class="sub mid" x="95" y="79">TOC counts, length</text>
+  <rect class="paper" x="205" y="32" width="330" height="58" rx="4"/>
+  <rect class="tf" x="205" y="32" width="330" height="58" rx="4" fill="var(--ink-2, #4a463f)" fill-opacity="0.1" stroke="var(--ink-2, #4a463f)"/>
+  <text class="st mid" x="370" y="52">Harness checks</text>
+  <text class="sub mid" x="370" y="66">closure to the buffer end · XBEAM start signature</text>
+  <text class="sub mid" x="370" y="79">PHVXOV header consistency · PHBM anchor</text>
+  <rect class="paper" x="570" y="32" width="170" height="58" rx="4"/>
+  <rect class="tf" x="570" y="32" width="170" height="58" rx="4" fill="var(--box-example, #3f6b3f)" fill-opacity="0.14" stroke="var(--box-example, #3f6b3f)"/>
+  <text class="st mid" x="655" y="52">Layout fixed</text>
+  <text class="sub mid" x="655" y="66">order and sizes</text>
+  <text class="sub mid" x="655" y="79">of every block</text>
+  <line class="ln" x1="182" y1="61" x2="202" y2="61" marker-end="url(#dw-arrow-ink-2)"/>
+  <line class="ln" x1="537" y1="61" x2="567" y2="61" marker-end="url(#dw-arrow-ink-2)"/>
+  <text class="lane start" x="10" y="110">LEVEL 2: MEANINGS, ONE AGENTIC LOOP PER BANK GROUP</text>
+  <rect class="paper" x="10" y="138" width="170" height="70" rx="4"/>
+  <rect class="tf" x="10" y="138" width="170" height="70" rx="4" fill="var(--box-remark, #7a6a3b)" fill-opacity="0.1" stroke="var(--box-remark, #7a6a3b)"/>
+  <text class="st mid" x="95" y="157.5">Dossier</text>
+  <text class="sub mid" x="95" y="171.5">templates, memos, papers;</text>
+  <text class="sub mid" x="95" y="184.5">each claim dated and</text>
+  <text class="sub mid" x="95" y="197.5">sourced; hints only</text>
+  <rect class="paper" x="205" y="138" width="150" height="70" rx="4"/>
+  <rect class="tf" x="205" y="138" width="150" height="70" rx="4" fill="var(--box-recipe, #5a4b82)" fill-opacity="0.1" stroke="var(--box-recipe, #5a4b82)"/>
+  <text class="st mid" x="280" y="157.5">Round 1, blind</text>
+  <text class="sub mid" x="280" y="171.5">no dossier, template</text>
+  <text class="sub mid" x="280" y="184.5">or memo; fields from</text>
+  <text class="sub mid" x="280" y="197.5">word profiles, sample</text>
+  <rect class="paper" x="385" y="138" width="150" height="70" rx="4"/>
+  <rect class="tf" x="385" y="138" width="150" height="70" rx="4" fill="var(--box-recipe, #5a4b82)" fill-opacity="0.1" stroke="var(--box-recipe, #5a4b82)"/>
+  <text class="st mid" x="460" y="157.5">Rounds 2 to 4</text>
+  <text class="sub mid" x="460" y="171.5">expected result first,</text>
+  <text class="sub mid" x="460" y="184.5">edit the spec only,</text>
+  <text class="sub mid" x="460" y="197.5">run the harness</text>
+  <rect class="paper" x="570" y="138" width="170" height="70" rx="4"/>
+  <rect class="tf" x="570" y="138" width="170" height="70" rx="4" fill="var(--box-example, #3f6b3f)" fill-opacity="0.14" stroke="var(--box-example, #3f6b3f)"/>
+  <text class="st mid" x="655" y="164">Labels per field</text>
+  <text class="sub mid" x="655" y="178">confirmed, plausible</text>
+  <text class="sub mid" x="655" y="191">or unknown</text>
+  <polyline class="ln" points="95,210 95,226 370,226 370,196 382,196" marker-end="url(#dw-arrow-ink-2)"/>
+  <text class="note mid" x="232" y="240">read from round 2</text>
+  <line class="ln" x1="357" y1="173" x2="382" y2="173" marker-end="url(#dw-arrow-ink-2)"/>
+  <line class="ln" x1="537" y1="173" x2="567" y2="173" marker-end="url(#dw-arrow-ink-2)"/>
+  <path class="ln" d="M505 210 q0 22 -45 22 q-45 0 -45 -22" marker-end="url(#dw-arrow-ink-2)"/>
+  <text class="note mid" x="460" y="248">until a round converges or two rounds</text>
+  <text class="note mid" x="460" y="261">pass without progress; at most round 4</text>
+  <polyline class="ln" points="600,92 600,124 280,124"/>
+  <line class="ln" x1="280" y1="124" x2="280" y2="135" marker-end="url(#dw-arrow-ink-2)"/>
+  <line class="ln" x1="460" y1="124" x2="460" y2="135" marker-end="url(#dw-arrow-ink-2)"/>
+  <text class="lane start" x="10" y="286">VERIFICATION AND REVIEW</text>
+  <rect class="paper" x="10" y="314" width="160" height="62" rx="4"/>
+  <rect class="tf" x="10" y="314" width="160" height="62" rx="4" fill="var(--box-warning, #a3471e)" fill-opacity="0.1" stroke="var(--box-warning, #a3471e)"/>
+  <text class="st mid" x="90" y="342.5">Holdout replay</text>
+  <text class="sub mid" x="90" y="356.5">files no other agent reads</text>
+  <rect class="paper" x="190" y="314" width="160" height="62" rx="4"/>
+  <rect class="tf" x="190" y="314" width="160" height="62" rx="4" fill="var(--box-warning, #a3471e)" fill-opacity="0.1" stroke="var(--box-warning, #a3471e)"/>
+  <text class="st mid" x="270" y="342.5">Physics checks</text>
+  <text class="sub mid" x="270" y="356.5">against shuffled nulls</text>
+  <rect class="paper" x="370" y="314" width="160" height="62" rx="4"/>
+  <rect class="tf" x="370" y="314" width="160" height="62" rx="4" fill="var(--box-warning, #a3471e)" fill-opacity="0.1" stroke="var(--box-warning, #a3471e)"/>
+  <text class="st mid" x="450" y="342.5">Challenger</text>
+  <text class="sub mid" x="450" y="356.5">tries other layouts</text>
+  <rect class="paper" x="555" y="314" width="195" height="62" rx="4"/>
+  <rect class="tf" x="555" y="314" width="195" height="62" rx="4" fill="var(--ink-2, #4a463f)" fill-opacity="0.1" stroke="var(--ink-2, #4a463f)"/>
+  <text class="st mid" x="652.5" y="329.5">Verdict rule</text>
+  <text class="sub mid" x="652.5" y="343.5">two refutations: unknown</text>
+  <text class="sub mid" x="652.5" y="356.5">two refutations or downgrades:</text>
+  <text class="sub mid" x="652.5" y="369.5">one level down</text>
+  <line class="ln" x1="655" y1="210" x2="655" y2="300"/>
+  <line class="ln" x1="90" y1="300" x2="655" y2="300"/>
+  <line class="ln" x1="90" y1="300" x2="90" y2="311" marker-end="url(#dw-arrow-ink-2)"/>
+  <line class="ln" x1="270" y1="300" x2="270" y2="311" marker-end="url(#dw-arrow-ink-2)"/>
+  <line class="ln" x1="450" y1="300" x2="450" y2="311" marker-end="url(#dw-arrow-ink-2)"/>
+  <line class="ln" x1="90" y1="378" x2="90" y2="390"/>
+  <line class="ln" x1="270" y1="378" x2="270" y2="390"/>
+  <line class="ln" x1="450" y1="378" x2="450" y2="390"/>
+  <line class="ln" x1="90" y1="390" x2="600" y2="390"/>
+  <line class="ln" x1="600" y1="390" x2="600" y2="379" marker-end="url(#dw-arrow-ink-2)"/>
+  <rect class="paper" x="205" y="406" width="365" height="58" rx="4"/>
+  <rect class="tf" x="205" y="406" width="365" height="58" rx="4" fill="var(--accent, #7f2e2a)" fill-opacity="0.14" stroke="var(--accent, #7f2e2a)"/>
+  <text class="st mid" x="387.5" y="426">Synthesis and human review</text>
+  <text class="sub mid" x="387.5" y="440">then decoders in the reader:</text>
+  <text class="sub mid" x="387.5" y="453">zero words skipped, leftover words kept raw</text>
+  <polyline class="ln" points="700,378 700,435 573,435" marker-end="url(#dw-arrow-ink-2)"/>
+</svg>

@@ -1,0 +1,154 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 430">
+  <style>
+    .t { fill: var(--ink, #1d1b17); font-size: 12px; }
+    .t2 { fill: var(--ink-2, #4a463f); font-size: 11px; }
+    .t3 { fill: var(--ink-3, #7a756b); font-size: 10px; }
+    .tb { font-weight: 600; }
+    .ti { font-style: italic; }
+    .ta { fill: var(--accent-ink, #6a2522); }
+    .caps { letter-spacing: 1.4px; }
+    .mono { font-family: var(--mono, monospace); }
+    .start { text-anchor: start; }
+    .mid { text-anchor: middle; }
+    .end { text-anchor: end; }
+    .ln { stroke: var(--ink-2, #4a463f); stroke-width: 1.2; fill: none; }
+    .ln3 { stroke: var(--ink-3, #7a756b); stroke-width: 1; fill: none; }
+    .thin { stroke-width: 0.7; }
+    .dash { stroke-dasharray: 4 3; }
+    .box { stroke: var(--ink-2, #4a463f); stroke-width: 1.2; fill: none; }
+    .paper { fill: var(--paper, #fbfaf7); }
+
+    .st { fill: var(--ink, #1d1b17); font-size: 12px; font-weight: 600; }
+    .sub { fill: var(--ink-2, #4a463f); font-size: 10.5px; }
+    .note { fill: var(--ink-3, #7a756b); font-size: 10px; }
+    .lane { fill: var(--ink-3, #7a756b); font-size: 10.5px; letter-spacing: 1.4px; }
+    .tf { stroke-width: 1.1; }
+
+    .axis { stroke: var(--ink-2, #4a463f); stroke-width: 1.2; }
+    .tk { fill: var(--ink-3, #7a756b); font-size: 10px; }
+    .ev { fill: var(--ink, #1d1b17); font-size: 10.5px; }
+    .evs { fill: var(--ink-3, #7a756b); font-size: 9.5px; }
+    .stem { stroke: var(--ink-3, #7a756b); stroke-width: 0.8; }
+  </style>
+  <text class="lane start" x="20" y="18">THE SLC AND SLD</text>
+  <line class="axis" x1="20" y1="120" x2="740" y2="120"/>
+  <line class="axis" x1="33.19" y1="120" x2="33.19" y2="124"/>
+  <text class="tk mid" x="33.19" y="135">1980</text>
+  <line class="axis" x1="85.93" y1="120" x2="85.93" y2="124"/>
+  <text class="tk mid" x="85.93" y="135">1982</text>
+  <line class="axis" x1="138.68" y1="120" x2="138.68" y2="124"/>
+  <text class="tk mid" x="138.68" y="135">1984</text>
+  <line class="axis" x1="191.43" y1="120" x2="191.43" y2="124"/>
+  <text class="tk mid" x="191.43" y="135">1986</text>
+  <line class="axis" x1="244.18" y1="120" x2="244.18" y2="124"/>
+  <text class="tk mid" x="244.18" y="135">1988</text>
+  <line class="axis" x1="296.92" y1="120" x2="296.92" y2="124"/>
+  <text class="tk mid" x="296.92" y="135">1990</text>
+  <line class="axis" x1="349.67" y1="120" x2="349.67" y2="124"/>
+  <text class="tk mid" x="349.67" y="135">1992</text>
+  <line class="axis" x1="402.42" y1="120" x2="402.42" y2="124"/>
+  <text class="tk mid" x="402.42" y="135">1994</text>
+  <line class="axis" x1="455.16" y1="120" x2="455.16" y2="124"/>
+  <text class="tk mid" x="455.16" y="135">1996</text>
+  <line class="axis" x1="507.91" y1="120" x2="507.91" y2="124"/>
+  <text class="tk mid" x="507.91" y="135">1998</text>
+  <line class="axis" x1="560.66" y1="120" x2="560.66" y2="124"/>
+  <text class="tk mid" x="560.66" y="135">2000</text>
+  <line class="axis" x1="613.41" y1="120" x2="613.41" y2="124"/>
+  <text class="tk mid" x="613.41" y="135">2002</text>
+  <line class="axis" x1="666.15" y1="120" x2="666.15" y2="124"/>
+  <text class="tk mid" x="666.15" y="135">2004</text>
+  <line class="axis" x1="718.9" y1="120" x2="718.9" y2="124"/>
+  <text class="tk mid" x="718.9" y="135">2006</text>
+  <rect class="" x="357.58" y="112" width="9.23" height="8" fill="var(--box-definition, #2f5d7c)" fill-opacity="0.55" stroke="none"/>
+  <rect class="" x="381.32" y="112" width="11.87" height="8" fill="var(--box-definition, #2f5d7c)" fill-opacity="0.55" stroke="none"/>
+  <rect class="" x="412.97" y="112" width="26.37" height="8" fill="var(--box-definition, #2f5d7c)" fill-opacity="0.55" stroke="none"/>
+  <rect class="" x="461.76" y="112" width="9.23" height="8" fill="var(--box-definition, #2f5d7c)" fill-opacity="0.55" stroke="none"/>
+  <rect class="" x="486.81" y="112" width="32.97" height="8" fill="var(--box-definition, #2f5d7c)" fill-opacity="0.55" stroke="none"/>
+  <text class="evs mid" x="362.2" y="108">22%</text>
+  <text class="evs mid" x="387.25" y="108">63%</text>
+  <text class="evs mid" x="426.15" y="108">77%</text>
+  <text class="evs mid" x="466.37" y="108">76%</text>
+  <text class="evs mid" x="503.3" y="108">73%</text>
+  <text class="evs end" x="740" y="152">bars: physics runs, with their electron polarisation</text>
+  <line class="stem" x1="45.05" y1="120" x2="45.05" y2="88"/>
+  <circle class="" cx="45.05" cy="120" r="3.2" fill="var(--ink, #1d1b17)" stroke="none"/>
+  <text class="ev start" x="41.05" y="70">SLC design report</text>
+  <text class="evs start" x="41.05" y="82">June 1980</text>
+  <line class="stem" x1="133.41" y1="120" x2="133.41" y2="60"/>
+  <circle class="" cx="133.41" cy="120" r="3.2" fill="var(--ink, #1d1b17)" stroke="none"/>
+  <text class="ev mid" x="133.41" y="42">SLC construction</text>
+  <text class="evs mid" x="133.41" y="54">Oct 1983 to 1987</text>
+  <line class="stem" x1="277.93" y1="120" x2="277.93" y2="88"/>
+  <circle class="" cx="277.93" cy="120" r="3.2" fill="var(--ink, #1d1b17)" stroke="none"/>
+  <text class="ev mid" x="277.93" y="70">first Z at the SLC</text>
+  <text class="evs mid" x="277.93" y="82">Mark II, Apr 1989</text>
+  <line class="stem" x1="336.48" y1="120" x2="336.48" y2="60"/>
+  <circle class="" cx="336.48" cy="120" r="3.2" fill="var(--ink, #1d1b17)" stroke="none"/>
+  <text class="ev mid" x="336.48" y="42">SLD at the IP</text>
+  <text class="evs mid" x="336.48" y="54">engineering run 1991</text>
+  <line class="stem" x1="358.37" y1="120" x2="358.37" y2="152"/>
+  <circle class="" cx="358.37" cy="120" r="3.2" fill="var(--ink, #1d1b17)" stroke="none"/>
+  <text class="ev mid" x="358.37" y="164">first polarised Z</text>
+  <text class="evs mid" x="358.37" y="176">2 May 1992</text>
+  <line class="stem" x1="455.16" y1="120" x2="455.16" y2="60"/>
+  <circle class="" cx="455.16" cy="120" r="3.2" fill="var(--ink, #1d1b17)" stroke="none"/>
+  <text class="ev mid" x="455.16" y="42">VXD3 installed</text>
+  <text class="evs mid" x="455.16" y="54">for the 1996 run</text>
+  <line class="stem" x1="519.25" y1="120" x2="519.25" y2="152"/>
+  <circle class="" cx="519.25" cy="120" r="3.2" fill="var(--ink, #1d1b17)" stroke="none"/>
+  <text class="ev mid" x="519.25" y="164">last SLD data</text>
+  <text class="evs mid" x="519.25" y="176">5 Jun 1998</text>
+  <line class="stem" x1="573.32" y1="120" x2="573.32" y2="88"/>
+  <circle class="" cx="573.32" cy="120" r="3.2" fill="var(--ink, #1d1b17)" stroke="none"/>
+  <text class="ev mid" x="573.32" y="70">final A<tspan dy="0.32em" font-size="72%">LR</tspan><tspan dy="-0.32em"> paper</tspan></text>
+  <text class="evs mid" x="573.32" y="82">PRL 84, Jun 2000</text>
+  <line class="stem" x1="728.13" y1="120" x2="728.13" y2="60"/>
+  <circle class="" cx="728.13" cy="120" r="3.2" fill="var(--ink, #1d1b17)" stroke="none"/>
+  <text class="ev end" x="732.13" y="42">LEP + SLD combination</text>
+  <text class="evs end" x="732.13" y="54">Phys. Rept. 427, 2006</text>
+  <text class="lane start" x="20" y="222">THE RECOVERY</text>
+  <line class="axis" x1="20" y1="330" x2="740" y2="330"/>
+  <line class="axis" x1="44.83" y1="330" x2="44.83" y2="334"/>
+  <text class="tk mid" x="44.83" y="345">Nov 2025</text>
+  <line class="axis" x1="144.14" y1="330" x2="144.14" y2="334"/>
+  <text class="tk mid" x="144.14" y="345">Jan 2026</text>
+  <line class="axis" x1="243.45" y1="330" x2="243.45" y2="334"/>
+  <text class="tk mid" x="243.45" y="345">Mar</text>
+  <line class="axis" x1="342.76" y1="330" x2="342.76" y2="334"/>
+  <text class="tk mid" x="342.76" y="345">May</text>
+  <line class="axis" x1="442.07" y1="330" x2="442.07" y2="334"/>
+  <text class="tk mid" x="442.07" y="345">Jul</text>
+  <line class="axis" x1="541.38" y1="330" x2="541.38" y2="334"/>
+  <text class="tk mid" x="541.38" y="345">Sep</text>
+  <line class="axis" x1="640.69" y1="330" x2="640.69" y2="334"/>
+  <text class="tk mid" x="640.69" y="345">Nov</text>
+  <line class="stem" x1="72.14" y1="330" x2="72.14" y2="298"/>
+  <circle class="" cx="72.14" cy="330" r="3.2" fill="var(--ink, #1d1b17)" stroke="none"/>
+  <text class="ev start" x="68.14" y="280">jazelle 0.1.0</text>
+  <text class="evs start" x="68.14" y="292">17 Nov 2025</text>
+  <line class="stem" x1="341.27" y1="330" x2="341.27" y2="298"/>
+  <circle class="" cx="341.27" cy="330" r="3.2" fill="var(--ink, #1d1b17)" stroke="none"/>
+  <text class="ev mid" x="341.27" y="280">Zenodo v1</text>
+  <text class="evs mid" x="341.27" y="292">30 Apr 2026</text>
+  <line class="stem" x1="388.94" y1="330" x2="388.94" y2="362"/>
+  <circle class="" cx="388.94" cy="330" r="3.2" fill="var(--ink, #1d1b17)" stroke="none"/>
+  <text class="ev mid" x="388.94" y="374">dataset paper on arXiv</text>
+  <text class="evs mid" x="388.94" y="386">29 May 2026</text>
+  <line class="stem" x1="449.52" y1="330" x2="449.52" y2="270"/>
+  <circle class="" cx="449.52" cy="330" r="3.2" fill="var(--ink, #1d1b17)" stroke="none"/>
+  <text class="ev mid" x="449.52" y="252">Zenodo v2</text>
+  <text class="evs mid" x="449.52" y="264">5 Jul 2026</text>
+  <line class="stem" x1="452.99" y1="330" x2="452.99" y2="390"/>
+  <circle class="" cx="452.99" cy="330" r="3.2" fill="var(--ink, #1d1b17)" stroke="none"/>
+  <text class="ev mid" x="452.99" y="402">jazelle 0.4.0, sld-resurrect 0.2.0</text>
+  <text class="evs mid" x="452.99" y="414">7 Jul 2026</text>
+  <line class="stem" x1="561.24" y1="330" x2="561.24" y2="298"/>
+  <circle class="" cx="561.24" cy="330" r="3.2" fill="var(--ink, #1d1b17)" stroke="none"/>
+  <text class="ev mid" x="561.24" y="280">Zenodo v3, Parnassus paper</text>
+  <text class="evs mid" x="561.24" y="292">13 Sep 2026</text>
+  <line class="stem" x1="589.54" y1="330" x2="589.54" y2="362"/>
+  <circle class="" cx="589.54" cy="330" r="3.2" fill="var(--ink, #1d1b17)" stroke="none"/>
+  <text class="ev mid" x="589.54" y="374">dataset paper published</text>
+  <text class="evs mid" x="589.54" y="386">MLST 7 050602, 30 Sep 2026</text>
+</svg>

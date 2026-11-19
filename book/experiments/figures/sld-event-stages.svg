@@ -1,0 +1,128 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 768 292">
+  <defs>
+    <marker id="es-arrow-ink-2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="var(--ink-2, #4a463f)"/></marker>
+  </defs>
+  <style>
+    .t { fill: var(--ink, #1d1b17); font-size: 12px; }
+    .t2 { fill: var(--ink-2, #4a463f); font-size: 11px; }
+    .t3 { fill: var(--ink-3, #7a756b); font-size: 10px; }
+    .tb { font-weight: 600; }
+    .ti { font-style: italic; }
+    .ta { fill: var(--accent-ink, #6a2522); }
+    .caps { letter-spacing: 1.4px; }
+    .mono { font-family: var(--mono, monospace); }
+    .start { text-anchor: start; }
+    .mid { text-anchor: middle; }
+    .end { text-anchor: end; }
+    .ln { stroke: var(--ink-2, #4a463f); stroke-width: 1.2; fill: none; }
+    .ln3 { stroke: var(--ink-3, #7a756b); stroke-width: 1; fill: none; }
+    .thin { stroke-width: 0.7; }
+    .dash { stroke-dasharray: 4 3; }
+    .box { stroke: var(--ink-2, #4a463f); stroke-width: 1.2; fill: none; }
+    .paper { fill: var(--paper, #fbfaf7); }
+
+    .pt { fill: var(--ink, #1d1b17); font-size: 11.5px; font-weight: 600; }
+    .pc { fill: var(--ink-2, #4a463f); font-size: 9.5px; }
+    .frame { fill: none; stroke: var(--rule, #ddd8cc); stroke-width: 1; }
+    .q { stroke: var(--box-definition, #2f5d7c); stroke-width: 1.6; fill: none; }
+    .g { stroke: var(--box-warning, #a3471e); stroke-width: 1.1; fill: none; }
+    .h { fill: var(--box-example, #3f6b3f); fill-opacity: 0.55; stroke: none; }
+    .str { stroke: var(--box-remark, #7a6a3b); stroke-width: 5; stroke-opacity: 0.35; fill: none; stroke-linecap: round; }
+    .trk { stroke: var(--ink-2, #4a463f); stroke-width: 1; fill: none; }
+    .neu { stroke: var(--ink-3, #7a756b); stroke-width: 0.9; stroke-dasharray: 3 2; fill: none; }
+    .det { fill: none; stroke: var(--rule, #ddd8cc); stroke-width: 6; }
+    .clu { fill: var(--box-warning, #a3471e); fill-opacity: 0.45; stroke: none; }
+  </style>
+  <rect class="frame" x="8" y="40" width="122" height="200" rx="4"/>
+  <text class="pt mid" x="69" y="18">1. Hard process</text>
+  <text class="pc mid" x="69" y="256">e⁺ e⁻ → Z → q q̄</text>
+  <text class="pc mid" x="69" y="268">matrix element</text>
+  <line class="trk" x1="17" y1="100" x2="51" y2="140"/>
+  <line class="trk" x1="17" y1="180" x2="51" y2="140"/>
+  <path class="g" d="M51 140 Q52.88 145 54.75 140 Q56.62 135 58.5 140 Q60.38 145 62.25 140 Q64.12 135 66 140 Q67.88 145 69.75 140 Q71.62 135 73.5 140 Q75.38 145 77.25 140 Q79.12 135 81 140"/>
+  <line class="q" x1="81" y1="140" x2="121" y2="88"/>
+  <line class="q" x1="81" y1="140" x2="121" y2="192"/>
+  <text class="pc mid" x="66" y="130">Z</text>
+  <rect class="frame" x="134" y="40" width="122" height="200" rx="4"/>
+  <text class="pt mid" x="195" y="18">2. Parton shower</text>
+  <text class="pc mid" x="195" y="256">q → qg, g → gg, g → q q̄</text>
+  <text class="pc mid" x="195" y="268">JETSET 7.4</text>
+  <line class="q" x1="155" y1="140" x2="220.05" y2="205.05"/>
+  <path class="g" d="M177.77 117.23 C184.43 113.63 180.95 120.74 179.7 113.28 C186.36 109.67 182.88 116.79 181.63 109.32 C188.29 105.72 184.81 112.84 183.56 105.37 C190.22 101.77 186.74 108.88 185.49 101.42 C192.15 97.81 188.68 104.93 187.43 97.46 C194.08 93.86 190.61 100.98 189.36 93.51 C196.01 89.91 192.54 97.02 191.29 89.56 C197.95 85.95 194.47 93.07 193.22 85.6 C199.88 82 196.4 89.12 195.15 81.65 C201.81 78.05 198.33 85.16 197.08 77.7"/>
+  <line class="g" x1="197.08" y1="77.7" x2="199.24" y2="63.86"/>
+  <path class="g" d="M194.03 100.97 C200.84 97.66 197.06 104.61 196.13 97.1 C202.94 93.79 199.16 100.75 198.23 93.24 C205.04 89.92 201.26 96.88 200.33 89.37 C207.14 86.06 203.36 93.02 202.43 85.5 C209.24 82.19 205.46 89.15 204.53 81.64 C211.34 78.32 207.56 85.28 206.64 77.77 C213.44 74.46 209.66 81.42 208.74 73.9 C215.54 70.59 211.76 77.55 210.84 70.04 C217.64 66.73 213.86 73.68 212.94 66.17 C219.74 62.86 215.96 69.82 215.04 62.31"/>
+  <line class="g" x1="215.04" y1="62.31" x2="217.79" y2="48.58"/>
+  <line class="q" x1="155" y1="140" x2="220.05" y2="74.95"/>
+  <path class="g" d="M177.77 162.77 C175.91 170.11 173.03 162.73 179.37 166.87 C177.52 174.21 174.63 166.83 180.97 170.96 C179.12 178.3 176.23 170.93 182.57 175.06 C180.72 182.4 177.84 175.03 184.18 179.16 C182.32 186.5 179.44 179.12 185.78 183.26 C183.92 190.6 181.04 183.22 187.38 187.36 C185.53 194.7 182.64 187.32 188.98 191.45 C187.13 198.79 184.24 191.42 190.59 195.55 C188.73 202.89 185.85 195.52 192.19 199.65 C190.33 206.99 187.45 199.61 193.79 203.75"/>
+  <line class="g" x1="193.79" y1="203.75" x2="202.51" y2="214.7"/>
+  <path class="g" d="M194.03 179.03 C193.25 186.56 189.34 179.68 196.21 182.86 C195.43 190.39 191.51 183.5 198.38 186.68 C197.61 194.21 193.69 187.33 200.56 190.51 C199.78 198.04 195.87 191.15 202.74 194.33 C201.96 201.86 198.04 194.98 204.91 198.15 C204.13 205.68 200.22 198.8 207.09 201.98 C206.31 209.51 202.39 202.62 209.26 205.8 C208.49 213.33 204.57 206.45 211.44 209.63 C210.66 217.16 206.74 210.27 213.62 213.45 C212.84 220.98 208.92 214.1 215.79 217.28"/>
+  <line class="g" x1="215.79" y1="217.28" x2="226" y2="226.85"/>
+  <rect class="frame" x="260" y="40" width="122" height="200" rx="4"/>
+  <text class="pt mid" x="321" y="18">3. Hadronisation</text>
+  <text class="pc mid" x="321" y="256">the colour string breaks</text>
+  <text class="pc mid" x="321" y="268">into hadrons (Lund model)</text>
+  <line class="str" x1="273" y1="186" x2="325" y2="82"/>
+  <circle class="h" cx="281.64" cy="169.52" r="3.6"/>
+  <circle class="h" cx="291.56" cy="145.88" r="3.6"/>
+  <circle class="h" cx="300.25" cy="121.62" r="3.6"/>
+  <circle class="h" cx="315.71" cy="100.75" r="3.6"/>
+  <line class="str" x1="325" y1="82" x2="371" y2="180"/>
+  <circle class="h" cx="336.55" cy="95.71" r="3.6"/>
+  <circle class="h" cx="343.08" cy="118.96" r="3.6"/>
+  <circle class="h" cx="356.49" cy="138.97" r="3.6"/>
+  <circle class="h" cx="366.43" cy="160.62" r="3.6"/>
+  <text class="pc mid" x="273" y="202">q</text>
+  <text class="pc mid" x="325" y="74">g</text>
+  <text class="pc mid" x="371" y="196">q̄</text>
+  <rect class="frame" x="386" y="40" width="122" height="200" rx="4"/>
+  <text class="pt mid" x="447" y="18">4. Decays</text>
+  <text class="pc mid" x="447" y="256">B and D decayed by the</text>
+  <text class="pc mid" x="447" y="268">generator; π⁰ → γγ at once</text>
+  <circle class="h" cx="402" cy="140" r="2.2"/>
+  <line class="q" x1="402" y1="140" x2="434" y2="118"/>
+  <circle class="h" cx="434" cy="118" r="2.4"/>
+  <line class="trk" x1="434" y1="118" x2="452.12" y2="71.4"/>
+  <line class="trk" x1="434" y1="118" x2="475.27" y2="89.77"/>
+  <line class="trk" x1="434" y1="118" x2="483.75" y2="113.01"/>
+  <line class="trk" x1="434" y1="118" x2="480.05" y2="137.47"/>
+  <text class="pc mid" x="422" y="110">B</text>
+  <line class="neu" x1="402" y1="140" x2="475.64" y2="158.8"/>
+  <line class="neu" x1="402" y1="140" x2="457.61" y2="191.8"/>
+  <text class="pc mid" x="424" y="202">π⁰ → γγ</text>
+  <line class="trk" x1="402" y1="140" x2="392" y2="190"/>
+  <rect class="frame" x="512" y="40" width="122" height="200" rx="4"/>
+  <text class="pt mid" x="573" y="18">5. Detector</text>
+  <text class="pc mid" x="573" y="256">tracking, CRID, LAC, WIC;</text>
+  <text class="pc mid" x="573" y="268">simulated by GEANT 3,</text>
+  <text class="pc mid" x="573" y="280">which decays K⁰<tspan dy="0.3em" font-size="75%">S</tspan><tspan dy="-0.3em">, K±, Λ</tspan></text>
+  <path class="det" d="M563 210 A40 40 0 0 0 523 170" stroke="var(--box-definition, #2f5d7c)" stroke-opacity="0.25"/>
+  <path class="det" d="M603 210 A80 80 0 0 0 523 130" stroke="var(--box-example, #3f6b3f)" stroke-opacity="0.25"/>
+  <path class="det" d="M635 210 A112 112 0 0 0 523 98" stroke="var(--box-warning, #a3471e)" stroke-opacity="0.25"/>
+  <path class="trk" d="M523 210 Q577.73 204.51 624.45 172.97"/>
+  <circle class="clu" cx="624.45" cy="172.97" r="4.2"/>
+  <path class="trk" d="M523 210 Q557.19 166.92 608.98 144.64"/>
+  <circle class="clu" cx="608.98" cy="144.64" r="4.2"/>
+  <path class="trk" d="M523 210 Q565.07 174.57 585.82 122.15"/>
+  <circle class="clu" cx="585.82" cy="122.15" r="4.2"/>
+  <path class="trk" d="M523 210 Q529.63 155.4 562.13 109.34"/>
+  <circle class="clu" cx="562.13" cy="109.34" r="4.2"/>
+  <line class="neu" x1="523" y1="210" x2="536.5" y2="98.82"/>
+  <circle class="clu" cx="536.5" cy="98.82" r="5"/>
+  <rect class="frame" x="638" y="40" width="122" height="200" rx="4"/>
+  <text class="pt mid" x="699" y="18">6. Reconstruction</text>
+  <text class="pc mid" x="699" y="256">tracks, clusters, particles;</text>
+  <text class="pc mid" x="699" y="268">thrust axis and jets</text>
+  <line class="trk" x1="651" y1="188" x2="747" y2="92" stroke-dasharray="6 3"/>
+  <line class="trk" x1="699" y1="140" x2="729.86" y2="113.08" marker-end="url(#es-arrow-ink-2)"/>
+  <line class="trk" x1="699" y1="140" x2="716.67" y2="106.97" marker-end="url(#es-arrow-ink-2)"/>
+  <line class="trk" x1="699" y1="140" x2="732.21" y2="124.09" marker-end="url(#es-arrow-ink-2)"/>
+  <line class="trk" x1="699" y1="140" x2="734.59" y2="118.84" marker-end="url(#es-arrow-ink-2)"/>
+  <line class="trk" x1="699" y1="140" x2="732.31" y2="98.02" marker-end="url(#es-arrow-ink-2)"/>
+  <line class="trk" x1="699" y1="140" x2="713.31" y2="104.43" marker-end="url(#es-arrow-ink-2)"/>
+  <line class="trk" x1="699" y1="140" x2="667.52" y2="176.18" marker-end="url(#es-arrow-ink-2)"/>
+  <line class="trk" x1="699" y1="140" x2="661.03" y2="171.49" marker-end="url(#es-arrow-ink-2)"/>
+  <line class="trk" x1="699" y1="140" x2="684" y2="180.23" marker-end="url(#es-arrow-ink-2)"/>
+  <line class="trk" x1="699" y1="140" x2="655.17" y2="157.37" marker-end="url(#es-arrow-ink-2)"/>
+  <line class="trk" x1="699" y1="140" x2="683.15" y2="171.77" marker-end="url(#es-arrow-ink-2)"/>
+  <text class="pc start" x="729" y="84">thrust</text>
+</svg>

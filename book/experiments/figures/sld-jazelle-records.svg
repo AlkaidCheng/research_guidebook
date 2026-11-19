@@ -1,0 +1,97 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 352">
+  <defs>
+    <marker id="jr-arrow-ink-3" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="var(--ink-3, #7a756b)"/></marker>
+  </defs>
+  <style>
+    .t { fill: var(--ink, #1d1b17); font-size: 12px; }
+    .t2 { fill: var(--ink-2, #4a463f); font-size: 11px; }
+    .t3 { fill: var(--ink-3, #7a756b); font-size: 10px; }
+    .tb { font-weight: 600; }
+    .ti { font-style: italic; }
+    .ta { fill: var(--accent-ink, #6a2522); }
+    .caps { letter-spacing: 1.4px; }
+    .mono { font-family: var(--mono, monospace); }
+    .start { text-anchor: start; }
+    .mid { text-anchor: middle; }
+    .end { text-anchor: end; }
+    .ln { stroke: var(--ink-2, #4a463f); stroke-width: 1.2; fill: none; }
+    .ln3 { stroke: var(--ink-3, #7a756b); stroke-width: 1; fill: none; }
+    .thin { stroke-width: 0.7; }
+    .dash { stroke-dasharray: 4 3; }
+    .box { stroke: var(--ink-2, #4a463f); stroke-width: 1.2; fill: none; }
+    .paper { fill: var(--paper, #fbfaf7); }
+
+    .seg { stroke: var(--ink-2, #4a463f); stroke-width: 1; }
+    .hdr { fill: var(--paper-3, #e9e5db); stroke: var(--ink-2, #4a463f); stroke-width: 1; }
+    .ghost { fill: none; stroke: var(--ink-3, #7a756b); stroke-width: 1; stroke-dasharray: 3 3; }
+    .brace { stroke: var(--ink-3, #7a756b); stroke-width: 1; fill: none; }
+    .nm { fill: var(--ink, #1d1b17); font-size: 11px; font-weight: 600; }
+    .sz { fill: var(--ink-2, #4a463f); font-size: 9.5px; }
+    .gh { fill: var(--ink-3, #7a756b); font-size: 9.5px; }
+    .tf { stroke-width: 1; }
+  </style>
+  <text class="t3 caps start" x="10" y="28">FILE: PHYSICAL RECORDS</text>
+  <rect class="seg" x="10" y="40" width="70" height="34" fill="none"/>
+  <rect class="hdr" x="10" y="40" width="12" height="34"/>
+  <text class="sz mid" x="51" y="61">file header</text>
+  <rect class="seg" x="84" y="40" width="140" height="34" fill="none"/>
+  <rect class="hdr" x="84" y="40" width="12" height="34"/>
+  <text class="sz mid" x="160" y="61">record</text>
+  <rect class="seg" x="228" y="40" width="140" height="34" fill="none"/>
+  <rect class="hdr" x="228" y="40" width="12" height="34"/>
+  <text class="sz mid" x="304" y="61">record</text>
+  <rect class="seg" x="372" y="40" width="140" height="34" fill="none"/>
+  <rect class="hdr" x="372" y="40" width="12" height="34"/>
+  <text class="sz mid" x="448" y="61">record</text>
+  <rect class="seg" x="516" y="40" width="140" height="34" fill="none"/>
+  <rect class="hdr" x="516" y="40" width="12" height="34"/>
+  <text class="sz mid" x="592" y="61">record</text>
+  <rect class="seg" x="660" y="40" width="90" height="34" fill="none"/>
+  <text class="sz mid" x="711" y="61">…</text>
+  <text class="sz start" x="10" y="92">Each physical record starts with 8 bytes: prlen, prres, lrlen, lrcnt (shaded).</text>
+  <rect class="tf" x="240" y="46" width="128" height="22" fill="var(--accent, #7f2e2a)" fill-opacity="0.22" stroke="var(--accent, #7f2e2a)"/>
+  <rect class="tf" x="384" y="46" width="92" height="22" fill="var(--accent, #7f2e2a)" fill-opacity="0.22" stroke="var(--accent, #7f2e2a)"/>
+  <path class="brace" d="M240 104 q0 6 6 6 h106.0 q6 0 6 6 q0 -6 6 -6 h106.0 q6 0 6 -6"/>
+  <text class="sz mid" x="358" y="132">one logical record, here an event; lrcnt bit 0: continues in the next record, bit 1: continues the previous one</text>
+  <text class="t3 caps start" x="10" y="158">LOGICAL RECORD</text>
+  <rect class="hdr" x="10" y="170" width="180" height="40"/>
+  <text class="nm mid" x="100" y="187">record header</text>
+  <text class="sz mid" x="100" y="202">112 B</text>
+  <rect class="hdr" x="194" y="170" width="130" height="40"/>
+  <text class="nm mid" x="259" y="187">IEVENTH</text>
+  <text class="sz mid" x="259" y="202">32 B, at usroff</text>
+  <rect class="hdr" x="328" y="170" width="130" height="40"/>
+  <text class="nm mid" x="393" y="187">PHMTOC</text>
+  <text class="sz mid" x="393" y="202">72 B, at tocoff1</text>
+  <rect class="seg" x="462" y="170" width="288" height="40" fill="var(--accent, #7f2e2a)" fill-opacity="0.12" stroke="var(--accent, #7f2e2a)"/>
+  <text class="nm mid" x="606" y="187">data buffer</text>
+  <text class="sz mid" x="606" y="202">datsiz B, at datoff</text>
+  <text class="sz start" x="10" y="226">Header: recno, recordType = EVENT, format = MINIDST, tocsiz, datsiz,</text>
+  <text class="sz start" x="10" y="239">tocoff1, datoff, usrnam = IJEVHD, usroff …</text>
+  <text class="sz start" x="10" y="252">IEVENTH: header pointer, run, event, time, weight, evttype, trigger</text>
+  <text class="sz start" x="366" y="226">PHMTOC: format version and 17 entry counts</text>
+  <text class="t3 caps start" x="10" y="278">DATA BUFFER: FAMILIES BACK TO BACK, NO DELIMITERS</text>
+  <rect class="tf" x="10" y="290" width="35.16" height="30" fill="var(--box-warning, #a3471e)" fill-opacity="0.2" stroke="var(--box-warning, #a3471e)"/>
+  <rect class="tf" x="49.16" y="290" width="35.16" height="30" fill="var(--box-warning, #a3471e)" fill-opacity="0.2" stroke="var(--box-warning, #a3471e)"/>
+  <rect class="tf" x="88.32" y="290" width="35.16" height="30" fill="var(--accent, #7f2e2a)" fill-opacity="0.2" stroke="var(--accent, #7f2e2a)"/>
+  <rect class="tf" x="127.47" y="290" width="35.16" height="30" fill="var(--box-definition, #2f5d7c)" fill-opacity="0.2" stroke="var(--box-definition, #2f5d7c)"/>
+  <rect class="tf" x="166.63" y="290" width="35.16" height="30" fill="var(--box-remark, #7a6a3b)" fill-opacity="0.2" stroke="var(--box-remark, #7a6a3b)"/>
+  <rect class="tf" x="205.79" y="290" width="35.16" height="30" fill="var(--ink-2, #4a463f)" fill-opacity="0.2" stroke="var(--ink-2, #4a463f)"/>
+  <rect class="tf" x="244.95" y="290" width="35.16" height="30" fill="var(--box-example, #3f6b3f)" fill-opacity="0.2" stroke="var(--box-example, #3f6b3f)"/>
+  <rect class="tf" x="284.11" y="290" width="35.16" height="30" fill="var(--box-remark, #7a6a3b)" fill-opacity="0.2" stroke="var(--box-remark, #7a6a3b)"/>
+  <rect class="tf" x="323.26" y="290" width="35.16" height="30" fill="var(--box-remark, #7a6a3b)" fill-opacity="0.2" stroke="var(--box-remark, #7a6a3b)"/>
+  <rect class="tf" x="362.42" y="290" width="35.16" height="30" fill="var(--accent, #7f2e2a)" fill-opacity="0.2" stroke="var(--accent, #7f2e2a)"/>
+  <rect class="tf" x="401.58" y="290" width="35.16" height="30" fill="var(--box-warning, #a3471e)" fill-opacity="0.2" stroke="var(--box-warning, #a3471e)"/>
+  <rect class="tf" x="440.74" y="290" width="35.16" height="30" fill="var(--box-recipe, #5a4b82)" fill-opacity="0.2" stroke="var(--box-recipe, #5a4b82)"/>
+  <rect class="tf" x="479.89" y="290" width="35.16" height="30" fill="var(--box-recipe, #5a4b82)" fill-opacity="0.2" stroke="var(--box-recipe, #5a4b82)"/>
+  <rect class="tf" x="519.05" y="290" width="35.16" height="30" fill="var(--box-recipe, #5a4b82)" fill-opacity="0.2" stroke="var(--box-recipe, #5a4b82)"/>
+  <rect class="tf" x="558.21" y="290" width="35.16" height="30" fill="var(--ink-3, #7a756b)" fill-opacity="0.2" stroke="var(--ink-3, #7a756b)"/>
+  <rect class="tf" x="597.37" y="290" width="35.16" height="30" fill="var(--ink-3, #7a756b)" fill-opacity="0.2" stroke="var(--ink-3, #7a756b)"/>
+  <rect class="tf" x="636.53" y="290" width="35.16" height="30" fill="var(--box-warning, #a3471e)" fill-opacity="0.2" stroke="var(--box-warning, #a3471e)"/>
+  <rect class="tf" x="675.68" y="290" width="35.16" height="30" fill="var(--ink-3, #7a756b)" fill-opacity="0.2" stroke="var(--ink-3, #7a756b)"/>
+  <rect class="tf" x="714.84" y="290" width="35.16" height="30" fill="var(--box-definition, #2f5d7c)" fill-opacity="0.2" stroke="var(--box-definition, #2f5d7c)"/>
+  <text class="sz start" x="10" y="338">MCHEAD</text>
+  <text class="sz end" x="750" y="338">PHVXOV</text>
+  <text class="sz mid" x="380" y="338">19 blocks in the fixed order of the next figure; PHMTOC gives the number of entries of 17 of them</text>
+  <line class="ln" x1="606" y1="210" x2="606" y2="286" marker-end="url(#jr-arrow-ink-3)"/>
+</svg>

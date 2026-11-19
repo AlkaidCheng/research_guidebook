@@ -1,0 +1,68 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 560 162">
+  <style>
+    .t { fill: var(--ink, #1d1b17); font-size: 12px; }
+    .t2 { fill: var(--ink-2, #4a463f); font-size: 11px; }
+    .t3 { fill: var(--ink-3, #7a756b); font-size: 10px; }
+    .tb { font-weight: 600; }
+    .ti { font-style: italic; }
+    .ta { fill: var(--accent-ink, #6a2522); }
+    .caps { letter-spacing: 1.4px; }
+    .mono { font-family: var(--mono, monospace); }
+    .start { text-anchor: start; }
+    .mid { text-anchor: middle; }
+    .end { text-anchor: end; }
+    .ln { stroke: var(--ink-2, #4a463f); stroke-width: 1.2; fill: none; }
+    .ln3 { stroke: var(--ink-3, #7a756b); stroke-width: 1; fill: none; }
+    .thin { stroke-width: 0.7; }
+    .dash { stroke-dasharray: 4 3; }
+    .box { stroke: var(--ink-2, #4a463f); stroke-width: 1.2; fill: none; }
+    .paper { fill: var(--paper, #fbfaf7); }
+
+    .fer { stroke-width: 1.4; }
+    .bos { stroke-width: 1.3; }
+    .glu { stroke-width: 1.2; }
+    .head { fill: var(--ink-2, #4a463f); stroke: none; }
+    .vtx { fill: var(--ink, #1d1b17); stroke: none; }
+    .fl { font-size: 14px; font-style: italic; }
+    .panel { fill: var(--ink-3, #7a756b); font-size: 12px; }
+  </style>
+  <text class="panel start" x="4" y="14">(a)</text>
+  <line class="ln fer" x1="35" y1="40" x2="100" y2="90"/>
+  <polygon class="head" points="70.27,67.13 62.53,65.72 66.92,60.01"/>
+  <line class="ln fer" x1="35" y1="140" x2="100" y2="90"/>
+  <polygon class="head" points="64.73,117.13 68.08,110.01 72.47,115.72"/>
+  <path class="ln bos" d="M100 90 Q102.5 96 105 90 Q107.5 84 110 90 Q112.5 96 115 90 Q117.5 84 120 90 Q122.5 96 125 90 Q127.5 84 130 90 Q132.5 96 135 90 Q137.5 84 140 90 Q142.5 96 145 90 Q147.5 84 150 90 Q152.5 96 155 90 Q157.5 84 160 90 Q162.5 96 165 90 Q167.5 84 170 90 Q172.5 96 175 90 Q177.5 84 180 90"/>
+  <line class="ln fer" x1="180" y1="90" x2="245" y2="40"/>
+  <polygon class="head" points="215.27,62.87 211.92,69.99 207.53,64.28"/>
+  <line class="ln fer" x1="180" y1="90" x2="245" y2="140"/>
+  <polygon class="head" points="209.73,112.87 217.47,114.28 213.08,119.99"/>
+  <circle class="vtx" cx="100" cy="90" r="2.6"/>
+  <circle class="vtx" cx="180" cy="90" r="2.6"/>
+  <text class="t fl end" x="32" y="38"><tspan>e⁻</tspan></text>
+  <text class="t fl end" x="32" y="148"><tspan>e⁺</tspan></text>
+  <text class="t fl mid" x="140" y="76"><tspan>γ*, Z</tspan></text>
+  <text class="t fl start" x="250" y="38"><tspan>f</tspan></text>
+  <text class="t fl start" x="250" y="148"><tspan text-decoration="overline">f</tspan></text>
+  <text class="panel start" x="284" y="14">(b)</text>
+  <line class="ln fer" x1="315" y1="40" x2="380" y2="90"/>
+  <polygon class="head" points="350.27,67.13 342.53,65.72 346.92,60.01"/>
+  <line class="ln fer" x1="315" y1="140" x2="380" y2="90"/>
+  <polygon class="head" points="344.73,117.13 348.08,110.01 352.47,115.72"/>
+  <path class="ln bos" d="M380 90 Q382.5 96 385 90 Q387.5 84 390 90 Q392.5 96 395 90 Q397.5 84 400 90 Q402.5 96 405 90 Q407.5 84 410 90 Q412.5 96 415 90 Q417.5 84 420 90 Q422.5 96 425 90 Q427.5 84 430 90 Q432.5 96 435 90 Q437.5 84 440 90 Q442.5 96 445 90 Q447.5 84 450 90 Q452.5 96 455 90 Q457.5 84 460 90"/>
+  <line class="ln fer" x1="460" y1="90" x2="492" y2="66"/>
+  <polygon class="head" points="478.8,75.9 475.36,82.98 471.04,77.22"/>
+  <line class="ln fer" x1="492" y1="66" x2="525" y2="40"/>
+  <polygon class="head" points="511.25,50.83 507.98,57.99 503.52,52.34"/>
+  <line class="ln fer" x1="460" y1="90" x2="525" y2="140"/>
+  <polygon class="head" points="489.73,112.87 497.47,114.28 493.08,119.99"/>
+  <path class="ln glu" d="M492 66 C494.64 77.26 485.64 71.41 497 69.25 C499.64 80.51 490.64 74.66 502 72.5 C504.64 83.76 495.64 77.91 507 75.75 C509.64 87.01 500.64 81.16 512 79 C514.64 90.26 505.64 84.41 517 82.25 C519.64 93.51 510.64 87.66 522 85.5 C524.64 96.76 515.64 90.91 527 88.75 C529.64 100.01 520.64 94.16 532 92"/>
+  <circle class="vtx" cx="380" cy="90" r="2.6"/>
+  <circle class="vtx" cx="460" cy="90" r="2.6"/>
+  <circle class="vtx" cx="492" cy="66" r="2.6"/>
+  <text class="t fl end" x="312" y="38"><tspan>e⁻</tspan></text>
+  <text class="t fl end" x="312" y="148"><tspan>e⁺</tspan></text>
+  <text class="t fl mid" x="420" y="76"><tspan>Z</tspan></text>
+  <text class="t fl start" x="530" y="38"><tspan>q</tspan></text>
+  <text class="t fl start" x="538" y="100"><tspan>g</tspan></text>
+  <text class="t fl start" x="530" y="148"><tspan text-decoration="overline">q</tspan></text>
+</svg>

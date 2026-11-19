@@ -1,0 +1,71 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 842 334">
+  <style>
+    .t { fill: var(--ink, #1d1b17); font-size: 12px; }
+    .t2 { fill: var(--ink-2, #4a463f); font-size: 11px; }
+    .t3 { fill: var(--ink-3, #7a756b); font-size: 10px; }
+    .tb { font-weight: 600; }
+    .ti { font-style: italic; }
+    .ta { fill: var(--accent-ink, #6a2522); }
+    .caps { letter-spacing: 1.4px; }
+    .mono { font-family: var(--mono, monospace); }
+    .start { text-anchor: start; }
+    .mid { text-anchor: middle; }
+    .end { text-anchor: end; }
+    .ln { stroke: var(--ink-2, #4a463f); stroke-width: 1.2; fill: none; }
+    .ln3 { stroke: var(--ink-3, #7a756b); stroke-width: 1; fill: none; }
+    .thin { stroke-width: 0.7; }
+    .dash { stroke-dasharray: 4 3; }
+    .box { stroke: var(--ink-2, #4a463f); stroke-width: 1.2; fill: none; }
+    .paper { fill: var(--paper, #fbfaf7); }
+
+    .st { fill: var(--ink, #1d1b17); font-size: 12px; font-weight: 600; }
+    .sub { fill: var(--ink-2, #4a463f); font-size: 10.5px; }
+    .note { fill: var(--ink-3, #7a756b); font-size: 10px; }
+    .lane { fill: var(--ink-3, #7a756b); font-size: 10.5px; letter-spacing: 1.4px; }
+    .tf { stroke-width: 1.1; }
+
+    .beam { fill: none; stroke-width: 2.4; }
+    .em { stroke: var(--box-definition, #2f5d7c); }
+    .ep { stroke: var(--box-warning, #a3471e); }
+    .linac { fill: var(--ink-3, #7a756b); fill-opacity: 0.18; stroke: var(--ink-2, #4a463f); stroke-width: 1; }
+    .ring { fill: none; stroke: var(--ink-2, #4a463f); stroke-width: 1.4; }
+    .dev { fill: var(--paper, #fbfaf7); stroke: var(--ink, #1d1b17); stroke-width: 1.2; }
+  </style>
+  <rect class="linac" x="70" y="238" width="420" height="18" rx="3"/>
+  <text class="sub mid" x="280" y="251">linac, 3 km</text>
+  <text class="note mid" x="250" y="322">electrons and positrons accelerated together to 46.6 GeV, 120 pulses per second</text>
+  <rect class="dev" x="14" y="236" width="44" height="22" rx="3"/>
+  <text class="sub mid" x="36" y="230">e⁻ source</text>
+  <line class="beam em" x1="58" y1="247" x2="70" y2="247"/>
+  <circle class="ring" cx="110" cy="196" r="22"/>
+  <circle class="ring" cx="170" cy="196" r="22"/>
+  <text class="sub mid" x="110" y="200">e⁻</text>
+  <text class="sub mid" x="170" y="200">e⁺</text>
+  <text class="sub mid" x="140" y="162">damping rings, 1.19 GeV</text>
+  <path class="beam em" d="M90 238 C90 214 95 210 100 214"/>
+  <path class="beam em" d="M120 216 C125 228 130 234 140 238"/>
+  <path class="beam ep" d="M180 216 C185 228 190 234 200 238"/>
+  <rect class="dev" x="392" y="258" width="30" height="14" rx="2"/>
+  <text class="note start" x="428" y="268">e⁺ target</text>
+  <path class="beam ep" d="M392 266 C300 312 200 306 175 220" stroke-dasharray="5 4"/>
+  <text class="note mid" x="300" y="306">positrons returned to the start of the linac</text>
+  <path class="beam em" d="M490 247 C560 247 580 120 640 92"/>
+  <path class="beam ep" d="M490 247 C560 247 700 250 700 170 C700 125 670 100 640 92"/>
+  <text class="note end" x="560" y="170">north and south arcs, about 1 km</text>
+  <rect class="dev" x="620" y="74" width="40" height="36" rx="4"/>
+  <text class="st mid" x="640" y="96">SLD</text>
+  <text class="sub end" x="600" y="104">interaction point,</text>
+  <text class="sub end" x="600" y="117">45.6 GeV beams</text>
+  <path class="beam em" d="M660 82 L742 22" stroke-dasharray="2 3"/>
+  <path class="beam ep" d="M620 82 L548 22" stroke-dasharray="2 3"/>
+  <rect class="dev" x="676" y="62" width="22" height="12" rx="2"/>
+  <text class="note start" x="704" y="76">Compton polarimeter, ~30 m</text>
+  <circle class="dev" cx="735" cy="27" r="5"/>
+  <circle class="dev" cx="555" cy="27" r="5"/>
+  <text class="note start" x="568" y="31">energy spectrometers, ~150 m</text>
+  <line class="beam em" x1="20" y1="20" x2="46" y2="20"/>
+  <text class="sub start" x="52" y="24">electrons (polarised)</text>
+  <line class="beam ep" x1="20" y1="40" x2="46" y2="40"/>
+  <text class="sub start" x="52" y="44">positrons</text>
+  <text class="note start" x="20" y="80">not to scale</text>
+</svg>

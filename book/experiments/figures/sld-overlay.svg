@@ -1,0 +1,70 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 330">
+  <defs>
+    <marker id="ov-arrow-box-remark" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="var(--box-remark, #7a6a3b)"/></marker>
+    <marker id="ov-arrow-box-definition" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="var(--box-definition, #2f5d7c)"/></marker>
+  </defs>
+  <style>
+    .t { fill: var(--ink, #1d1b17); font-size: 12px; }
+    .t2 { fill: var(--ink-2, #4a463f); font-size: 11px; }
+    .t3 { fill: var(--ink-3, #7a756b); font-size: 10px; }
+    .tb { font-weight: 600; }
+    .ti { font-style: italic; }
+    .ta { fill: var(--accent-ink, #6a2522); }
+    .caps { letter-spacing: 1.4px; }
+    .mono { font-family: var(--mono, monospace); }
+    .start { text-anchor: start; }
+    .mid { text-anchor: middle; }
+    .end { text-anchor: end; }
+    .ln { stroke: var(--ink-2, #4a463f); stroke-width: 1.2; fill: none; }
+    .ln3 { stroke: var(--ink-3, #7a756b); stroke-width: 1; fill: none; }
+    .thin { stroke-width: 0.7; }
+    .dash { stroke-dasharray: 4 3; }
+    .box { stroke: var(--ink-2, #4a463f); stroke-width: 1.2; fill: none; }
+    .paper { fill: var(--paper, #fbfaf7); }
+
+    .st { fill: var(--ink, #1d1b17); font-size: 12px; font-weight: 600; }
+    .sub { fill: var(--ink-2, #4a463f); font-size: 10.5px; }
+    .note { fill: var(--ink-3, #7a756b); font-size: 10px; }
+    .lane { fill: var(--ink-3, #7a756b); font-size: 10.5px; letter-spacing: 1.4px; }
+    .tf { stroke-width: 1.1; }
+  </style>
+  <rect class="paper" x="10" y="92" width="200" height="120" rx="4"/>
+  <rect class="tf" x="10" y="92" width="200" height="120" rx="4" fill="var(--box-remark, #7a6a3b)" fill-opacity="0.14" stroke="var(--box-remark, #7a6a3b)"/>
+  <text class="st mid" x="110" y="130">Random-trigger event</text>
+  <text class="sub mid" x="110" y="144">recorded at a random beam</text>
+  <text class="sub mid" x="110" y="157">crossing: detector status,</text>
+  <text class="sub mid" x="110" y="170">noise and beam background</text>
+  <text class="sub mid" x="110" y="183">(run, event)</text>
+  <rect class="paper" x="262" y="18" width="448" height="230" rx="4"/>
+  <rect class="tf" x="262" y="18" width="448" height="230" rx="4" fill="none" stroke="var(--ink-3, #7a756b)"/>
+  <rect class="paper" x="274" y="30" width="448" height="230" rx="4"/>
+  <rect class="tf" x="274" y="30" width="448" height="230" rx="4" fill="none" stroke="var(--ink-3, #7a756b)"/>
+  <rect class="paper" x="286" y="42" width="448" height="230" rx="4"/>
+  <rect class="tf" x="286" y="42" width="448" height="230" rx="4" fill="none" stroke="var(--ink-3, #7a756b)"/>
+  <rect class="paper" x="298" y="54" width="448" height="230" rx="4"/>
+  <rect class="tf" x="298" y="54" width="448" height="230" rx="4" fill="none" stroke="var(--ink-3, #7a756b)"/>
+  <text class="st mid" x="522" y="74">MC record (one of several that share the event)</text>
+  <rect class="tf" x="314" y="90" width="416" height="17" rx="2" fill="var(--box-remark, #7a6a3b)" fill-opacity="0.16" stroke="var(--box-remark, #7a6a3b)"/>
+  <text class="sub mid" x="522" y="102.5">header label (run, event)</text>
+  <rect class="tf" x="314" y="114" width="416" height="17" rx="2" fill="var(--box-remark, #7a6a3b)" fill-opacity="0.16" stroke="var(--box-remark, #7a6a3b)"/>
+  <text class="sub mid" x="522" y="126.5">PHEVCL status words, except the CDC veto bit</text>
+  <rect class="tf" x="314" y="138" width="416" height="17" rx="2" fill="var(--box-remark, #7a6a3b)" fill-opacity="0.16" stroke="var(--box-remark, #7a6a3b)"/>
+  <text class="sub mid" x="522" y="150.5">background clusters, mostly byte for byte</text>
+  <rect class="tf" x="314" y="162" width="416" height="17" rx="2" fill="var(--box-definition, #2f5d7c)" fill-opacity="0.16" stroke="var(--box-definition, #2f5d7c)"/>
+  <text class="sub mid" x="522" y="174.5">simulated Z decay: MCPART, MCPNT, PHKMC1, PHWMC</text>
+  <rect class="tf" x="314" y="186" width="416" height="17" rx="2" fill="var(--box-definition, #2f5d7c)" fill-opacity="0.16" stroke="var(--box-definition, #2f5d7c)"/>
+  <text class="sub mid" x="522" y="198.5">tracks, clusters and particles built from both</text>
+  <rect class="tf" x="314" y="210" width="416" height="17" rx="2" fill="var(--box-definition, #2f5d7c)" fill-opacity="0.16" stroke="var(--box-definition, #2f5d7c)"/>
+  <text class="sub mid" x="522" y="222.5">PHBM and MCBEAM: beam energy, IP, helicity</text>
+  <line class="ln" x1="212" y1="152" x2="292" y2="152" marker-end="url(#ov-arrow-box-remark)"/>
+  <text class="note mid" x="255" y="140">reused</text>
+  <rect class="paper" x="10" y="238" width="200" height="54" rx="4"/>
+  <rect class="tf" x="10" y="238" width="200" height="54" rx="4" fill="var(--box-definition, #2f5d7c)" fill-opacity="0.14" stroke="var(--box-definition, #2f5d7c)"/>
+  <text class="st mid" x="110" y="262.5">Simulated Z decay</text>
+  <text class="sub mid" x="110" y="276.5">JETSET 7.4, GEANT 3</text>
+  <line class="ln" x1="212" y1="265" x2="292" y2="230" marker-end="url(#ov-arrow-box-definition)"/>
+  <rect class="tf" x="300" y="304" width="12" height="12" fill="var(--box-remark, #7a6a3b)" fill-opacity="0.3" stroke="var(--box-remark, #7a6a3b)"/>
+  <text class="sub start" x="318" y="314">copied from the random trigger</text>
+  <rect class="tf" x="520" y="304" width="12" height="12" fill="var(--box-definition, #2f5d7c)" fill-opacity="0.3" stroke="var(--box-definition, #2f5d7c)"/>
+  <text class="sub start" x="538" y="314">simulated, different in every record</text>
+</svg>

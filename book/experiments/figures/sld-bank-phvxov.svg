@@ -1,0 +1,121 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 704 216">
+  <style>
+    .t { fill: var(--ink, #1d1b17); font-size: 12px; }
+    .t2 { fill: var(--ink-2, #4a463f); font-size: 11px; }
+    .t3 { fill: var(--ink-3, #7a756b); font-size: 10px; }
+    .tb { font-weight: 600; }
+    .ti { font-style: italic; }
+    .ta { fill: var(--accent-ink, #6a2522); }
+    .caps { letter-spacing: 1.4px; }
+    .mono { font-family: var(--mono, monospace); }
+    .start { text-anchor: start; }
+    .mid { text-anchor: middle; }
+    .end { text-anchor: end; }
+    .ln { stroke: var(--ink-2, #4a463f); stroke-width: 1.2; fill: none; }
+    .ln3 { stroke: var(--ink-3, #7a756b); stroke-width: 1; fill: none; }
+    .thin { stroke-width: 0.7; }
+    .dash { stroke-dasharray: 4 3; }
+    .box { stroke: var(--ink-2, #4a463f); stroke-width: 1.2; fill: none; }
+    .paper { fill: var(--paper, #fbfaf7); }
+
+    .cell { stroke-width: 0.8; }
+    .nm { fill: var(--ink, #1d1b17); font-size: 9px; }
+    .off { fill: var(--ink-3, #7a756b); font-size: 9px; }
+    .blk { fill: var(--ink-2, #4a463f); font-size: 10.5px; font-weight: 600; }
+    .lg { fill: var(--ink-2, #4a463f); font-size: 10px; }
+    .grid { stroke: var(--rule, #ddd8cc); stroke-width: 0.6; }
+  </style>
+  <text class="blk start" x="54" y="17">header  (repeated: per bank)  — 16 bytes</text>
+  <text class="off end" x="48" y="40">+0</text>
+  <line class="grid" x1="54" y1="24" x2="54" y2="28"/>
+  <line class="grid" x1="134" y1="24" x2="134" y2="28"/>
+  <line class="grid" x1="214" y1="24" x2="214" y2="28"/>
+  <line class="grid" x1="294" y1="24" x2="294" y2="28"/>
+  <line class="grid" x1="374" y1="24" x2="374" y2="28"/>
+  <rect class="cell" x="54.5" y="24.5" width="79" height="23" fill="var(--box-remark, #7a6a3b)" fill-opacity="0.16" stroke="var(--box-remark, #7a6a3b)"/>
+  <text class="nm mid" x="94" y="39.5">id</text>
+  <rect class="cell" x="134.5" y="24.5" width="79" height="23" fill="var(--box-example, #3f6b3f)" fill-opacity="0.16" stroke="var(--box-example, #3f6b3f)"/>
+  <text class="nm mid" x="174" y="39.5">n_hits</text>
+  <rect class="cell" x="214.5" y="24.5" width="79" height="23" fill="var(--box-example, #3f6b3f)" fill-opacity="0.16" stroke="var(--box-example, #3f6b3f)"/>
+  <text class="nm mid" x="254" y="39.5">link</text>
+  <rect class="cell" x="294.5" y="24.5" width="79" height="23" fill="var(--box-example, #3f6b3f)" fill-opacity="0.16" stroke="var(--box-example, #3f6b3f)"/>
+  <text class="nm mid" x="334" y="39.5">n_hits_list</text>
+  <text class="blk start" x="54" y="75">hit  (repeated: n_hits per bank)  — 80 bytes</text>
+  <text class="off end" x="48" y="98">+0</text>
+  <line class="grid" x1="54" y1="82" x2="54" y2="86"/>
+  <line class="grid" x1="134" y1="82" x2="134" y2="86"/>
+  <line class="grid" x1="214" y1="82" x2="214" y2="86"/>
+  <line class="grid" x1="294" y1="82" x2="294" y2="86"/>
+  <line class="grid" x1="374" y1="82" x2="374" y2="86"/>
+  <line class="grid" x1="454" y1="82" x2="454" y2="86"/>
+  <line class="grid" x1="534" y1="82" x2="534" y2="86"/>
+  <line class="grid" x1="614" y1="82" x2="614" y2="86"/>
+  <line class="grid" x1="694" y1="82" x2="694" y2="86"/>
+  <text class="off end" x="48" y="124">+32</text>
+  <line class="grid" x1="54" y1="108" x2="54" y2="112"/>
+  <line class="grid" x1="134" y1="108" x2="134" y2="112"/>
+  <line class="grid" x1="214" y1="108" x2="214" y2="112"/>
+  <line class="grid" x1="294" y1="108" x2="294" y2="112"/>
+  <line class="grid" x1="374" y1="108" x2="374" y2="112"/>
+  <line class="grid" x1="454" y1="108" x2="454" y2="112"/>
+  <line class="grid" x1="534" y1="108" x2="534" y2="112"/>
+  <line class="grid" x1="614" y1="108" x2="614" y2="112"/>
+  <line class="grid" x1="694" y1="108" x2="694" y2="112"/>
+  <text class="off end" x="48" y="150">+64</text>
+  <line class="grid" x1="54" y1="134" x2="54" y2="138"/>
+  <line class="grid" x1="134" y1="134" x2="134" y2="138"/>
+  <line class="grid" x1="214" y1="134" x2="214" y2="138"/>
+  <line class="grid" x1="294" y1="134" x2="294" y2="138"/>
+  <line class="grid" x1="374" y1="134" x2="374" y2="138"/>
+  <rect class="cell" x="54.5" y="82.5" width="39" height="23" fill="var(--box-example, #3f6b3f)" fill-opacity="0.16" stroke="var(--box-example, #3f6b3f)"/>
+  <text class="nm mid" x="74" y="97.5">ccd</text>
+  <rect class="cell" x="94.5" y="82.5" width="39" height="23" fill="var(--box-example, #3f6b3f)" fill-opacity="0.16" stroke="var(--box-example, #3f6b3f)"/>
+  <text class="nm mid" x="114" y="97.5">6</text>
+  <rect class="cell" x="134.5" y="82.5" width="39" height="23" fill="var(--box-example, #3f6b3f)" fill-opacity="0.16" stroke="var(--box-example, #3f6b3f)"/>
+  <text class="nm mid" x="154" y="97.5">7</text>
+  <rect class="cell" x="174.5" y="82.5" width="39" height="23" fill="var(--box-example, #3f6b3f)" fill-opacity="0.16" stroke="var(--box-example, #3f6b3f)"/>
+  <text class="nm mid" x="194" y="97.5">8</text>
+  <rect class="cell" x="214.5" y="82.5" width="79" height="23" fill="var(--box-example, #3f6b3f)" fill-opacity="0.16" stroke="var(--box-example, #3f6b3f)"/>
+  <text class="nm mid" x="254" y="97.5">x</text>
+  <rect class="cell" x="294.5" y="82.5" width="79" height="23" fill="var(--box-example, #3f6b3f)" fill-opacity="0.16" stroke="var(--box-example, #3f6b3f)"/>
+  <text class="nm mid" x="334" y="97.5">y</text>
+  <rect class="cell" x="374.5" y="82.5" width="79" height="23" fill="var(--box-example, #3f6b3f)" fill-opacity="0.16" stroke="var(--box-example, #3f6b3f)"/>
+  <text class="nm mid" x="414" y="97.5">z</text>
+  <rect class="cell" x="454.5" y="82.5" width="79" height="23" fill="var(--box-example, #3f6b3f)" fill-opacity="0.16" stroke="var(--box-example, #3f6b3f)"/>
+  <text class="nm mid" x="494" y="97.5">u</text>
+  <rect class="cell" x="534.5" y="82.5" width="79" height="23" fill="var(--box-example, #3f6b3f)" fill-opacity="0.16" stroke="var(--box-example, #3f6b3f)"/>
+  <text class="nm mid" x="574" y="97.5">v</text>
+  <rect class="cell" x="614.5" y="82.5" width="79" height="23" fill="var(--box-remark, #7a6a3b)" fill-opacity="0.16" stroke="var(--box-remark, #7a6a3b)"/>
+  <text class="nm mid" x="654" y="97.5">w</text>
+  <rect class="cell" x="54.5" y="108.5" width="79" height="23" fill="var(--box-example, #3f6b3f)" fill-opacity="0.16" stroke="var(--box-example, #3f6b3f)"/>
+  <text class="nm mid" x="94" y="123.5">var_xx</text>
+  <rect class="cell" x="134.5" y="108.5" width="79" height="23" fill="var(--ink-3, #7a756b)" fill-opacity="0.16" stroke="var(--ink-3, #7a756b)"/>
+  <text class="nm mid" x="174" y="123.5">cov_xy</text>
+  <rect class="cell" x="214.5" y="108.5" width="79" height="23" fill="var(--ink-3, #7a756b)" fill-opacity="0.16" stroke="var(--ink-3, #7a756b)"/>
+  <text class="nm mid" x="254" y="123.5">cov_xz</text>
+  <rect class="cell" x="294.5" y="108.5" width="79" height="23" fill="var(--box-example, #3f6b3f)" fill-opacity="0.16" stroke="var(--box-example, #3f6b3f)"/>
+  <text class="nm mid" x="334" y="123.5">var_yy</text>
+  <rect class="cell" x="374.5" y="108.5" width="79" height="23" fill="var(--ink-3, #7a756b)" fill-opacity="0.16" stroke="var(--ink-3, #7a756b)"/>
+  <text class="nm mid" x="414" y="123.5">cov_yz</text>
+  <rect class="cell" x="454.5" y="108.5" width="79" height="23" fill="var(--box-example, #3f6b3f)" fill-opacity="0.16" stroke="var(--box-example, #3f6b3f)"/>
+  <text class="nm mid" x="494" y="123.5">var_zz</text>
+  <rect class="cell" x="534.5" y="108.5" width="79" height="23" fill="var(--box-example, #3f6b3f)" fill-opacity="0.16" stroke="var(--box-example, #3f6b3f)"/>
+  <text class="nm mid" x="574" y="123.5">sigma_u</text>
+  <rect class="cell" x="614.5" y="108.5" width="79" height="23" fill="var(--box-example, #3f6b3f)" fill-opacity="0.16" stroke="var(--box-example, #3f6b3f)"/>
+  <text class="nm mid" x="654" y="123.5">sigma_v</text>
+  <rect class="cell" x="54.5" y="134.5" width="79" height="23" fill="var(--ink-3, #7a756b)" fill-opacity="0.16" stroke="var(--ink-3, #7a756b)"/>
+  <text class="nm mid" x="94" y="149.5">word_64</text>
+  <rect class="cell" x="134.5" y="134.5" width="79" height="23" fill="var(--box-example, #3f6b3f)" fill-opacity="0.16" stroke="var(--box-example, #3f6b3f)"/>
+  <text class="nm mid" x="174" y="149.5">u_true</text>
+  <rect class="cell" x="214.5" y="134.5" width="79" height="23" fill="var(--box-example, #3f6b3f)" fill-opacity="0.16" stroke="var(--box-example, #3f6b3f)"/>
+  <text class="nm mid" x="254" y="149.5">v_true</text>
+  <rect class="cell" x="294.5" y="134.5" width="79" height="23" fill="var(--box-remark, #7a6a3b)" fill-opacity="0.16" stroke="var(--box-remark, #7a6a3b)"/>
+  <text class="nm mid" x="334" y="149.5">w_true</text>
+  <rect class="cell" x="54" y="182" width="10" height="10" fill="var(--box-example, #3f6b3f)" fill-opacity="0.3" stroke="var(--box-example, #3f6b3f)"/>
+  <text class="lg start" x="68" y="191">confirmed</text>
+  <rect class="cell" x="134.6" y="182" width="10" height="10" fill="var(--box-remark, #7a6a3b)" fill-opacity="0.3" stroke="var(--box-remark, #7a6a3b)"/>
+  <text class="lg start" x="148.6" y="191">plausible</text>
+  <rect class="cell" x="215.2" y="182" width="10" height="10" fill="var(--ink-3, #7a756b)" fill-opacity="0.3" stroke="var(--ink-3, #7a756b)"/>
+  <text class="lg start" x="229.2" y="191">unknown</text>
+  <text class="lg start" x="54" y="207">A box too narrow for its field name shows the field's row number in the table.</text>
+</svg>

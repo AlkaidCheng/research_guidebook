@@ -1,0 +1,70 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 250">
+  <defs>
+    <marker id="dc-arrow-accent" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="var(--accent, #7f2e2a)"/></marker>
+  </defs>
+  <style>
+    .t { fill: var(--ink, #1d1b17); font-size: 12px; }
+    .t2 { fill: var(--ink-2, #4a463f); font-size: 11px; }
+    .t3 { fill: var(--ink-3, #7a756b); font-size: 10px; }
+    .tb { font-weight: 600; }
+    .ti { font-style: italic; }
+    .ta { fill: var(--accent-ink, #6a2522); }
+    .caps { letter-spacing: 1.4px; }
+    .mono { font-family: var(--mono, monospace); }
+    .start { text-anchor: start; }
+    .mid { text-anchor: middle; }
+    .end { text-anchor: end; }
+    .ln { stroke: var(--ink-2, #4a463f); stroke-width: 1.2; fill: none; }
+    .ln3 { stroke: var(--ink-3, #7a756b); stroke-width: 1; fill: none; }
+    .thin { stroke-width: 0.7; }
+    .dash { stroke-dasharray: 4 3; }
+    .box { stroke: var(--ink-2, #4a463f); stroke-width: 1.2; fill: none; }
+    .paper { fill: var(--paper, #fbfaf7); }
+
+    .st { fill: var(--ink, #1d1b17); font-size: 12px; font-weight: 600; }
+    .sub { fill: var(--ink-2, #4a463f); font-size: 10.5px; }
+    .note { fill: var(--ink-3, #7a756b); font-size: 10px; }
+    .lane { fill: var(--ink-3, #7a756b); font-size: 10.5px; letter-spacing: 1.4px; }
+    .tf { stroke-width: 1.1; }
+
+    .blk { fill: var(--ink, #1d1b17); font-size: 10.5px; font-weight: 600; }
+  </style>
+  <text class="lane start" x="10" y="20">DATA RECORD, AFTER PHKCHRG</text>
+  <rect class="tf" x="10" y="28" width="90" height="40" fill="var(--ink-3, #7a756b)" fill-opacity="0.15" stroke="var(--ink-3, #7a756b)"/>
+  <text class="blk mid" x="55" y="45">PHBM</text>
+  <text class="sub mid" x="55" y="59">60 B</text>
+  <rect class="tf" x="103" y="28" width="100" height="40" fill="var(--ink-3, #7a756b)" fill-opacity="0.15" stroke="var(--ink-3, #7a756b)"/>
+  <text class="blk mid" x="153" y="45">PHEVCL</text>
+  <text class="sub mid" x="153" y="59">72 B</text>
+  <rect class="tf" x="206" y="28" width="62" height="40" fill="var(--ink-3, #7a756b)" fill-opacity="0.15" stroke="var(--ink-3, #7a756b)"/>
+  <text class="blk mid" x="237" y="45">reserved</text>
+  <text class="sub mid" x="237" y="59">4 B</text>
+  <rect class="tf" x="271" y="28" width="358" height="40" fill="var(--box-definition, #2f5d7c)" fill-opacity="0.15" stroke="var(--box-definition, #2f5d7c)"/>
+  <text class="blk mid" x="450" y="45">PHVXOV</text>
+  <text class="sub mid" x="450" y="59">16 + 80 × hits, per bank</text>
+  <text class="lane start" x="10" y="110">MC RECORD, AFTER PHKCHRG</text>
+  <rect class="tf" x="10" y="118" width="120" height="40" fill="var(--box-recipe, #5a4b82)" fill-opacity="0.15" stroke="var(--box-recipe, #5a4b82)"/>
+  <text class="blk mid" x="70" y="135">PHKMC1 pass 1</text>
+  <text class="sub mid" x="70" y="149">20 × n</text>
+  <rect class="tf" x="133" y="118" width="60" height="40" fill="var(--box-recipe, #5a4b82)" fill-opacity="0.15" stroke="var(--box-recipe, #5a4b82)"/>
+  <text class="blk mid" x="163" y="135">pass 2</text>
+  <text class="sub mid" x="163" y="149">4 × n</text>
+  <rect class="tf" x="196" y="118" width="70" height="40" fill="var(--ink-3, #7a756b)" fill-opacity="0.15" stroke="var(--ink-3, #7a756b)"/>
+  <text class="blk mid" x="231" y="135">PHBM</text>
+  <text class="sub mid" x="231" y="149">60 B</text>
+  <rect class="tf" x="269" y="118" width="80" height="40" fill="var(--ink-3, #7a756b)" fill-opacity="0.15" stroke="var(--ink-3, #7a756b)"/>
+  <text class="blk mid" x="309" y="135">PHEVCL</text>
+  <text class="sub mid" x="309" y="149">72 B</text>
+  <rect class="tf" x="352" y="118" width="104" height="40" fill="var(--box-warning, #a3471e)" fill-opacity="0.15" stroke="var(--box-warning, #a3471e)"/>
+  <text class="blk mid" x="404" y="135">MCBEAM</text>
+  <text class="sub mid" x="404" y="149">76 B, “XBEAM”</text>
+  <rect class="tf" x="459" y="118" width="62" height="40" fill="var(--ink-3, #7a756b)" fill-opacity="0.15" stroke="var(--ink-3, #7a756b)"/>
+  <text class="blk mid" x="490" y="135">reserved</text>
+  <text class="sub mid" x="490" y="149">4 B</text>
+  <rect class="tf" x="524" y="118" width="140" height="40" fill="var(--box-definition, #2f5d7c)" fill-opacity="0.15" stroke="var(--box-definition, #2f5d7c)"/>
+  <text class="blk mid" x="594" y="135">PHVXOV</text>
+  <text class="sub mid" x="594" y="149">16 + 80 × hits</text>
+  <line class="ln" x1="12" y1="194" x2="12" y2="162" marker-end="url(#dc-arrow-accent)"/>
+  <text class="note start" x="18" y="200">jazelle ≤ 0.4.0 reads PHBM here, so its MC PHBM holds PHKMC1 bytes</text>
+  <text class="sub mono start" x="10" y="236">tail length = 24 n(PHKMC1) + 60 n(PHBM) + 72 n(PHEVCL) + 76 n(MCBEAM) + 4 + Σ (16 + 80 hits)</text>
+</svg>

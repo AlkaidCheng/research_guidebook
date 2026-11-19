@@ -1,0 +1,1422 @@
+provenance:
+  reader: github.com/HEP-KE/jazelle_reader
+  commit: 7bbc10a
+  note: layouts of src/banks/*.cpp and tools/bank_lab/specs/*.yaml
+banks:
+  MCHEAD:
+    group: truth
+    source: src/banks/MCHEAD.cpp
+    blocks:
+    - name: entry
+      size: 20
+      fields:
+      - offset: 0
+        type: i4
+        name: ntot
+      - offset: 4
+        type: i4
+        name: origin
+      - offset: 8
+        type: f4
+        name: ipx
+      - offset: 12
+        type: f4
+        name: ipy
+      - offset: 16
+        type: f4
+        name: ipz
+  PHPSUM:
+    group: summary
+    source: src/banks/PHPSUM.cpp
+    blocks:
+    - name: entry
+      size: 32
+      fields:
+      - offset: 0
+        type: f4
+        name: px
+      - offset: 4
+        type: f4
+        name: py
+      - offset: 8
+        type: f4
+        name: pz
+      - offset: 12
+        type: f4
+        name: x
+      - offset: 16
+        type: f4
+        name: y
+      - offset: 20
+        type: f4
+        name: z
+      - offset: 24
+        type: f4
+        name: charge
+      - offset: 28
+        type: i4
+        name: status
+      id_word: a 4-byte id precedes each entry
+  PHCHRG:
+    group: tracking
+    source: src/banks/PHCHRG.cpp
+    blocks:
+    - name: entry
+      size: 236
+      fields:
+      - offset: 0
+        type: f4
+        name: hlxpar
+        count: 6
+      - offset: 24
+        type: f4
+        name: dhlxpar
+        count: 15
+      - offset: 84
+        type: f4
+        name: bnorm
+        reader_note: Normalization factor
+      - offset: 88
+        type: f4
+        name: impact
+        reader_note: 2D impact parameter
+      - offset: 92
+        type: f4
+        name: b3norm
+        reader_note: 3D normalization
+      - offset: 96
+        type: f4
+        name: impact3
+        reader_note: 3D impact parameter
+      - offset: 100
+        type: i2
+        name: charge
+        reader_note: Particle charge
+      - offset: 102
+        type: i2
+        name: smwstat
+        reader_note: Swim status
+      - offset: 104
+        type: i4
+        name: status
+        reader_note: Track status flags
+      - offset: 108
+        type: f4
+        name: tkpar0
+        reader_note: Initial track parameter
+      - offset: 112
+        type: f4
+        name: tkpar
+        count: 5
+      - offset: 132
+        type: f4
+        name: dtkpar
+        count: 15
+      - offset: 192
+        type: f4
+        name: length
+        reader_note: Track length
+      - offset: 196
+        type: f4
+        name: chi2dt
+        reader_note: Chi-squared of Drift Chamber fit
+      - offset: 200
+        type: i2
+        name: imc
+        reader_note: Monte Carlo particle association index
+      - offset: 202
+        type: i2
+        name: ndfdt
+        reader_note: Degrees of freedom for Drift Chamber fit
+      - offset: 204
+        type: i2
+        name: nhit
+        reader_note: Total number of hits on track
+      - offset: 206
+        type: i2
+        name: nhite
+        reader_note: Number of expected hits
+      - offset: 208
+        type: i2
+        name: nhitp
+        reader_note: Number of potential hits
+      - offset: 210
+        type: i2
+        name: nmisht
+        reader_note: Number of missing hits
+      - offset: 212
+        type: i2
+        name: nwrght
+        reader_note: Number of wrong-way hits
+      - offset: 214
+        type: i2
+        name: nhitv
+        reader_note: Number of hits in the Vertex Detector (VXD)
+      - offset: 216
+        type: f4
+        name: chi2
+        reader_note: Combined fit Chi-squared
+      - offset: 220
+        type: f4
+        name: chi2v
+        reader_note: Vertex Detector fit Chi-squared
+      - offset: 224
+        type: i4
+        name: vxdhit
+        reader_note: Bitmask of hit VXD layers
+      - offset: 228
+        type: i2
+        name: mustat
+        reader_note: Muon identification status
+      - offset: 230
+        type: i2
+        name: estat
+        reader_note: Electron identification status
+      - offset: 232
+        type: i4
+        name: dedx
+        reader_note: dE/dx ionization energy loss
+      id_word: a 4-byte id precedes each entry
+  PHKLUS:
+    group: calorimetry
+    source: src/banks/PHKLUS.cpp
+    blocks:
+    - name: entry
+      size: 96
+      fields:
+      - offset: 0
+        type: i4
+        name: status
+        reader_note: Cluster status flags
+      - offset: 4
+        type: f4
+        name: eraw
+        reader_note: Raw cluster energy before e/pi correction
+      - offset: 8
+        type: f4
+        name: cth
+        reader_note: Mean cluster cos(theta), energy weighted
+      - offset: 12
+        type: f4
+        name: wcth
+        reader_note: Width of cluster energy in cos(theta)
+      - offset: 16
+        type: f4
+        name: phi
+        reader_note: Mean cluster phi, energy weighted
+      - offset: 20
+        type: f4
+        name: wphi
+        reader_note: Width of cluster energy in phi
+      - offset: 24
+        type: f4
+        name: elayer
+        count: 8
+      - offset: 56
+        type: i4
+        name: nhit2
+        reader_note: Number of towers hit in LAC EM1
+      - offset: 60
+        type: f4
+        name: cth2
+        reader_note: Mean cos(theta) in LAC EM1, energy weighted
+      - offset: 64
+        type: f4
+        name: wcth2
+        reader_note: Width of energy in cos(theta) for LAC EM1
+      - offset: 68
+        type: f4
+        name: phi2
+        reader_note: Mean phi in LAC EM1, energy weighted
+      - offset: 72
+        type: f4
+        name: whphi2
+        reader_note: Width of energy in phi for LAC EM1
+      - offset: 76
+        type: i4
+        name: nhit3
+        reader_note: Number of towers hit in LAC EM2
+      - offset: 80
+        type: f4
+        name: cth3
+        reader_note: Mean cos(theta) in LAC EM2, energy weighted
+      - offset: 84
+        type: f4
+        name: wcth3
+        reader_note: Width of energy in cos(theta) for LAC EM2
+      - offset: 88
+        type: f4
+        name: phi3
+        reader_note: Mean phi in LAC EM2, energy weighted
+      - offset: 92
+        type: f4
+        name: wphi3
+        reader_note: Width of energy in phi for LAC EM2
+      id_word: a 4-byte id precedes each entry
+  PHWIC:
+    group: muon
+    source: src/banks/PHWIC.cpp
+    blocks:
+    - name: entry
+      size: 140
+      fields:
+      - offset: 0
+        type: i2
+        name: idstat
+        reader_note: Identification status flag
+      - offset: 2
+        type: i2
+        name: nhit
+        reader_note: Total hits in WIC associated with this track
+      - offset: 4
+        type: i2
+        name: nhit45
+        reader_note: Hits in specific angular layers (e.g., 45-degree)
+      - offset: 6
+        type: i2
+        name: npat
+        reader_note: Number of patterns/clusters found in WIC
+      - offset: 8
+        type: i2
+        name: nhitpat
+        reader_note: Number of hits within the identified WIC pattern
+      - offset: 10
+        type: i2
+        name: syshit
+        reader_note: System-specific hit flag or counter
+      - offset: 12
+        type: f4
+        name: qpinit
+        reader_note: Initial charge/momentum (q/p) from tracking
+      - offset: 16
+        type: f4
+        name: t1
+        reader_note: Track matching parameter/direction at calorimeter layers
+      - offset: 20
+        type: f4
+        name: t2
+        reader_note: Track matching parameter/direction at calorimeter layers
+      - offset: 24
+        type: f4
+        name: t3
+        reader_note: Track matching parameter/direction at calorimeter layers
+      - offset: 28
+        type: i4
+        name: hitmiss
+        reader_note: Bitmask of hit/miss patterns across WIC layers
+      - offset: 32
+        type: f4
+        name: itrlen
+        reader_note: Interaction length/track length through the iron
+      - offset: 36
+        type: i2
+        name: nlayexp
+        reader_note: Number of WIC layers expected to be hit
+      - offset: 38
+        type: i2
+        name: nlaybey
+        reader_note: Layers hit beyond the expected penetration depth
+      - offset: 40
+        type: f4
+        name: missprob
+        reader_note: Misidentification probability (non-muon probability)
+      - offset: 44
+        type: i4
+        name: phwicid
+        reader_note: Unique ID linking to the corresponding PHCHRG track
+      - offset: 48
+        type: i2
+        name: nhitshar
+        reader_note: Number of WIC hits shared with another track
+      - offset: 50
+        type: i2
+        name: nother
+        reader_note: Counter for other associated clusters/hits
+      - offset: 52
+        type: i4
+        name: hitsused
+        reader_note: Count or bitmask of hits used in the final fit
+      - offset: 56
+        type: f4
+        name: pref1
+        count: 3
+        reader_note: Reference points for the WIC cluster
+      - offset: 68
+        type: f4
+        name: pfit
+        count: 4
+        reader_note: Trajectory fit parameters within the WIC
+      - offset: 84
+        type: f4
+        name: dpfit
+        count: 10
+        reader_note: Error matrix for WIC-specific track fit
+      - offset: 124
+        type: f4
+        name: chi2
+        reader_note: Chi-squared of the WIC internal track fit
+      - offset: 128
+        type: i2
+        name: ndf
+        reader_note: Degrees of freedom for internal WIC fit
+      - offset: 130
+        type: i2
+        name: punfit
+        reader_note: Status/counter for points not utilized in fit
+      - offset: 132
+        type: f4
+        name: matchChi2
+        reader_note: Chi-squared of CDC track-to-WIC cluster match
+      - offset: 136
+        type: i2
+        name: matchNdf
+        reader_note: Degrees of freedom for the track-to-WIC matching
+      id_word: a 4-byte id precedes each entry
+  PHKELID:
+    group: calorimetry
+    source: src/banks/PHKELID.cpp
+    blocks:
+    - name: entry
+      size: 96
+      fields:
+      - offset: 0
+        type: u4
+        name: header
+        bits:
+        - - 0-15
+          - id
+        - - 16-31
+          - PHCHRG id
+      - offset: 4
+        type: i2
+        name: idstat
+        reader_note: Electron ID status flags
+      - offset: 6
+        type: i2
+        name: prob
+        reader_note: Probability/Confidence level of electron hypothesis
+      - offset: 8
+        type: f4
+        name: phi
+        reader_note: Measured azimuthal angle (phi) of the cluster
+      - offset: 12
+        type: f4
+        name: theta
+        reader_note: Measured polar angle (theta) of the cluster
+      - offset: 16
+        type: f4
+        name: qp
+        reader_note: Associated track charge/momentum (q/p)
+      - offset: 20
+        type: f4
+        name: dphi
+        reader_note: Difference in phi between track and cluster
+      - offset: 24
+        type: f4
+        name: dtheta
+        reader_note: Difference in theta between track and cluster
+      - offset: 28
+        type: f4
+        name: dqp
+        reader_note: Error or difference in the q/p measurement
+      - offset: 32
+        type: f4
+        name: tphi
+        reader_note: Expected phi based on track extrapolation
+      - offset: 36
+        type: f4
+        name: ttheta
+        reader_note: Expected theta based on track extrapolation
+      - offset: 40
+        type: f4
+        name: isolat
+        reader_note: Isolation energy around the cluster
+      - offset: 44
+        type: f4
+        name: em1
+        reader_note: Energy deposited in LAC EM Layer 1
+      - offset: 48
+        type: f4
+        name: em12
+        reader_note: Combined energy in EM Layers 1 and 2
+      - offset: 52
+        type: f4
+        name: dem12
+        reader_note: Error/uncertainty in the combined EM energy
+      - offset: 56
+        type: f4
+        name: had1
+        reader_note: Energy in LAC Hadronic Layer 1 (used for rejection)
+      - offset: 60
+        type: f4
+        name: emphi
+        reader_note: EM shower centroid phi
+      - offset: 64
+        type: f4
+        name: emtheta
+        reader_note: EM shower centroid theta
+      - offset: 68
+        type: f4
+        name: phiwid
+        reader_note: Width of the EM shower in phi
+      - offset: 72
+        type: f4
+        name: thewid
+        reader_note: Width of the EM shower in theta
+      - offset: 76
+        type: f4
+        name: em1x1
+        reader_note: Energy in a 1x1 tower window
+      - offset: 80
+        type: f4
+        name: em2x2a
+        reader_note: Energy in a 2x2 tower window (offset A)
+      - offset: 84
+        type: f4
+        name: em2x2b
+        reader_note: Energy in a 2x2 tower window (offset B)
+      - offset: 88
+        type: f4
+        name: em3x3a
+        reader_note: Energy in a 3x3 tower window (offset A)
+      - offset: 92
+        type: f4
+        name: em3x3b
+        reader_note: Energy in a 3x3 tower window (offset B)
+  PHCRID:
+    group: pid
+    source: src/banks/PHCRID.cpp
+    blocks:
+    - name: entry
+      size: 16 + liquid block (36 or 4) + gas block (36 or 4)
+      fields:
+      - offset: 0
+        type: i4
+        name: ctlword
+        reader_note: Control word containing radiator presence flags
+        bits:
+        - - 0-15
+          - id
+        - - '16'
+          - liquid block present
+        - - '17'
+          - gas block present
+      - offset: 4
+        type: f4
+        name: norm
+        reader_note: Normalization factor for likelihood calculations
+      - offset: 8
+        type: i2
+        name: rc
+        reader_note: Return code from the CRID reconstruction processor
+      - offset: 10
+        type: i2
+        name: geom
+        reader_note: Geometry version or status flag
+      - offset: 12
+        type: i2
+        name: trkp
+        reader_note: Track parameter pointer or index
+      - offset: 14
+        type: i2
+        name: nhits
+        reader_note: Number of Cherenkov photon hits associated with the track
+  MCPART:
+    group: truth
+    source: src/banks/MCPART.cpp, MCPART::read; ID-word bits from the decode lines
+    blocks:
+    - name: entry
+      size: 36, or 40 when E is stored
+      fields:
+      - offset: 0
+        type: f4
+        name: px
+      - offset: 4
+        type: f4
+        name: py
+      - offset: 8
+        type: f4
+        name: pz
+      - offset: 12
+        type: u4
+        name: id_word
+        bits:
+        - - 0-12
+          - id
+        - - 13-25
+          - parent_id
+        - - 26-28
+          - charge magnitude index (0, 1/3, 2/3, 1, 2, 3, 4, 5)
+        - - '29'
+          - charge negative
+        - - '30'
+          - E omitted
+      - offset: 16
+        type: i4
+        name: ptype
+      - offset: 20
+        type: i4
+        name: origin
+      - offset: 24
+        type: f4
+        name: xt_x
+      - offset: 28
+        type: f4
+        name: xt_y
+      - offset: 32
+        type: f4
+        name: xt_z
+      - offset: 36
+        type: f4
+        name: e
+        optional: true
+  PHPOINT:
+    group: summary
+    source: src/banks/PHPOINT.cpp, PHPOINT::read
+    blocks:
+    - name: entry
+      size: 4 + 2 per set mask bit, padded to a multiple of 4
+      fields:
+      - offset: 0
+        type: u4
+        name: header
+        bits:
+        - - 0-15
+          - id
+        - - 16-31
+          - mask
+      - offset: 4
+        type: i2
+        name: pointers
+        count: number of set mask bits
+        bits:
+        - - mask bit 0
+          - PHPSUM (if clear, the PHPSUM id equals id)
+        - - mask bit 1
+          - PHCRID
+        - - mask bit 2
+          - PHCHRG
+        - - mask bit 3
+          - PHKLUS
+        - - mask bit 4
+          - PHKELID
+        - - mask bit 5
+          - PHWIC
+  MCPNT:
+    group: relations
+    source: src/banks/MCPNT.cpp and the second pass in src/JazelleFile.cpp, parseMiniDst
+    blocks:
+    - name: pass 1
+      size: 16
+      repeat: n_mcpnt
+      fields:
+      - offset: 0
+        type: u4
+        name: header
+        bits:
+        - - 0-15
+          - MCPART id
+        - - 16-31
+          - MCPNT id
+      - offset: 4
+        type: i4
+        name: reason
+      - offset: 8
+        type: i4
+        name: nhits
+      - offset: 12
+        type: f4
+        name: econtrib
+    - name: pass 2
+      size: 4
+      repeat: n_mcpnt
+      fields:
+      - offset: 0
+        type: u4
+        name: header
+        bits:
+        - - 0-15
+          - PHPOINT id
+        - - 16-31
+          - MCPNT id
+  CRIDHYP:
+    group: pid
+    source: src/banks/CRIDHYP.cpp and src/banks/PIDVEC.cpp; one block per radiator in PHCRID
+    blocks:
+    - name: full form
+      size: 36
+      fields:
+      - offset: 0
+        type: f4
+        name: llik
+        count: 5
+        reader_note: 'PIDVEC: log-likelihoods for e, mu, pi, K, p'
+      - offset: 20
+        type: i2
+        name: rc
+      - offset: 22
+        type: i2
+        name: nhits
+      - offset: 24
+        type: i4
+        name: besthyp
+      - offset: 28
+        type: i2
+        name: nhexp
+      - offset: 30
+        type: i2
+        name: nhfnd
+      - offset: 32
+        type: i2
+        name: nhbkg
+      - offset: 34
+        type: i2
+        name: mskphot
+    - name: reduced form
+      size: 4
+      fields:
+      - offset: 0
+        type: i2
+        name: rc
+      - offset: 2
+        type: i2
+        name: nhits
+  PHKTRK:
+    group: calorimetry
+    source: src/banks/PHKTRK.cpp (reads 0 bytes; the count is always 0)
+    blocks:
+    - name: entry
+      size: 0
+      fields: []
+  IEVENTH:
+    group: event
+    source: src/banks/IEVENTH.cpp, read from the logical record at usroff
+    blocks:
+    - name: header
+      size: 32
+      fields:
+      - offset: 0
+        type: i4
+        name: header
+      - offset: 4
+        type: i4
+        name: run
+      - offset: 8
+        type: i4
+        name: event
+      - offset: 12
+        type: date8
+        name: evttime
+      - offset: 20
+        type: f4
+        name: weight
+      - offset: 24
+        type: i4
+        name: evttype
+      - offset: 28
+        type: i4
+        name: trigger
+  PHBM:
+    group: event
+    kinds:
+    - data
+    - mc
+    source: tools/bank_lab/specs
+    blocks:
+    - name: entry
+      size: 60
+      repeat: n_phbm
+      fields:
+      - offset: 0
+        type: f4
+        name: ecm
+        label: confirmed
+        meaning: centre-of-mass energy (GeV); -999 when not measured
+      - offset: 4
+        type: f4
+        name: decm
+        label: confirmed
+        meaning: uncertainty or spread of ecm (GeV); -999 together with ecm
+      - offset: 8
+        type: f4
+        name: pos_x
+        label: confirmed
+        meaning: 'interaction point x (cm); MC: 0'
+      - offset: 12
+        type: f4
+        name: pos_y
+        label: confirmed
+        meaning: 'interaction point y (cm); MC: 0'
+      - offset: 16
+        type: f4
+        name: pos_z
+        label: confirmed
+        meaning: event vertex z (cm); without an event vertex (25% of data events) the z centre of the
+          IP block; MC fallback -0.53 (the generated mean) in 1.2% of entries
+      - offset: 20
+        type: f4
+        name: dpos_xx
+        label: confirmed
+        meaning: 'statistical error (1 sigma, cm) of the IP-block fit in x, the xx entry of a lower-triangle
+          packed 3x3 matrix of sigmas; MC: a fixed assigned value'
+      - offset: 24
+        type: f4
+        name: dpos_xy
+        label: plausible
+        meaning: xy entry of the packed IP matrix, always 0 (no x-y correlation stored)
+      - offset: 28
+        type: f4
+        name: dpos_yy
+        label: confirmed
+        meaning: 'statistical error (1 sigma, cm) of the IP-block fit in y; MC: a fixed assigned value'
+      - offset: 32
+        type: f4
+        name: dpos_xz
+        label: plausible
+        meaning: xz entry of the packed IP matrix, always 0
+      - offset: 36
+        type: f4
+        name: dpos_yz
+        label: plausible
+        meaning: yz entry of the packed IP matrix, always 0
+      - offset: 40
+        type: f4
+        name: dpos_zz
+        label: confirmed
+        meaning: 'luminous-region length sigma_z of the IP block (cm): the spread of the event vertex
+          z about the block centre, and so the error of pos_z when it falls back to that centre'
+      - offset: 44
+        type: f4
+        name: pol
+        label: confirmed
+        meaning: 'signed electron-beam polarization = helicity x |P| of the assigned polarimeter measurement
+          (negative = left-handed); 0 when the measurement is missing or the helicity is unknown; MC:
+          helicity +-1'
+      - offset: 48
+        type: f4
+        name: dpol
+        label: confirmed
+        meaning: 'uncertainty of the polarimeter measurement assigned to the event; 1 when pol is missing;
+          MC: 0'
+      - offset: 52
+        type: f4
+        name: pol_dt
+        label: confirmed
+        meaning: 'time between the event and the polarimeter measurement whose |pol| and dpol it carries
+          (days, unsigned); 999 when no measurement; 0 when a fixed average polarization (0.73 +- 0.00594)
+          is assigned; MC: 0'
+      - offset: 56
+        type: bits32
+        name: reserved_56
+        label: plausible
+        meaning: unused word, always 0; no status word or helicity sign (BPOL) is filled here
+  PHEVCL:
+    group: event
+    kinds:
+    - data
+    - mc
+    source: tools/bank_lab/specs
+    blocks:
+    - name: entry
+      size: 72
+      repeat: n_phevcl
+      fields:
+      - offset: 0
+        type: u4
+        name: zero_00
+        label: unknown
+        meaning: always 0 (unfilled slot or padding; not in the 1996 template)
+      - offset: 4
+        type: u4
+        name: zero_04
+        label: unknown
+        meaning: always 0 (unfilled slot or padding; not in the 1996 template)
+      - offset: 8
+        type: u4
+        name: zero_08
+        label: unknown
+        meaning: always 0 (unfilled slot or padding; not in the 1996 template)
+      - offset: 12
+        type: u4
+        name: zero_12
+        label: unknown
+        meaning: always 0 (unfilled slot or padding; not in the 1996 template)
+      - offset: 16
+        type: u4
+        name: zero_16
+        label: unknown
+        meaning: always 0 (unfilled slot or padding; not in the 1996 template)
+      - offset: 20
+        type: u4
+        name: zero_20
+        label: unknown
+        meaning: always 0 (unfilled slot or padding; not in the 1996 template)
+      - offset: 24
+        type: u4
+        name: zero_24
+        label: unknown
+        meaning: always 0 (unfilled slot or padding; not in the 1996 template)
+      - offset: 28
+        type: u4
+        name: zero_28
+        label: unknown
+        meaning: always 0 (unfilled slot or padding; not in the 1996 template)
+      - offset: 32
+        type: i4
+        name: word_32
+        label: plausible
+        meaning: 0 whenever the event has 1 to 63 charged tracks, and 0 with 64 or more; unset storage
+          without tracks (not in the 1996 template)
+      - offset: 36
+        type: i4
+        name: word_36
+        label: plausible
+        meaning: 12 when the event has 1 to 63 charged tracks (purpose unknown), 0 with 64 or more; unset
+          storage without tracks (not in the 1996 template). The writer runs only for 1 <= n_phchrg <=
+          63
+      - offset: 40
+        type: bits32
+        name: evtclass
+        label: confirmed
+        meaning: 'event-class bits, one VAX longword with the 1996 template numbering. Data: 6 ECTAUS
+          (energy concentrated within 10 deg of the hardest-cluster axis); 8 EE (Bhabha: <=3 tracks, E_raw
+          >= 35 GeV, EM-like); 14 TAKAL2 (A_LR filter: EIT plus tracks); 15 TRKHAD2 (tracking hadron filter);
+          17 LUMBHA (trigger bit 3, central detector mostly empty); 18 RNDMTRG (= trigger bit 0, quiet
+          events); 19 LASER (= trigger bit 25); 21 TRK track trigger (only trigger bit 4, low-energy tracks);
+          23 EIT (Pass-1 LAC energy, E_raw >= 20 GeV); 24 MUPAIR (Pass-1 mu pair, WIC tracks; also fires
+          on cosmic rays); 25 TAUPAIR (Pass-1, a track with p > 1 GeV); 27 EIT2 (Pass-2 of 23, hadronic);
+          28 MUPAIR2 (Pass-2 of 24: two tracks from the IP, mu+mu-); 29 TAUPAIR2 (Pass-2 of 25, sum p_trk
+          + E_clus > 10 GeV). Never set: 0-5, 7, 9-13, 16, 20, 22, 26, 30, 31. MC: bit 18 in every record,
+          because each MC record overlays a 1996 data random-trigger event whose (run, event) label it
+          carries (the overlaid event''s own RNDMTRG flag); bit 23 is the simulated EIT (98.8%); bits
+          6/17/19/24/25 appear in 0.25% of MC records, copied from the overlaid data event'
+      - offset: 44
+        type: u4
+        name: zero_44
+        label: unknown
+        meaning: always 0; template THRUST(3) x slot, never filled (no stored thrust axis)
+      - offset: 48
+        type: u4
+        name: zero_48
+        label: unknown
+        meaning: always 0; template THRUST(3) y slot, never filled
+      - offset: 52
+        type: u4
+        name: zero_52
+        label: unknown
+        meaning: always 0; template THRUST(3) z slot, never filled
+      - offset: 56
+        type: bits16
+        name: vxdstat
+        label: plausible
+        meaning: 'VXD status code, MC only (0 in data): the value of the 1996 random-trigger event that
+          the MC record overlays. The main values go with VXD sectors that are dead in all three layers
+          at that time: 0x2020/0x2021/0x2030/0x2070 with phi 270-315 deg in both halves, 0x0800/0x0a00
+          with south phi 0-45 and 90-135 deg, 0x8e08/0x9e08/0xff08 with north 0-45 and south 0-135 and
+          180-225 deg. Not a dead-sector bitmask and not a complete list: the dead sectors follow the
+          run while the value can change within it, bit 5 alone (0x0020) kills nothing, 0xff08 holds bit
+          13 but leaves phi 270-315 deg live, and south 90-135 deg is dead with value 0 in runs 35102-35462.
+          0xffff (all bits) lowers the VXD-hit fraction everywhere'
+      - offset: 58
+        type: bits16
+        name: cdcstat
+        label: confirmed
+        meaning: 'CDC status, MC only (0 in data). Bits 0-9: one per drift-chamber superlayer marked off
+          (template ''HV off''), taken from the 1996 random-trigger event that the MC record overlays.
+          Bit 15 VETO: drawn per MC event. Bits 10-14 (not in the template) set in 39 of 231,030 MC records'
+      - offset: 60
+        type: u2
+        name: zero_60
+        label: unknown
+        meaning: always 0; template KALSTAT slot, never filled
+      - offset: 62
+        type: bits16
+        name: crdstat
+        label: confirmed
+        meaning: 'CRID status (template CRDSTAT): bit 0 BRLOFF (barrel HV low), bit 1 with 5, 6, 9, 10
+          the missing velocity calibrations (always set together), bit 2 XVCALB (poor barrel velocity
+          calibration), bit 4 ECSOFF and bit 8 ECNOFF (endcap HV low; bit 8 always set), bit 12 MANGLED
+          (per event, busy events), bit 13 LOCRvsDC (CRID data size low). Bits 3, 7, 11, 14, 15 never
+          set. MC carries the value of the data event whose (run, event) label it reuses'
+      - offset: 64
+        type: u2
+        name: zero_64
+        label: unknown
+        meaning: always 0; template WICSTAT slot, never filled
+      - offset: 66
+        type: u2
+        name: word_66
+        label: unknown
+        meaning: template CONDITI1 slot (STRGCHK conditions); 0 in MC; in data the content does not behave
+          as condition flags (median 5-6 bits set, no relation to the event)
+      - offset: 68
+        type: u2
+        name: word_68
+        label: unknown
+        meaning: template CONDITI2 slot (STRGCHK conditions); 0 in MC; in data the content does not behave
+          as condition flags
+      - offset: 70
+        type: u2
+        name: word_70
+        label: unknown
+        meaning: 'alignment word after the template block (memo note 12), never written: data holds a
+          file-level leftover (0 in the first output file of each production job, one constant 0xF0-0xF8
+          in the job''s later files, arbitrary in ~7%); MC arbitrary per event'
+  GAP_WORD:
+    group: event
+    kinds:
+    - data
+    - mc
+    source: tools/bank_lab/specs
+    blocks:
+    - name: word
+      size: 4
+      repeat: 1 per record
+      fields:
+      - offset: 0
+        type: u4
+        name: reserved_end_word
+        label: plausible
+        meaning: 'reserved word, always 0, that closes the version-3 compressed record; in TOC v4.0 the
+          PHVXOV banks follow it. Untested candidate from the archived documents: the in-record count
+          (0 or 1) of MCPQRK, a compressed bank with no TOC count'
+  MCBEAM:
+    group: truth
+    kinds:
+    - mc
+    source: tools/bank_lab/specs
+    blocks:
+    - name: entry
+      size: 76
+      repeat: n_mcbeam
+      fields:
+      - offset: 0
+        type: ascii8
+        name: name
+        label: plausible
+        meaning: entry label, always 'XBEAM   '
+      - offset: 8
+        type: f4
+        name: ip_x
+        label: confirmed
+        meaning: generated interaction point x (cm, detector frame)
+      - offset: 12
+        type: f4
+        name: ip_y
+        label: confirmed
+        meaning: generated interaction point y (cm, detector frame)
+      - offset: 16
+        type: f4
+        name: ip_z
+        label: confirmed
+        meaning: generated interaction point z (cm, detector frame)
+      - offset: 20
+        type: f4
+        name: px_total
+        label: plausible
+        meaning: x momentum of the e+e- system (GeV), always 0
+      - offset: 24
+        type: f4
+        name: py_total
+        label: plausible
+        meaning: y momentum of the e+e- system (GeV), always 0
+      - offset: 28
+        type: f4
+        name: pz_total
+        label: confirmed
+        meaning: z momentum of the e+e- system in MCBEAM components (GeV), = beam1_pz + beam2_pz = E2
+          - E1; the generated final state carries -pz_total in the detector frame
+      - offset: 32
+        type: f4
+        name: e_total
+        label: confirmed
+        meaning: energy of the e+e- system (GeV), E1 + E2
+      - offset: 36
+        type: f4
+        name: ecm
+        label: confirmed
+        meaning: generated centre-of-mass energy sqrt(s) (GeV)
+      - offset: 40
+        type: f4
+        name: beam1_px
+        label: plausible
+        meaning: beam 1 x momentum (GeV), always 0
+      - offset: 44
+        type: f4
+        name: beam1_py
+        label: plausible
+        meaning: beam 1 y momentum (GeV), always 0
+      - offset: 48
+        type: f4
+        name: beam1_pz
+        label: plausible
+        meaning: beam 1 z momentum in MCBEAM components (GeV), = -beam1_e (along -z in MCBEAM's own convention)
+      - offset: 52
+        type: f4
+        name: beam1_e
+        label: confirmed
+        meaning: beam 1 energy (GeV); by momentum conservation in the generated final state, the energy
+          of the beam moving along +z in the detector frame
+      - offset: 56
+        type: f4
+        name: beam2_px
+        label: plausible
+        meaning: beam 2 x momentum (GeV), always 0
+      - offset: 60
+        type: f4
+        name: beam2_py
+        label: plausible
+        meaning: beam 2 y momentum (GeV), always 0
+      - offset: 64
+        type: f4
+        name: beam2_pz
+        label: plausible
+        meaning: beam 2 z momentum in MCBEAM components (GeV), = +beam2_e (along +z in MCBEAM's own convention)
+      - offset: 68
+        type: f4
+        name: beam2_e
+        label: confirmed
+        meaning: beam 2 energy (GeV); by momentum conservation in the generated final state, the energy
+          of the beam moving along -z in the detector frame
+      - offset: 72
+        type: f4
+        name: helicity
+        label: confirmed
+        meaning: generated electron-beam helicity, -1 = left-handed, +1 = right-handed (fully polarized)
+  PHVXOV:
+    group: tracking
+    kinds:
+    - data
+    - mc
+    source: tools/bank_lab/specs
+    blocks:
+    - name: header
+      size: 16
+      repeat: per bank
+      fields:
+      - offset: 0
+        type: i4
+        name: id
+        label: plausible
+        meaning: 'bank id: position of the bank in the record, 1..n_phvxov'
+      - offset: 4
+        type: i4
+        name: n_hits
+        label: confirmed
+        meaning: number of VXD hits in the bank (2..9 in the working sample, 1..11 in the full files);
+          the tail parser steps over n_hits 80-byte hit entries
+      - offset: 8
+        type: i4
+        name: link
+        label: confirmed
+        meaning: PHCHRG id of the track the hits belong to; 0 for a VXD-only candidate not attached to
+          any stored track (in MC 45% hold only hits no generated particle made, and about 30% share a
+          hit with another bank)
+      - offset: 12
+        type: i4
+        name: n_hits_list
+        label: confirmed
+        meaning: repeat of n_hits; one copy is the bank attribute and the other the converter's block-length
+          word, and the data cannot tell which
+    - name: hit
+      size: 80
+      repeat: n_hits per bank
+      fields:
+      - offset: 0
+        type: i2
+        name: ccd
+        label: confirmed
+        meaning: 'CCD number 1..96: layer 1 = 1..24, layer 2 = 25..56, layer 3 = 57..96; ladder = (ccd
+          + 1) // 2 (12/16/20 ladders), odd = z < 0 half, even = z > 0 half'
+      - offset: 2
+        type: i2
+        name: mc_particle
+        label: confirmed
+        meaning: 'MC: MCPART id of the particle that made the hit; -9999 for data and for MC hits without
+          a generated particle'
+      - offset: 4
+        type: i2
+        name: n_pixels
+        label: confirmed
+        meaning: cluster size in pixels (data 1..21, MC 1..66)
+      - offset: 6
+        type: i2
+        name: pulse_height
+        label: confirmed
+        meaning: cluster pulse height (summed ADC counts, 8..1075 in data)
+      - offset: 8
+        type: f4
+        name: x
+        label: confirmed
+        meaning: 'global hit x (cm), SLD frame (data: VXD axis at x = 0.03, y = 0.19 like the PHBM IP)'
+      - offset: 12
+        type: f4
+        name: y
+        label: confirmed
+        meaning: global hit y (cm)
+      - offset: 16
+        type: f4
+        name: z
+        label: confirmed
+        meaning: global hit z (cm)
+      - offset: 20
+        type: f4
+        name: u
+        label: confirmed
+        meaning: local hit coordinate across the CCD (cm, 0..1.6), increasing with azimuth
+      - offset: 24
+        type: f4
+        name: v
+        label: confirmed
+        meaning: local hit coordinate along the CCD (cm, 0..8.0), measured from the CCD end at z ~ 0
+      - offset: 28
+        type: f4
+        name: w
+        label: plausible
+        meaning: 'local hit coordinate normal to the CCD (cm): the CCD surface height at (u, v); MC flat
+          at -0.0013, data a measured shape map of -105..+190 um'
+      - offset: 32
+        type: f4
+        name: var_xx
+        label: confirmed
+        meaning: 'global covariance xx (cm^2) = (2 sigma_u)^2 sin^2(phi_hit): an r-phi error rotated into
+          x'
+      - offset: 36
+        type: f4
+        name: cov_xy
+        label: unknown
+        meaning: always 0; xy slot of the packed covariance [xx, xy, xz, yy, yz, zz]
+      - offset: 40
+        type: f4
+        name: cov_xz
+        label: unknown
+        meaning: always 0; xz slot of the packed covariance
+      - offset: 44
+        type: f4
+        name: var_yy
+        label: confirmed
+        meaning: global covariance yy (cm^2) = (2 sigma_u)^2 cos^2(phi_hit)
+      - offset: 48
+        type: f4
+        name: cov_yz
+        label: unknown
+        meaning: always 0; yz slot of the packed covariance
+      - offset: 52
+        type: f4
+        name: var_zz
+        label: confirmed
+        meaning: global covariance zz (cm^2) = (2 sigma_v)^2
+      - offset: 56
+        type: f4
+        name: sigma_u
+        label: confirmed
+        meaning: cluster position error across the CCD (cm), 1.4..3.4 um; cap (pitch / sqrt(12)) * 2^(-3/4)
+          = 3.43295 um (MC) for a cluster one pixel wide in u
+      - offset: 60
+        type: f4
+        name: sigma_v
+        label: confirmed
+        meaning: cluster position error along the CCD (cm), 0.8..3.4 um (max 55 um); same cap as sigma_u
+      - offset: 64
+        type: bits32
+        name: word_64
+        label: unknown
+        meaning: always 0
+      - offset: 68
+        type: f4
+        name: u_true
+        label: confirmed
+        meaning: 'MC: true local u of the hit (cm); 0 when mc_particle = -9999 and in all data'
+      - offset: 72
+        type: f4
+        name: v_true
+        label: confirmed
+        meaning: 'MC: true local v of the hit (cm); 0 when mc_particle = -9999 and in all data'
+      - offset: 76
+        type: f4
+        name: w_true
+        label: plausible
+        meaning: 'MC: true local w (cm), constant -0.001195; 0 when there is no MC particle and in all
+          data'
+  PHKMC1:
+    group: relations
+    kinds:
+    - mc
+    source: tools/bank_lab/specs
+    blocks:
+    - name: pass 1
+      size: 20
+      repeat: n_phkmc1
+      fields:
+      - offset: 0
+        type: u2
+        name: mcpart_id
+        label: confirmed
+        meaning: MCPART bank id of the particle (low half of the packed word [own id << 16 | MCPART id])
+      - offset: 2
+        type: u2
+        name: own_id
+        label: confirmed
+        meaning: PHKMC1 bank id (relation id), the key that joins pass 1 to pass 2
+      - offset: 4
+        type: f4
+        name: e
+        label: confirmed
+        meaning: MC-truth energy (GeV, raw PHKLUS scale) the particle and its shower contributed to the
+          linked cluster (the MCPNT ECONTRIB of the same pair); an estimate, not an exact partition of
+          eraw
+      - offset: 8
+        type: f4
+        name: x
+        label: confirmed
+        meaning: 'x (cm) of the LAC entry point: the front-face crossing, or the MCPART termination point
+          XT if the particle stopped in front of the faces or inside the LAC'
+      - offset: 12
+        type: f4
+        name: y
+        label: confirmed
+        meaning: y (cm) of the LAC entry point (as x)
+      - offset: 16
+        type: f4
+        name: z
+        label: confirmed
+        meaning: z (cm) of the LAC entry point (as x)
+    - name: pass 2
+      size: 4
+      repeat: n_phkmc1
+      fields:
+      - offset: 0
+        type: u2
+        name: phklus_id
+        label: confirmed
+        meaning: PHKLUS bank id of the cluster (low half of the packed word)
+      - offset: 2
+        type: u2
+        name: own_id
+        label: confirmed
+        meaning: PHKMC1 bank id (relation id), the key that joins pass 2 to pass 1
+  PHKCHRG:
+    group: relations
+    kinds:
+    - data
+    - mc
+    source: tools/bank_lab/specs
+    blocks:
+    - name: pass 1
+      size: 16
+      repeat: n_phkchrg
+      fields:
+      - offset: 0
+        type: u2
+        name: phchrg_id
+        label: confirmed
+        meaning: id of the matched PHCHRG track (PHCHRG ids are 1..n_phchrg); each track appears at most
+          once per record
+      - offset: 2
+        type: u2
+        name: phkchrg_id
+        label: confirmed
+        meaning: PHKCHRG id of this track-cluster relation (1..n_phkchrg); the key that joins pass-1 to
+          pass-2
+      - offset: 4
+        type: f4
+        name: match_probability
+        label: confirmed
+        meaning: 'chi2 probability for 2 degrees of freedom, P = exp(-chi2/2), of the track-cluster match:
+          chi2 sums the two residuals squared over w^2 + (10 mrad)^2, w the theta or phi width of the
+          cluster''s first-layer (EM1) sub-cluster, with the track''s sin theta in w_theta; this reproduces
+          P to 0.001 for about 62% of relations (24% when |polar_pull| > 1, 30% outside the barrel), so
+          the error model of the rest is open; 1 = perfect; relations below 0.01 are not stored, and each
+          cluster goes to the relation with the largest value'
+      - offset: 8
+        type: f4
+        name: polar_pull
+        label: confirmed
+        meaning: polar pull (cos theta_EM1 - cos theta_track) / wcth2 of the matched cluster's first-layer
+          (EM1) sub-cluster against the track swum to the calorimeter (the cos theta form fits better
+          than the theta form, MAD 0.50 against 0.81 mrad); positive when the cluster has larger cos theta
+          (smaller theta) than the track
+      - offset: 12
+        type: f4
+        name: azimuthal_pull
+        label: confirmed
+        meaning: 'azimuthal pull (phi_EM1 - phi_track) / whphi2 of the matched cluster''s first-layer
+          (EM1) sub-cluster against the track swum to the calorimeter (r = 198 cm barrel, |z| = 232 cm
+          endcap at 0.6 T), with phi wrapped inconsistently: only 29-53% of the residuals that straddle
+          phi = 0 carry the 2 pi jump'
+    - name: pass 2
+      size: 4
+      repeat: n_phkchrg
+      fields:
+      - offset: 0
+        type: u2
+        name: phklus_id
+        label: confirmed
+        meaning: id of the LAC cluster (PHKLUS) matched to the track of this relation; one cluster can
+          carry several tracks
+      - offset: 2
+        type: u2
+        name: phkchrg_id
+        label: confirmed
+        meaning: PHKCHRG id of the relation (1..n_phkchrg), the key shared with pass-1
+  PHWMC:
+    group: relations
+    kinds:
+    - mc
+    source: tools/bank_lab/specs
+    blocks:
+    - name: header
+      size: 20
+      repeat: per bank
+      fields:
+      - offset: 0
+        type: i4
+        name: phwmc_id
+        label: plausible
+        meaning: bank id, 1..n_phwmc in storage order
+      - offset: 4
+        type: i4
+        name: n_pairs_word1
+        label: plausible
+        meaning: a count equal to n_pairs in every header seen (1..8); most likely a second copy of the
+          pair count, since no candidate count that could differ from it survives
+      - offset: 8
+        type: i4
+        name: phwic_id
+        label: confirmed
+        meaning: id of the PHWIC bank (muon-system track) whose hits this bank attributes to MC particles;
+          it equals phwmc_id everywhere, so a pointer and a copy of the own id cannot be told apart
+      - offset: 12
+        type: i4
+        name: total_hits
+        label: confirmed
+        meaning: total number of hits of the cluster, the sum of the pair hit counts
+      - offset: 16
+        type: i4
+        name: n_pairs
+        label: plausible
+        meaning: number of 8-byte pairs that follow the header (1..8)
+    - name: pair
+      size: 8
+      repeat: n_pairs per bank
+      fields:
+      - offset: 0
+        type: u2
+        name: contribution_code
+        label: confirmed
+        meaning: 'how the hits relate to the MC particle: 0 = hits the particle made itself before its
+          termination point (73% muons in the scan; the rest pi, K, p, e), 1 = hits made after that point
+          by the products of its interaction (never a muon), 11 = hits with no MC particle (mcpart_id
+          = 0), concentrated in the forward WIC (|cos theta| 0.6-0.9) and most likely background hits.
+          It is a property of the hits, not of the particle: one particle can have a code-0 and a code-1
+          pair in the same bank'
+      - offset: 2
+        type: u2
+        name: n_hits
+        label: confirmed
+        meaning: number of the cluster's hits attributed to this contribution
+      - offset: 4
+        type: i4
+        name: mcpart_id
+        label: confirmed
+        meaning: MCPART id of the particle that produced the hits; 0 for code 11
