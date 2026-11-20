@@ -1,1 +1,1 @@
-bookspine
+bookspine>=0.3.1
