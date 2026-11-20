@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 162">
+  <style>
+    .t { fill: var(--ink, #1d1b17); font-size: 12px; }
+    .t2 { fill: var(--ink-2, #4a463f); font-size: 11px; }
+    .t3 { fill: var(--ink-3, #7a756b); font-size: 10px; }
+    .tb { font-weight: 600; }
+    .ti { font-style: italic; }
+    .ta { fill: var(--accent-ink, #6a2522); }
+    .caps { letter-spacing: 1.4px; }
+    .mono { font-family: var(--mono, monospace); }
+    .start { text-anchor: start; }
+    .mid { text-anchor: middle; }
+    .end { text-anchor: end; }
+    .ln { stroke: var(--ink-2, #4a463f); stroke-width: 1.2; fill: none; }
+    .ln3 { stroke: var(--ink-3, #7a756b); stroke-width: 1; fill: none; }
+    .thin { stroke-width: 0.7; }
+    .dash { stroke-dasharray: 4 3; }
+    .box { stroke: var(--ink-2, #4a463f); stroke-width: 1.2; fill: none; }
+    .paper { fill: var(--paper, #fbfaf7); }
+
+    .fer { stroke-width: 1.4; }
+    .bos { stroke-width: 1.3; }
+    .glu { stroke-width: 1.2; }
+    .head { fill: var(--ink-2, #4a463f); stroke: none; }
+    .vtx { fill: var(--ink, #1d1b17); stroke: none; }
+    .fl { font-size: 14px; font-style: italic; }
+    .panel { fill: var(--ink-3, #7a756b); font-size: 12px; }
+  </style>
+  <line class="ln fer" x1="30" y1="90" x2="120" y2="90"/>
+  <polygon class="head" points="78.5,90 71.5,93.6 71.5,86.4"/>
+  <line class="ln fer" x1="120" y1="90" x2="260" y2="40"/>
+  <polygon class="head" points="193.3,63.82 187.91,69.57 185.49,62.79"/>
+  <path class="ln bos" d="M120 90 Q120.08 96.52 124.72 91.94 Q129.37 87.37 129.44 93.89 Q129.52 100.41 134.17 95.83 Q138.81 91.26 138.89 97.78 Q138.97 104.3 143.61 99.72 Q148.26 95.15 148.33 101.67 Q148.41 108.19 153.06 103.61 Q157.7 99.04 157.78 105.56 Q157.85 112.08 162.5 107.5 Q167.15 102.92 167.22 109.44 Q167.3 115.96 171.94 111.39 Q176.59 106.81 176.67 113.33 Q176.74 119.85 181.39 115.28 Q186.03 110.7 186.11 117.22 Q186.19 123.74 190.83 119.17 Q195.48 114.59 195.56 121.11 Q195.63 127.63 200.28 123.06 Q204.92 118.48 205 125"/>
+  <line class="ln fer" x1="204.45" y1="126.5" x2="259.45" y2="146.5"/>
+  <line class="ln fer" x1="205.55" y1="123.5" x2="260.55" y2="143.5"/>
+  <circle class="vtx" cx="120" cy="90" r="2.6"/>
+  <circle class="vtx" cx="205" cy="125" r="2.6"/>
+  <text class="t fl end" x="26" y="95"><tspan>τ⁻</tspan></text>
+  <text class="t fl start" x="265" y="38">ν<tspan dy="0.32em" font-size="72%">τ</tspan><tspan dy="-0.32em"> </tspan></text>
+  <text class="t fl end" x="150" y="128"><tspan>W⁻*</tspan></text>
+  <text class="t fl start" x="265" y="152"><tspan>π⁻</tspan></text>
+</svg>

@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 704 106">
+  <style>
+    .t { fill: var(--ink, #1d1b17); font-size: 12px; }
+    .t2 { fill: var(--ink-2, #4a463f); font-size: 11px; }
+    .t3 { fill: var(--ink-3, #7a756b); font-size: 10px; }
+    .tb { font-weight: 600; }
+    .ti { font-style: italic; }
+    .ta { fill: var(--accent-ink, #6a2522); }
+    .caps { letter-spacing: 1.4px; }
+    .mono { font-family: var(--mono, monospace); }
+    .start { text-anchor: start; }
+    .mid { text-anchor: middle; }
+    .end { text-anchor: end; }
+    .ln { stroke: var(--ink-2, #4a463f); stroke-width: 1.2; fill: none; }
+    .ln3 { stroke: var(--ink-3, #7a756b); stroke-width: 1; fill: none; }
+    .thin { stroke-width: 0.7; }
+    .dash { stroke-dasharray: 4 3; }
+    .box { stroke: var(--ink-2, #4a463f); stroke-width: 1.2; fill: none; }
+    .paper { fill: var(--paper, #fbfaf7); }
+
+    .cell { stroke-width: 0.8; }
+    .nm { fill: var(--ink, #1d1b17); font-size: 9px; }
+    .off { fill: var(--ink-3, #7a756b); font-size: 9px; }
+    .blk { fill: var(--ink-2, #4a463f); font-size: 10.5px; font-weight: 600; }
+    .lg { fill: var(--ink-2, #4a463f); font-size: 10px; }
+    .grid { stroke: var(--rule, #ddd8cc); stroke-width: 0.6; }
+  </style>
+  <text class="blk start" x="54" y="17">entry  — 4 + 2 per set mask bit, padded to a multiple of 4</text>
+  <text class="off end" x="48" y="40">+0</text>
+  <line class="grid" x1="54" y1="24" x2="54" y2="28"/>
+  <line class="grid" x1="134" y1="24" x2="134" y2="28"/>
+  <rect class="cell" x="54.5" y="24.5" width="79" height="23" fill="var(--box-definition, #2f5d7c)" fill-opacity="0.16" stroke="var(--box-definition, #2f5d7c)"/>
+  <text class="nm mid" x="94" y="39.5">header</text>
+  <rect class="cell" x="134.5" y="24.5" width="39" height="23" fill="var(--box-definition, #2f5d7c)" fill-opacity="0.16" stroke="var(--box-definition, #2f5d7c)"/>
+  <text class="nm mid" x="154" y="39.5">2</text>
+  <rect class="cell" x="54" y="72" width="10" height="10" fill="var(--box-definition, #2f5d7c)" fill-opacity="0.3" stroke="var(--box-definition, #2f5d7c)"/>
+  <text class="lg start" x="68" y="81">documented meaning</text>
+  <text class="lg start" x="54" y="97">A box too narrow for its field name shows the field's row number in the table.</text>
+</svg>

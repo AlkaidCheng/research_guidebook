@@ -1,0 +1,94 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 330">
+  <defs>
+    <marker id="pc-arrow-ink-2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="var(--ink-2, #4a463f)"/></marker>
+  </defs>
+  <style>
+    .t { fill: var(--ink, #1d1b17); font-size: 12px; }
+    .t2 { fill: var(--ink-2, #4a463f); font-size: 11px; }
+    .t3 { fill: var(--ink-3, #7a756b); font-size: 10px; }
+    .tb { font-weight: 600; }
+    .ti { font-style: italic; }
+    .ta { fill: var(--accent-ink, #6a2522); }
+    .caps { letter-spacing: 1.4px; }
+    .mono { font-family: var(--mono, monospace); }
+    .start { text-anchor: start; }
+    .mid { text-anchor: middle; }
+    .end { text-anchor: end; }
+    .ln { stroke: var(--ink-2, #4a463f); stroke-width: 1.2; fill: none; }
+    .ln3 { stroke: var(--ink-3, #7a756b); stroke-width: 1; fill: none; }
+    .thin { stroke-width: 0.7; }
+    .dash { stroke-dasharray: 4 3; }
+    .box { stroke: var(--ink-2, #4a463f); stroke-width: 1.2; fill: none; }
+    .paper { fill: var(--paper, #fbfaf7); }
+
+    .st { fill: var(--ink, #1d1b17); font-size: 12px; font-weight: 600; }
+    .sub { fill: var(--ink-2, #4a463f); font-size: 10.5px; }
+    .note { fill: var(--ink-3, #7a756b); font-size: 10px; }
+    .lane { fill: var(--ink-3, #7a756b); font-size: 10.5px; letter-spacing: 1.4px; }
+    .tf { stroke-width: 1.1; }
+  </style>
+  <text class="lane start" x="10" y="22">SIMULATED EVENTS</text>
+  <rect class="paper" x="10" y="34" width="112" height="64" rx="4"/>
+  <rect class="tf" x="10" y="34" width="112" height="64" rx="4" fill="var(--box-warning, #a3471e)" fill-opacity="0.1" stroke="var(--box-warning, #a3471e)"/>
+  <text class="st mid" x="66" y="57">Beam</text>
+  <text class="sub mid" x="66" y="71">MCSLC:</text>
+  <text class="sub mid" x="66" y="84">energies, IP, helicity</text>
+  <rect class="paper" x="140" y="34" width="112" height="64" rx="4"/>
+  <rect class="tf" x="140" y="34" width="112" height="64" rx="4" fill="var(--box-warning, #a3471e)" fill-opacity="0.1" stroke="var(--box-warning, #a3471e)"/>
+  <text class="st mid" x="196" y="57">Generator</text>
+  <text class="sub mid" x="196" y="71">MCL74 (JETSET 7.4),</text>
+  <text class="sub mid" x="196" y="84">KORALZ for τ pairs</text>
+  <rect class="paper" x="270" y="34" width="112" height="64" rx="4"/>
+  <rect class="tf" x="270" y="34" width="112" height="64" rx="4" fill="var(--box-warning, #a3471e)" fill-opacity="0.1" stroke="var(--box-warning, #a3471e)"/>
+  <text class="st mid" x="326" y="57">Detector</text>
+  <text class="sub mid" x="326" y="71">GEANT 3 (GSIM):</text>
+  <text class="sub mid" x="326" y="84">hits of every particle</text>
+  <rect class="paper" x="400" y="34" width="112" height="64" rx="4"/>
+  <rect class="tf" x="400" y="34" width="112" height="64" rx="4" fill="var(--box-warning, #a3471e)" fill-opacity="0.1" stroke="var(--box-warning, #a3471e)" stroke-dasharray="4 3"/>
+  <text class="st mid" x="456" y="57">Overlay</text>
+  <text class="sub mid" x="456" y="71">+ raw data of a</text>
+  <text class="sub mid" x="456" y="84">random-trigger event</text>
+  <line class="ln" x1="124" y1="66" x2="137" y2="66" marker-end="url(#pc-arrow-ink-2)"/>
+  <line class="ln" x1="254" y1="66" x2="267" y2="66" marker-end="url(#pc-arrow-ink-2)"/>
+  <line class="ln" x1="384" y1="66" x2="397" y2="66" marker-end="url(#pc-arrow-ink-2)"/>
+  <text class="note mid" x="326" y="114">truth: MCBEAM, MCHEAD, MCPART</text>
+  <text class="lane start" x="10" y="214">RECORDED EVENTS</text>
+  <rect class="paper" x="10" y="226" width="112" height="64" rx="4"/>
+  <rect class="tf" x="10" y="226" width="112" height="64" rx="4" fill="var(--box-definition, #2f5d7c)" fill-opacity="0.1" stroke="var(--box-definition, #2f5d7c)"/>
+  <text class="st mid" x="66" y="249">Readout</text>
+  <text class="sub mid" x="66" y="263">detector data</text>
+  <text class="sub mid" x="66" y="276">of a trigger</text>
+  <rect class="paper" x="140" y="226" width="112" height="64" rx="4"/>
+  <rect class="tf" x="140" y="226" width="112" height="64" rx="4" fill="var(--box-definition, #2f5d7c)" fill-opacity="0.1" stroke="var(--box-definition, #2f5d7c)"/>
+  <text class="st mid" x="196" y="249">PASS1</text>
+  <text class="sub mid" x="196" y="263">drops about 97% of</text>
+  <text class="sub mid" x="196" y="276">triggers (1993)</text>
+  <rect class="paper" x="270" y="226" width="112" height="64" rx="4"/>
+  <rect class="tf" x="270" y="226" width="112" height="64" rx="4" fill="var(--box-definition, #2f5d7c)" fill-opacity="0.1" stroke="var(--box-definition, #2f5d7c)"/>
+  <text class="st mid" x="326" y="249">PASS2</text>
+  <text class="sub mid" x="326" y="263">first reconstruction,</text>
+  <text class="sub mid" x="326" y="276">event-class tags</text>
+  <line class="ln" x1="124" y1="258" x2="137" y2="258" marker-end="url(#pc-arrow-ink-2)"/>
+  <line class="ln" x1="254" y1="258" x2="267" y2="258" marker-end="url(#pc-arrow-ink-2)"/>
+  <rect class="paper" x="524" y="130" width="112" height="64" rx="4"/>
+  <rect class="tf" x="524" y="130" width="112" height="64" rx="4" fill="var(--ink-2, #4a463f)" fill-opacity="0.1" stroke="var(--ink-2, #4a463f)"/>
+  <text class="st mid" x="580" y="153">Reconstruction</text>
+  <text class="sub mid" x="580" y="167">RECSLD, frozen</text>
+  <text class="sub mid" x="580" y="180">production code</text>
+  <rect class="paper" x="650" y="130" width="90" height="64" rx="4"/>
+  <rect class="tf" x="650" y="130" width="90" height="64" rx="4" fill="var(--ink-2, #4a463f)" fill-opacity="0.1" stroke="var(--ink-2, #4a463f)"/>
+  <text class="st mid" x="695" y="159.5">DST</text>
+  <text class="sub mid" x="695" y="173.5">full output</text>
+  <line class="ln" x1="514" y1="66" x2="580" y2="128" marker-end="url(#pc-arrow-ink-2)"/>
+  <polyline class="ln" points="196,224 196,162 521,162" marker-end="url(#pc-arrow-ink-2)"/>
+  <text class="note mid" x="326" y="306">not used for physics</text>
+  <line class="ln" x1="638" y1="162" x2="647" y2="162" marker-end="url(#pc-arrow-ink-2)"/>
+  <rect class="paper" x="650" y="230" width="90" height="64" rx="4"/>
+  <rect class="tf" x="650" y="230" width="90" height="64" rx="4" fill="var(--accent, #7f2e2a)" fill-opacity="0.14" stroke="var(--accent, #7f2e2a)"/>
+  <text class="st mid" x="695" y="253">Mini-DST</text>
+  <text class="sub mid" x="695" y="267">compressed</text>
+  <text class="sub mid" x="695" y="280">format</text>
+  <line class="ln" x1="695" y1="196" x2="695" y2="227" marker-end="url(#pc-arrow-ink-2)"/>
+  <text class="note mid" x="580" y="210">same code for data and MC</text>
+  <text class="note mid" x="695" y="310">the format of this chapter</text>
+</svg>

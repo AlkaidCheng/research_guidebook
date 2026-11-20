@@ -1,0 +1,113 @@
+{
+ "block": "PHBM",
+ "kind": "data",
+ "sample": "working",
+ "records": 19500,
+ "words": [
+  {
+   "offset": 0,
+   "zero": 0.0,
+   "float": 1.0,
+   "int": 0.0,
+   "other": 0.0
+  },
+  {
+   "offset": 4,
+   "zero": 0.0,
+   "float": 1.0,
+   "int": 0.0,
+   "other": 0.0
+  },
+  {
+   "offset": 8,
+   "zero": 0.0,
+   "float": 1.0,
+   "int": 0.0,
+   "other": 0.0
+  },
+  {
+   "offset": 12,
+   "zero": 0.0,
+   "float": 1.0,
+   "int": 0.0,
+   "other": 0.0
+  },
+  {
+   "offset": 16,
+   "zero": 0.0,
+   "float": 1.0,
+   "int": 0.0,
+   "other": 0.0
+  },
+  {
+   "offset": 20,
+   "zero": 0.0,
+   "float": 1.0,
+   "int": 0.0,
+   "other": 0.0
+  },
+  {
+   "offset": 24,
+   "zero": 1.0,
+   "float": 0.0,
+   "int": 0.0,
+   "other": 0.0
+  },
+  {
+   "offset": 28,
+   "zero": 0.0,
+   "float": 1.0,
+   "int": 0.0,
+   "other": 0.0
+  },
+  {
+   "offset": 32,
+   "zero": 1.0,
+   "float": 0.0,
+   "int": 0.0,
+   "other": 0.0
+  },
+  {
+   "offset": 36,
+   "zero": 1.0,
+   "float": 0.0,
+   "int": 0.0,
+   "other": 0.0
+  },
+  {
+   "offset": 40,
+   "zero": 0.0,
+   "float": 1.0,
+   "int": 0.0,
+   "other": 0.0
+  },
+  {
+   "offset": 44,
+   "zero": 0.0012,
+   "float": 0.9988,
+   "int": 0.0,
+   "other": 0.0
+  },
+  {
+   "offset": 48,
+   "zero": 0.0,
+   "float": 1.0,
+   "int": 0.0,
+   "other": 0.0
+  },
+  {
+   "offset": 52,
+   "zero": 0.0615,
+   "float": 0.9385,
+   "int": 0.0,
+   "other": 0.0
+  },
+  {
+   "offset": 56,
+   "zero": 1.0,
+   "float": 0.0,
+   "int": 0.0,
+   "other": 0.0
+  }
+ ]
+}

@@ -1,0 +1,63 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 560 162">
+  <style>
+    .t { fill: var(--ink, #1d1b17); font-size: 12px; }
+    .t2 { fill: var(--ink-2, #4a463f); font-size: 11px; }
+    .t3 { fill: var(--ink-3, #7a756b); font-size: 10px; }
+    .tb { font-weight: 600; }
+    .ti { font-style: italic; }
+    .ta { fill: var(--accent-ink, #6a2522); }
+    .caps { letter-spacing: 1.4px; }
+    .mono { font-family: var(--mono, monospace); }
+    .start { text-anchor: start; }
+    .mid { text-anchor: middle; }
+    .end { text-anchor: end; }
+    .ln { stroke: var(--ink-2, #4a463f); stroke-width: 1.2; fill: none; }
+    .ln3 { stroke: var(--ink-3, #7a756b); stroke-width: 1; fill: none; }
+    .thin { stroke-width: 0.7; }
+    .dash { stroke-dasharray: 4 3; }
+    .box { stroke: var(--ink-2, #4a463f); stroke-width: 1.2; fill: none; }
+    .paper { fill: var(--paper, #fbfaf7); }
+
+    .fer { stroke-width: 1.4; }
+    .bos { stroke-width: 1.3; }
+    .glu { stroke-width: 1.2; }
+    .head { fill: var(--ink-2, #4a463f); stroke: none; }
+    .vtx { fill: var(--ink, #1d1b17); stroke: none; }
+    .fl { font-size: 14px; font-style: italic; }
+    .panel { fill: var(--ink-3, #7a756b); font-size: 12px; }
+  </style>
+  <text class="panel start" x="4" y="14">(a)</text>
+  <line class="ln fer" x1="35" y1="40" x2="100" y2="90"/>
+  <polygon class="head" points="70.27,67.13 62.53,65.72 66.92,60.01"/>
+  <line class="ln fer" x1="35" y1="140" x2="100" y2="90"/>
+  <polygon class="head" points="64.73,117.13 68.08,110.01 72.47,115.72"/>
+  <path class="ln bos" d="M100 90 Q102.5 96 105 90 Q107.5 84 110 90 Q112.5 96 115 90 Q117.5 84 120 90 Q122.5 96 125 90 Q127.5 84 130 90 Q132.5 96 135 90 Q137.5 84 140 90 Q142.5 96 145 90 Q147.5 84 150 90 Q152.5 96 155 90 Q157.5 84 160 90 Q162.5 96 165 90 Q167.5 84 170 90 Q172.5 96 175 90 Q177.5 84 180 90"/>
+  <line class="ln fer" x1="180" y1="90" x2="245" y2="40"/>
+  <polygon class="head" points="215.27,62.87 211.92,69.99 207.53,64.28"/>
+  <line class="ln fer" x1="180" y1="90" x2="245" y2="140"/>
+  <polygon class="head" points="209.73,112.87 217.47,114.28 213.08,119.99"/>
+  <circle class="vtx" cx="100" cy="90" r="2.6"/>
+  <circle class="vtx" cx="180" cy="90" r="2.6"/>
+  <text class="t fl end" x="32" y="38"><tspan>e⁻</tspan></text>
+  <text class="t fl end" x="32" y="148"><tspan>e⁺</tspan></text>
+  <text class="t fl mid" x="140" y="76"><tspan>γ*, Z</tspan></text>
+  <text class="t fl start" x="250" y="38"><tspan>e⁻</tspan></text>
+  <text class="t fl start" x="250" y="148"><tspan>e⁺</tspan></text>
+  <text class="panel start" x="284" y="14">(b)</text>
+  <line class="ln fer" x1="330" y1="40" x2="430" y2="55"/>
+  <polygon class="head" points="383.46,48.02 376,50.54 377.07,43.42"/>
+  <line class="ln fer" x1="430" y1="55" x2="530" y2="40"/>
+  <polygon class="head" points="483.46,46.98 477.07,51.58 476,44.46"/>
+  <line class="ln fer" x1="330" y1="140" x2="430" y2="125"/>
+  <polygon class="head" points="376.54,133.02 382.93,128.42 384,135.54"/>
+  <line class="ln fer" x1="430" y1="125" x2="530" y2="140"/>
+  <polygon class="head" points="476.54,131.98 484,129.46 482.93,136.58"/>
+  <path class="ln bos" d="M430 55 Q424 57.5 430 60 Q436 62.5 430 65 Q424 67.5 430 70 Q436 72.5 430 75 Q424 77.5 430 80 Q436 82.5 430 85 Q424 87.5 430 90 Q436 92.5 430 95 Q424 97.5 430 100 Q436 102.5 430 105 Q424 107.5 430 110 Q436 112.5 430 115 Q424 117.5 430 120 Q436 122.5 430 125"/>
+  <circle class="vtx" cx="430" cy="55" r="2.6"/>
+  <circle class="vtx" cx="430" cy="125" r="2.6"/>
+  <text class="t fl end" x="327" y="38"><tspan>e⁻</tspan></text>
+  <text class="t fl end" x="327" y="148"><tspan>e⁺</tspan></text>
+  <text class="t fl start" x="442" y="94"><tspan>γ</tspan></text>
+  <text class="t fl start" x="535" y="38"><tspan>e⁻</tspan></text>
+  <text class="t fl start" x="535" y="148"><tspan>e⁺</tspan></text>
+</svg>

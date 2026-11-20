@@ -1,0 +1,71 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 704 190">
+  <style>
+    .t { fill: var(--ink, #1d1b17); font-size: 12px; }
+    .t2 { fill: var(--ink-2, #4a463f); font-size: 11px; }
+    .t3 { fill: var(--ink-3, #7a756b); font-size: 10px; }
+    .tb { font-weight: 600; }
+    .ti { font-style: italic; }
+    .ta { fill: var(--accent-ink, #6a2522); }
+    .caps { letter-spacing: 1.4px; }
+    .mono { font-family: var(--mono, monospace); }
+    .start { text-anchor: start; }
+    .mid { text-anchor: middle; }
+    .end { text-anchor: end; }
+    .ln { stroke: var(--ink-2, #4a463f); stroke-width: 1.2; fill: none; }
+    .ln3 { stroke: var(--ink-3, #7a756b); stroke-width: 1; fill: none; }
+    .thin { stroke-width: 0.7; }
+    .dash { stroke-dasharray: 4 3; }
+    .box { stroke: var(--ink-2, #4a463f); stroke-width: 1.2; fill: none; }
+    .paper { fill: var(--paper, #fbfaf7); }
+
+    .cell { stroke-width: 0.8; }
+    .nm { fill: var(--ink, #1d1b17); font-size: 9px; }
+    .off { fill: var(--ink-3, #7a756b); font-size: 9px; }
+    .blk { fill: var(--ink-2, #4a463f); font-size: 10.5px; font-weight: 600; }
+    .lg { fill: var(--ink-2, #4a463f); font-size: 10px; }
+    .grid { stroke: var(--rule, #ddd8cc); stroke-width: 0.6; }
+  </style>
+  <text class="blk start" x="54" y="17">full form  — 36 bytes</text>
+  <text class="off end" x="48" y="40">+0</text>
+  <line class="grid" x1="54" y1="24" x2="54" y2="28"/>
+  <line class="grid" x1="134" y1="24" x2="134" y2="28"/>
+  <line class="grid" x1="214" y1="24" x2="214" y2="28"/>
+  <line class="grid" x1="294" y1="24" x2="294" y2="28"/>
+  <line class="grid" x1="374" y1="24" x2="374" y2="28"/>
+  <line class="grid" x1="454" y1="24" x2="454" y2="28"/>
+  <line class="grid" x1="534" y1="24" x2="534" y2="28"/>
+  <line class="grid" x1="614" y1="24" x2="614" y2="28"/>
+  <line class="grid" x1="694" y1="24" x2="694" y2="28"/>
+  <text class="off end" x="48" y="66">+32</text>
+  <line class="grid" x1="54" y1="50" x2="54" y2="54"/>
+  <line class="grid" x1="134" y1="50" x2="134" y2="54"/>
+  <rect class="cell" x="54.5" y="24.5" width="399" height="23" fill="var(--box-definition, #2f5d7c)" fill-opacity="0.16" stroke="var(--box-definition, #2f5d7c)"/>
+  <text class="nm mid" x="254" y="39.5">llik[5]</text>
+  <rect class="cell" x="454.5" y="24.5" width="39" height="23" fill="var(--box-definition, #2f5d7c)" fill-opacity="0.16" stroke="var(--box-definition, #2f5d7c)"/>
+  <text class="nm mid" x="474" y="39.5">rc</text>
+  <rect class="cell" x="494.5" y="24.5" width="39" height="23" fill="var(--accent, #7f2e2a)" fill-opacity="0.16" stroke="var(--accent, #7f2e2a)"/>
+  <text class="nm mid" x="514" y="39.5">nhits</text>
+  <rect class="cell" x="534.5" y="24.5" width="79" height="23" fill="var(--accent, #7f2e2a)" fill-opacity="0.16" stroke="var(--accent, #7f2e2a)"/>
+  <text class="nm mid" x="574" y="39.5">besthyp</text>
+  <rect class="cell" x="614.5" y="24.5" width="39" height="23" fill="var(--accent, #7f2e2a)" fill-opacity="0.16" stroke="var(--accent, #7f2e2a)"/>
+  <text class="nm mid" x="634" y="39.5">nhexp</text>
+  <rect class="cell" x="654.5" y="24.5" width="39" height="23" fill="var(--accent, #7f2e2a)" fill-opacity="0.16" stroke="var(--accent, #7f2e2a)"/>
+  <text class="nm mid" x="674" y="39.5">nhfnd</text>
+  <rect class="cell" x="54.5" y="50.5" width="39" height="23" fill="var(--accent, #7f2e2a)" fill-opacity="0.16" stroke="var(--accent, #7f2e2a)"/>
+  <text class="nm mid" x="74" y="65.5">nhbkg</text>
+  <rect class="cell" x="94.5" y="50.5" width="39" height="23" fill="var(--accent, #7f2e2a)" fill-opacity="0.16" stroke="var(--accent, #7f2e2a)"/>
+  <text class="nm mid" x="114" y="65.5">8</text>
+  <text class="blk start" x="54" y="101">reduced form  — 4 bytes</text>
+  <text class="off end" x="48" y="124">+0</text>
+  <line class="grid" x1="54" y1="108" x2="54" y2="112"/>
+  <line class="grid" x1="134" y1="108" x2="134" y2="112"/>
+  <rect class="cell" x="54.5" y="108.5" width="39" height="23" fill="var(--box-definition, #2f5d7c)" fill-opacity="0.16" stroke="var(--box-definition, #2f5d7c)"/>
+  <text class="nm mid" x="74" y="123.5">rc</text>
+  <rect class="cell" x="94.5" y="108.5" width="39" height="23" fill="var(--accent, #7f2e2a)" fill-opacity="0.16" stroke="var(--accent, #7f2e2a)"/>
+  <text class="nm mid" x="114" y="123.5">nhits</text>
+  <rect class="cell" x="54" y="156" width="10" height="10" fill="var(--box-definition, #2f5d7c)" fill-opacity="0.3" stroke="var(--box-definition, #2f5d7c)"/>
+  <text class="lg start" x="68" y="165">documented meaning</text>
+  <rect class="cell" x="183.2" y="156" width="10" height="10" fill="var(--accent, #7f2e2a)" fill-opacity="0.3" stroke="var(--accent, #7f2e2a)"/>
+  <text class="lg start" x="197.2" y="165">meaning from the reader only</text>
+  <text class="lg start" x="54" y="181">A box too narrow for its field name shows the field's row number in the table.</text>
+</svg>

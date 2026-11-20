@@ -1,0 +1,59 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 560 162">
+  <style>
+    .t { fill: var(--ink, #1d1b17); font-size: 12px; }
+    .t2 { fill: var(--ink-2, #4a463f); font-size: 11px; }
+    .t3 { fill: var(--ink-3, #7a756b); font-size: 10px; }
+    .tb { font-weight: 600; }
+    .ti { font-style: italic; }
+    .ta { fill: var(--accent-ink, #6a2522); }
+    .caps { letter-spacing: 1.4px; }
+    .mono { font-family: var(--mono, monospace); }
+    .start { text-anchor: start; }
+    .mid { text-anchor: middle; }
+    .end { text-anchor: end; }
+    .ln { stroke: var(--ink-2, #4a463f); stroke-width: 1.2; fill: none; }
+    .ln3 { stroke: var(--ink-3, #7a756b); stroke-width: 1; fill: none; }
+    .thin { stroke-width: 0.7; }
+    .dash { stroke-dasharray: 4 3; }
+    .box { stroke: var(--ink-2, #4a463f); stroke-width: 1.2; fill: none; }
+    .paper { fill: var(--paper, #fbfaf7); }
+
+    .fer { stroke-width: 1.4; }
+    .bos { stroke-width: 1.3; }
+    .glu { stroke-width: 1.2; }
+    .head { fill: var(--ink-2, #4a463f); stroke: none; }
+    .vtx { fill: var(--ink, #1d1b17); stroke: none; }
+    .fl { font-size: 14px; font-style: italic; }
+    .panel { fill: var(--ink-3, #7a756b); font-size: 12px; }
+  </style>
+  <text class="panel start" x="4" y="14">(a)</text>
+  <line class="ln fer" x1="40" y1="40" x2="110" y2="90"/>
+  <polygon class="head" points="77.85,67.03 70.06,65.9 74.24,60.04"/>
+  <path class="ln bos" d="M40 140 Q45.55 143.41 44.12 137.06 Q42.69 130.71 48.24 134.12 Q53.78 137.53 52.35 131.18 Q50.92 124.82 56.47 128.24 Q62.02 131.65 60.59 125.29 Q59.16 118.94 64.71 122.35 Q70.25 125.76 68.82 119.41 Q67.39 113.06 72.94 116.47 Q78.49 119.88 77.06 113.53 Q75.63 107.18 81.18 110.59 Q86.72 114 85.29 107.65 Q83.87 101.29 89.41 104.71 Q94.96 108.12 93.53 101.76 Q92.1 95.41 97.65 98.82 Q103.19 102.24 101.76 95.88 Q100.34 89.53 105.88 92.94 Q111.43 96.35 110 90"/>
+  <line class="ln fer" x1="110" y1="90" x2="190" y2="90"/>
+  <polygon class="head" points="153.5,90 146.5,93.6 146.5,86.4"/>
+  <line class="ln fer" x1="190" y1="90" x2="255" y2="40"/>
+  <polygon class="head" points="225.27,62.87 221.92,69.99 217.53,64.28"/>
+  <path class="ln bos" d="M190 90 Q188.37 96.32 194.06 93.12 Q199.75 89.93 198.12 96.25 Q196.5 102.57 202.19 99.38 Q207.88 96.18 206.25 102.5 Q204.62 108.82 210.31 105.62 Q216 102.43 214.38 108.75 Q212.75 115.07 218.44 111.88 Q224.13 108.68 222.5 115 Q220.87 121.32 226.56 118.12 Q232.25 114.93 230.62 121.25 Q229 127.57 234.69 124.38 Q240.38 121.18 238.75 127.5 Q237.12 133.82 242.81 130.62 Q248.5 127.43 246.88 133.75 Q245.25 140.07 250.94 136.88 Q256.63 133.68 255 140"/>
+  <circle class="vtx" cx="110" cy="90" r="2.6"/>
+  <circle class="vtx" cx="190" cy="90" r="2.6"/>
+  <text class="t fl end" x="37" y="38"><tspan>e⁻</tspan></text>
+  <text class="t fl end" x="37" y="148"><tspan>γ</tspan></text>
+  <text class="t fl start" x="260" y="38"><tspan>e⁻</tspan></text>
+  <text class="t fl start" x="260" y="148"><tspan>γ</tspan></text>
+  <text class="panel start" x="284" y="14">(b)</text>
+  <line class="ln fer" x1="330" y1="40" x2="430" y2="55"/>
+  <polygon class="head" points="383.46,48.02 376,50.54 377.07,43.42"/>
+  <line class="ln fer" x1="430" y1="55" x2="430" y2="125"/>
+  <polygon class="head" points="430,93.5 426.4,86.5 433.6,86.5"/>
+  <line class="ln fer" x1="430" y1="125" x2="530" y2="140"/>
+  <polygon class="head" points="483.46,133.02 476,135.54 477.07,128.42"/>
+  <path class="ln bos" d="M330 140 Q333.39 145.56 335 139.25 Q336.61 132.94 340 138.5 Q343.39 144.06 345 137.75 Q346.61 131.44 350 137 Q353.39 142.56 355 136.25 Q356.61 129.94 360 135.5 Q363.39 141.06 365 134.75 Q366.61 128.44 370 134 Q373.39 139.56 375 133.25 Q376.61 126.94 380 132.5 Q383.39 138.06 385 131.75 Q386.61 125.44 390 131 Q393.39 136.56 395 130.25 Q396.61 123.94 400 129.5 Q403.39 135.06 405 128.75 Q406.61 122.44 410 128 Q413.39 133.56 415 127.25 Q416.61 120.94 420 126.5 Q423.39 132.06 425 125.75 Q426.61 119.44 430 125"/>
+  <path class="ln bos" d="M430 55 Q433.39 60.56 435 54.25 Q436.61 47.94 440 53.5 Q443.39 59.06 445 52.75 Q446.61 46.44 450 52 Q453.39 57.56 455 51.25 Q456.61 44.94 460 50.5 Q463.39 56.06 465 49.75 Q466.61 43.44 470 49 Q473.39 54.56 475 48.25 Q476.61 41.94 480 47.5 Q483.39 53.06 485 46.75 Q486.61 40.44 490 46 Q493.39 51.56 495 45.25 Q496.61 38.94 500 44.5 Q503.39 50.06 505 43.75 Q506.61 37.44 510 43 Q513.39 48.56 515 42.25 Q516.61 35.94 520 41.5 Q523.39 47.06 525 40.75 Q526.61 34.44 530 40"/>
+  <circle class="vtx" cx="430" cy="55" r="2.6"/>
+  <circle class="vtx" cx="430" cy="125" r="2.6"/>
+  <text class="t fl end" x="327" y="38"><tspan>e⁻</tspan></text>
+  <text class="t fl end" x="327" y="148"><tspan>γ</tspan></text>
+  <text class="t fl start" x="535" y="38"><tspan>γ</tspan></text>
+  <text class="t fl start" x="535" y="148"><tspan>e⁻</tspan></text>
+</svg>

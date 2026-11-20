@@ -1,0 +1,68 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 400">
+  <style>
+    .t { fill: var(--ink, #1d1b17); font-size: 12px; }
+    .t2 { fill: var(--ink-2, #4a463f); font-size: 11px; }
+    .t3 { fill: var(--ink-3, #7a756b); font-size: 10px; }
+    .tb { font-weight: 600; }
+    .ti { font-style: italic; }
+    .ta { fill: var(--accent-ink, #6a2522); }
+    .caps { letter-spacing: 1.4px; }
+    .mono { font-family: var(--mono, monospace); }
+    .start { text-anchor: start; }
+    .mid { text-anchor: middle; }
+    .end { text-anchor: end; }
+    .ln { stroke: var(--ink-2, #4a463f); stroke-width: 1.2; fill: none; }
+    .ln3 { stroke: var(--ink-3, #7a756b); stroke-width: 1; fill: none; }
+    .thin { stroke-width: 0.7; }
+    .dash { stroke-dasharray: 4 3; }
+    .box { stroke: var(--ink-2, #4a463f); stroke-width: 1.2; fill: none; }
+    .paper { fill: var(--paper, #fbfaf7); }
+
+    .st { fill: var(--ink, #1d1b17); font-size: 12px; font-weight: 600; }
+    .sub { fill: var(--ink-2, #4a463f); font-size: 10.5px; }
+    .note { fill: var(--ink-3, #7a756b); font-size: 10px; }
+    .lane { fill: var(--ink-3, #7a756b); font-size: 10.5px; letter-spacing: 1.4px; }
+    .tf { stroke-width: 1.1; }
+  </style>
+  <text class="lane start" x="150" y="18">SHARE OF RECORDS, PER 4-BYTE WORD OF PHBM</text>
+  <text class="sub mono end" x="140" y="44">+0  ecm</text>
+  <rect class="tf" x="150" y="33" width="470" height="16" fill="var(--box-definition, #2f5d7c)" fill-opacity="0.45" stroke="none"/>
+  <text class="sub mono end" x="140" y="66">+4  decm</text>
+  <rect class="tf" x="150" y="55" width="470" height="16" fill="var(--box-definition, #2f5d7c)" fill-opacity="0.45" stroke="none"/>
+  <text class="sub mono end" x="140" y="88">+8  pos_x</text>
+  <rect class="tf" x="150" y="77" width="470" height="16" fill="var(--box-definition, #2f5d7c)" fill-opacity="0.45" stroke="none"/>
+  <text class="sub mono end" x="140" y="110">+12  pos_y</text>
+  <rect class="tf" x="150" y="99" width="470" height="16" fill="var(--box-definition, #2f5d7c)" fill-opacity="0.45" stroke="none"/>
+  <text class="sub mono end" x="140" y="132">+16  pos_z</text>
+  <rect class="tf" x="150" y="121" width="470" height="16" fill="var(--box-definition, #2f5d7c)" fill-opacity="0.45" stroke="none"/>
+  <text class="sub mono end" x="140" y="154">+20  dpos_xx</text>
+  <rect class="tf" x="150" y="143" width="470" height="16" fill="var(--box-definition, #2f5d7c)" fill-opacity="0.45" stroke="none"/>
+  <text class="sub mono end" x="140" y="176">+24  dpos_xy</text>
+  <rect class="tf" x="150" y="165" width="470" height="16" fill="var(--ink-3, #7a756b)" fill-opacity="0.45" stroke="none"/>
+  <text class="sub mono end" x="140" y="198">+28  dpos_yy</text>
+  <rect class="tf" x="150" y="187" width="470" height="16" fill="var(--box-definition, #2f5d7c)" fill-opacity="0.45" stroke="none"/>
+  <text class="sub mono end" x="140" y="220">+32  dpos_xz</text>
+  <rect class="tf" x="150" y="209" width="470" height="16" fill="var(--ink-3, #7a756b)" fill-opacity="0.45" stroke="none"/>
+  <text class="sub mono end" x="140" y="242">+36  dpos_yz</text>
+  <rect class="tf" x="150" y="231" width="470" height="16" fill="var(--ink-3, #7a756b)" fill-opacity="0.45" stroke="none"/>
+  <text class="sub mono end" x="140" y="264">+40  dpos_zz</text>
+  <rect class="tf" x="150" y="253" width="470" height="16" fill="var(--box-definition, #2f5d7c)" fill-opacity="0.45" stroke="none"/>
+  <text class="sub mono end" x="140" y="286">+44  pol</text>
+  <rect class="tf" x="150" y="275" width="469.44" height="16" fill="var(--box-definition, #2f5d7c)" fill-opacity="0.45" stroke="none"/>
+  <rect class="tf" x="619.44" y="275" width="0.56" height="16" fill="var(--ink-3, #7a756b)" fill-opacity="0.45" stroke="none"/>
+  <text class="sub mono end" x="140" y="308">+48  dpol</text>
+  <rect class="tf" x="150" y="297" width="470" height="16" fill="var(--box-definition, #2f5d7c)" fill-opacity="0.45" stroke="none"/>
+  <text class="sub mono end" x="140" y="330">+52  pol_dt</text>
+  <rect class="tf" x="150" y="319" width="441.1" height="16" fill="var(--box-definition, #2f5d7c)" fill-opacity="0.45" stroke="none"/>
+  <rect class="tf" x="591.1" y="319" width="28.91" height="16" fill="var(--ink-3, #7a756b)" fill-opacity="0.45" stroke="none"/>
+  <text class="sub mono end" x="140" y="352">+56  reserved_56</text>
+  <rect class="tf" x="150" y="341" width="470" height="16" fill="var(--ink-3, #7a756b)" fill-opacity="0.45" stroke="none"/>
+  <rect class="tf" x="150" y="366" width="12" height="12" fill="var(--box-definition, #2f5d7c)" fill-opacity="0.45" stroke="none"/>
+  <text class="sub start" x="168" y="376">VAX F float</text>
+  <rect class="tf" x="290" y="366" width="12" height="12" fill="var(--ink-3, #7a756b)" fill-opacity="0.45" stroke="none"/>
+  <text class="sub start" x="308" y="376">zero</text>
+  <rect class="tf" x="430" y="366" width="12" height="12" fill="var(--box-remark, #7a6a3b)" fill-opacity="0.45" stroke="none"/>
+  <text class="sub start" x="448" y="376">small integer</text>
+  <rect class="tf" x="570" y="366" width="12" height="12" fill="var(--accent, #7f2e2a)" fill-opacity="0.45" stroke="none"/>
+  <text class="sub start" x="588" y="376">other</text>
+</svg>

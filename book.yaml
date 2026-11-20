@@ -24,3 +24,18 @@ parts:
       - event-generation.md
       - detector-simulation.md
       - statistical-inference.md
+  - dir: experiments
+    title: Experiments
+    chapters:
+      - dir: sld
+        sections:
+          - slc.md
+          - physics.md
+          - detector.md
+          - simulation.md
+          - minidst.md
+          - banks-reconstruction.md
+          - banks-event-truth.md
+          - decoding.md
+          - mc-records.md
+          - measurements.md
