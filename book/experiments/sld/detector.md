@@ -36,10 +36,9 @@ SLD uses a right-handed frame with its origin at the interaction point, the z ax
 the positron beam, pointing north, and the y axis vertically up [@agnew1993vxd2]; the polar
 angle θ is measured from +z and the azimuth φ from +x [@abe2005rbrc]. Figure 4.7
 shows one quadrant of the detector in the plane that contains the beam, to scale, and
-Figure 4.8 the barrel seen along the beam. Outlines without a published dimension are read
-from SLAC's 1993 quadrant drawing of the detector [@drawing7282].
+Figure 4.8 the barrel seen along the beam.
 
-![One quadrant of SLD in the r–z plane, to scale. The interaction point is at the lower left and the beam runs along the bottom edge. The dotted line marks |cos θ| = 0.85, the edge of efficient tracking. Dimensions of the LAC, the endcap CRID, the CDC and the vertex detector are published values; the other outlines are read from the 1993 SLAC quadrant drawing and are approximate.](../figures/sld-detector-rz.svg)
+![One quadrant of SLD in the r–z plane, to scale. The interaction point is at the lower left and the beam runs along the bottom edge. The dotted line marks |cos θ| = 0.85, the edge of efficient tracking. Dimensions of the LAC, the endcap CRID, the CDC and the vertex detector are published values; the other outlines are read from the 1993 SLAC quadrant drawing [@drawing7282] and are approximate.](../figures/sld-detector-rz.svg)
 
 ![The barrel of SLD seen along the beam, to scale, with the octagonal iron of the warm iron calorimeter, the coil, the 48 modules of the liquid argon calorimeter, the CRID and the drift chamber.](../figures/sld-detector-xy.svg)
 

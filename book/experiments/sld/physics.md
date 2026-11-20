@@ -147,9 +147,9 @@ fitted $\mathcal{A}_\tau$ by about $+0.018$, which the analysis subtracts. The l
 efficiencies, and with them $\mathcal{A}_e$ from τ pairs, are not affected
 [@abe2001lepton].
 
-![Bhabha scattering, e⁺e⁻ → e⁺e⁻: (a) annihilation and (b) photon exchange in the t-channel, which dominates at small angles.](../figures/sld-feynman-bhabha.svg)
+![Bhabha scattering, $e^+e^- \to e^+e^-$: (a) annihilation and (b) photon exchange in the t-channel, which dominates at small angles.](../figures/sld-feynman-bhabha.svg)
 
-![The decay of a τ⁻ into a π⁻ and a τ neutrino through a virtual W. The pion direction in the τ rest frame, and hence its energy in the laboratory, depends on the τ polarisation, which makes the τ its own polarimeter.](../figures/sld-feynman-tau.svg)
+![The decay $\tau^- \to \nu_\tau\pi^-$ through a virtual W. The pion direction in the τ rest frame, and hence its energy in the laboratory, depends on the τ polarisation, which makes the τ its own polarimeter.](../figures/sld-feynman-tau.svg)
 
 !!! summary "Key points"
     - The asymmetries depend on the ratio of the Z couplings through $\mathcal{A}_f$, and

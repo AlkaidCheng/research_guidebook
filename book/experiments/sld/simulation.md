@@ -53,7 +53,7 @@ heavy-flavour analyses retuned the B decays to measurements at the Υ(4S)
 [@abe2005rbrc]. τ pairs were generated with KORALZ 4.0 and the TAUOLA decay library
 [@jadach1994koralz; @jadach1993tauola; @abe2001lepton].
 
-![An e⁺e⁻ → Z → q q̄ event at its stages, stylised. The generator produces the hard process, the parton shower, the hadronisation and the decays of short-lived hadrons; the detector simulation propagates the particles through the detector and decays the long-lived ones, such as K⁰ₛ, K± and Λ, in flight; the reconstruction recovers tracks, clusters and particles, from which jets and event shapes are built.](../figures/sld-event-stages.svg)
+![An $e^+e^- \to Z \to q\bar q$ event at its stages, stylised. The generator produces the hard process, the parton shower, the hadronisation and the decays of short-lived hadrons; the detector simulation propagates the particles through the detector and decays the long-lived ones, such as $K^0_S$, $K^\pm$ and $\Lambda$, in flight; the reconstruction recovers tracks, clusters and particles, from which jets and event shapes are built.](../figures/sld-event-stages.svg)
 
 ## Simulating the detector
 
